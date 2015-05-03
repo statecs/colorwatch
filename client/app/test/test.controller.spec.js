@@ -14,8 +14,9 @@ describe('Controller: TestCtrl', function () {
       $scope: scope
     });
   }));
+  
+  it('should load images for both color combinition choices', function(){});
+  it('should load images for both color combinition choices', function(){});
 
-  it('should ...', function () {
-    expect(1).toEqual(1);
-  });
+
 });

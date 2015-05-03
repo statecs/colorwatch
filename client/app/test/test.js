@@ -3,7 +3,7 @@
 angular.module('colorwatchApp')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/test', {
+      .when('/test/:questionNr', {
         templateUrl: 'app/test/test.html',
         controller: 'TestCtrl'
       });

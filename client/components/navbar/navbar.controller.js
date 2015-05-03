@@ -7,11 +7,11 @@ angular.module('colorwatchApp')
       'link': '/'
     },
     { 'title': 'Test',
-      'link': '/test'}
-      ,
+      'link': '/test'
+    },
     { 'title': 'Översikt',
-      'link': '/oversikt'}
-      ,
+      'link': '/oversikt'
+    },
     { 'title': 'Slut',
       'link': '/slut'}];
 
