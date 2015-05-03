@@ -4,37 +4,15 @@
 <div class="container">
 	<div class="row">
 		<div class="col col-md-3 col-xs-6 col-md-offset-2">
-			<img src="/assets/images/placeholder.png" class="img-responsive"  alt="Placeholder image"></img>
+			<img ng-src="{{currentImage1}}" class="img-responsive"  alt="Placeholder image"></img>
 		</div>
 		<div class="col col-md-3 col-xs-6 col-md-offset-1">
-			<img src="/assets/images/placeholder.png" class="img-responsive" alt="Placeholder image"></img>
+			<img src="{{currentImage2}}" class="img-responsive" alt="Placeholder image"></img>
 		</div>
 	</div>
 	<hr/>
 	<div class="row text-center">
-		<nav>
-		  <ul class="pagination">
-		    <li>
-		      <a href="#" aria-label="Föregående">
-		        <span aria-hidden="true">Föregående</span>
-		      </a>
-		    </li>
-		    <li><a href="/test/1">1</a></li>
-		    <li><a href="/test/2">2</a></li>
-		    <li><a href="/test/3">3</a></li>
-		    <li><a href="/test/4">4</a></li>
-		    <li><a href="/test/5">5</a></li>
-		    <li><a href="#">6</a></li>
-		    <li><a href="#">7</a></li>
-		    <li><a href="#">8</a></li>
-		    <li><a href="#">9</a></li>
-		    <li><a href="#">10</a></li>
-		    <li>
-		      <a href="#" aria-label="Nästa">
-		        <span aria-hidden="true">Nästa</span>
-		      </a>
-		    </li>
-		  </ul>
-		</nav>
+		<p>Sida {{currentPage}} av {{totalItems}}</p>
+    	<pagination next-text="Nästa" previous-text="Föregående" items-per-page="itemsPerPage" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></pagination>
 	</div>
 </div>

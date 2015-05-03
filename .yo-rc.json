@@ -15,7 +15,10 @@
       "ngroute": true,
       "bootstrap": true,
       "uibootstrap": true,
-      "mongoose": true
+      "mongoose": true,
+      "auth": true,
+      "oauth": true,
+      "googleAuth": true
     }
   },
   "generator-ng-component": {
