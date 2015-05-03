@@ -4,15 +4,17 @@
 <div class="container">
 	<div class="row">
 		<div class="col col-md-3 col-xs-6 col-md-offset-2">
-			<img ng-src="{{currentImage1}}" class="img-responsive"  alt="Placeholder image"></img>
+			<img ng-src="{{currentImage1}}" class="img-responsive" alt="Placeholder image"></img>
+			<a ng-href="/test/{{currentQuestion+1}}" class="btn btn-default btn-lg">Välj alternativ 1</a>
 		</div>
 		<div class="col col-md-3 col-xs-6 col-md-offset-1">
 			<img src="{{currentImage2}}" class="img-responsive" alt="Placeholder image"></img>
+			<a ng-href="/test/{{currentQuestion+1}}" class="btn btn-default btn-lg">Välj alternativ 2</a>
 		</div>
 	</div>
 	<hr/>
 	<div class="row text-center">
-		<p>Sida {{currentPage}} av {{totalItems}}</p>
-    	<pagination next-text="Nästa" previous-text="Föregående" items-per-page="itemsPerPage" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></pagination>
+		<p>Sida {{currentQuestion}} av {{totalQuestions}}</p>
+    	<pagination next-text="Nästa" previous-text="Föregående" items-per-page="itemsPerPage" total-items="totalQuestions" ng-model="currentQuestion" ng-change="questionChanged()"></pagination>
 	</div>
 </div>
