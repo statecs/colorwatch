@@ -28,10 +28,20 @@ angular.module('colorwatchApp')
     	$scope.currentQuestion = questionNr;
   	};
 
-  	console.log("Elorating before",EloRating.getRatingList());
-
+  	//console.log("Elorating before",EloRating.getRatingList());
+  	EloRating.initRatingList(10, 1400);
   	EloRating.setNewRatings(1,2,1,0);
-
-  	console.log("Elorating after",EloRating.getRatingList());
+	EloRating.setNewRatings(2,3,1,0);
+	EloRating.setNewRatings(3,4,1,0);
+  	EloRating.setNewRatings(4,5,1,0);
+	EloRating.setNewRatings(5,6,1,0);
+	EloRating.setNewRatings(6,7,1,0);
+  	EloRating.setNewRatings(7,8,1,0);
+	EloRating.setNewRatings(9,10,1,0);
+	EloRating.setNewRatings(4,9,1,0);
+  	EloRating.setNewRatings(3,1,1,0);
+	
+	
+  	//console.log("Elorating after",EloRating.getRatingList());
 
   });

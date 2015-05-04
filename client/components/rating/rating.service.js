@@ -16,6 +16,29 @@ angular.module('colorwatchApp')
     var kFactor = 32;
 
     return {
+      /**
+      * @function initialize the ELO rating list for color combinations
+      * @param {number} numItems - number of items to have in the rating list
+      * @param {number} ratingPoint - initial rating point
+      */
+      initRatingList: function(numItems, ratingPoint) {
+          ratingList = [];
+          for(var i = 1; i <= numItems; i++)
+          {
+            ratingList.push({
+              'id': i,
+              'rating': ratingPoint
+            });
+          }
+          //console.log("initRatingList with", ratingList);
+      },
+      /**
+      * @function set new rating of two elements in the rating list
+      * @param {number} idColorA - id of first alternative color combination in the rating list
+      * @param {number} idColorB - id of second alternative color combination in the rating list
+      * @param {number} scoreA - score of first alternative, eg 1
+      * @param {number} scoreB - score of second alternative, eg 0
+      */
       setNewRatings: function(idColorA, idColorB, scoreA, scoreB){
         var expectedScoreA, expectedScoreB, newRatingA, newRatingB;
 
@@ -30,10 +53,17 @@ angular.module('colorwatchApp')
         
         colorA.rating = newRatingA;
         colorB.rating = newRatingB;
-        console.log("new ratings", newRatingA, newRatingB);
+        console.log("new ratings", newRatingA, newRatingB, ratingList);
       },
+      /**
+      * @function get total ELO rating list
+      * @return {Array} ratingList - total rating list
+      */
       getRatingList: function(){
         return ratingList;
+      },
+      getSortedRatingList: function(){
+        return
       }
 	  };
   });
