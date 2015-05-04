@@ -1,0 +1,20 @@
+<div class="page-header">
+	<h1 class="text-center">Vilken text tycker du är lättast att läsa?</h1>
+</div>
+<div class="container">
+	<div class="row text-center">
+		<div class="col col-md-3 col-xs-6 col-md-offset-2">
+			<img ng-src="{{twoImagesToChoose.alt1.src}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
+			<a ng-href="/test/{{currentQuestion+1}}" ng-click="chooseImage(true)" class="btn btn-default btn-lg">Välj alternativ 1</a>
+		</div>
+		<div class="col col-md-3 col-xs-6 col-md-offset-1">
+			<img ng-src="{{twoImagesToChoose.alt2.src}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
+			<a ng-href="/test/{{currentQuestion+1}}" ng-click="chooseImage(false)" class="btn btn-default btn-lg">Välj alternativ 2</a>
+		</div>
+	</div>
+	<hr/>
+	<div class="row text-center">
+		<p>Sida {{currentQuestion}} av {{totalQuestions}}</p>
+    	<pagination next-text="Nästa" previous-text="Föregående" items-per-page="itemsPerPage" total-items="totalQuestions" ng-model="currentQuestion" ng-change="questionChanged()"></pagination>
+	</div>
+</div>
