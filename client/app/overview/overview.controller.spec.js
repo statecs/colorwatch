@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: OverviewCtrl', function () {
+ddescribe('Controller: OverviewCtrl', function () {
 
   // load the controller's module
   beforeEach(module('colorwatchApp'));

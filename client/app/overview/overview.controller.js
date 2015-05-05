@@ -2,5 +2,5 @@
 
 angular.module('colorwatchApp')
   .controller('OverviewCtrl', function ($scope) {
-    $scope.message = 'Hello';
+    $scope.radioModel = 'Alt1';
   });
