@@ -44,10 +44,10 @@ angular.module('colorwatchApp')
 
     return {
       /**
-      * @function initialize the ELO rating list for color combinations
-      * @param {number} numItems - number of items to have in the rating list
-      * @param {number} ratingPoint - initial rating point
-      */
+       * initialize the ELO rating list for color combinations
+       * @param  {Number} numItems - number of items to have in the rating list
+       * @param  {Number} ratingPoint - initial rating point
+       */
       initRatingList: function(numItems, ratingPoint) {
           _ratingList = [];
           for(var i = 1; i <= numItems; i++)
@@ -60,12 +60,12 @@ angular.module('colorwatchApp')
           //console.log("initRatingList with", ratingList);
       },
       /**
-      * @function set new rating of two elements in the rating list
-      * @param {number} idColorA - id of first alternative color combination in the rating list
-      * @param {number} idColorB - id of second alternative color combination in the rating list
-      * @param {number} scoreA - score of first alternative, eg 1
-      * @param {number} scoreB - score of second alternative, eg 0
-      */
+       * set new rating of two elements in the rating list
+       * @param {Number} idColorA - id of first alternative color combination in the rating list
+       * @param {Number} idColorB - id of second alternative color combination in the rating list
+       * @param {Number} scoreA - score of first alternative, eg 1
+       * @param {Number} scoreB - score of second alternative, eg 0
+       */
       setNewRatings: function(idColorA, idColorB, scoreA, scoreB){
         var expectedScoreA, expectedScoreB, newRatingA, newRatingB;
 
@@ -83,12 +83,17 @@ angular.module('colorwatchApp')
         console.log("new ratings", newRatingA, newRatingB, _ratingList);
       },
       /**
-      * @function get total ELO rating list
-      * @return {Array} ratingList - total rating list
-      */
+       * get total ELO rating list
+       * @return {Object} ratingList - total rating list
+       */
       getRatingList: function(){
         return _ratingList;
       },
+      /**
+       * populates two unique images for each questiong
+       * @param  {Number} numQuestions - number of questions to pouplate images for
+       * @return {Object} selectedImages - An array with one object for each question
+       */
       getImagesToRate: function(numQuestions){
         var selectedImages = [];
         for(var i = 0; i<numQuestions;i++){
@@ -108,9 +113,6 @@ angular.module('colorwatchApp')
           });
         }
         return selectedImages;
-      },
-      getSortedRatingList: function(){
-        return;
       }
 	  };
   });
