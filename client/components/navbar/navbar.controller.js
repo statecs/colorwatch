@@ -7,7 +7,7 @@ angular.module('colorwatchApp')
       'link': '/'
     },
     { 'title': 'Test',
-      'link': '/test'
+      'link': '/test/1'
     },
     { 'title': 'Översikt',
       'link': '/oversikt'

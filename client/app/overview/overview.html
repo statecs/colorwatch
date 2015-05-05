@@ -1,7 +1,24 @@
 <div class="container">
 
-	<div class="btn-group">
-        <label class="btn btn-default" ng-model="radioModel" btn-radio="'Alt1'" uncheckable>Alt1</label>
-        <label class="btn btn-default" ng-model="radioModel" btn-radio="'Alt2'" uncheckable>Alt2</label>
+	<div class="row text-center">
+		<h1>Översikt</h1>
+	    <p class="lead">{{overviewDescText}}</p>
+	    <a href="/slut" id="confirmTest" class="btn btn-default btn-lg">Fortsätt</a>
+	</div>
+	<hr/>
+    <div class="row btn-group" ng-repeat="question in choosedImages">
+    	<div ng-class-odd="'row odd'" ng-class-even="'row even'">
+    		<h2>{{$index + 1}}</h2>
+       		<div class="col-lg-5 col-xs-5">
+		        <label class="btn btn-default thumbnail img-responsive" ng-model="question.altChoosed" btn-radio="'Alt1'" uncheckable>
+		        	<img ng-src="{{question.alt1.src}}"></img>
+		        </label>
+       		</div>
+       		<div class="col-lg-5 col-xs-5">
+		        <label class="btn btn-default thumbnail img-responsive" ng-model="question.altChoosed" btn-radio="'Alt2'" uncheckable>
+		        	<img ng-src="{{question.alt2.src}}"></img>
+		        </label>
+       		</div>
+       	</div>
     </div>
 </div>

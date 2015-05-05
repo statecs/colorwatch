@@ -34,28 +34,28 @@ angular.module('colorwatchApp')
     };
     /**
      * [chooseImage description]
-     * @param  {Number} alt1Choosed - if alternative 1 is choosed, eg 1 or 0
+     * @param  {String} altChoosed - which alternative is choosed, eg 'Alt1' or 'Alt2'
      */
-    $scope.chooseImage = function(alt1Choosed){
+    $scope.chooseImage = function(altChoosed){
       var idColorA = $scope.twoImagesToChoose.alt1.id;
       var idColorB = $scope.twoImagesToChoose.alt2.id;
       var scoreA = 0;
       var scoreB = 0;
-      if(alt1Choosed){
+      if(altChoosed == 'Alt1'){
         scoreA = 1;
       }
       else{
         scoreB = 1;
       }
       EloRating.setNewRatings(idColorA, idColorB, scoreA, scoreB);
-      $scope.twoImagesToChoose.alt1Choosed = alt1Choosed;
+      $scope.twoImagesToChoose.altChoosed = altChoosed;
     };
     /**
      * Changes class of button of selected color combination
      * @return {String} - the class for a button
      */
     $scope.selected = function(){
-      if($scope.twoImagesToChoose.alt1Choosed){
+      if($scope.twoImagesToChoose.altChoosed == 'Alt1'){
         return "btn btn-primary btn-lg";
       }
       else{

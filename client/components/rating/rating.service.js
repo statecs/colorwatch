@@ -109,7 +109,7 @@ angular.module('colorwatchApp')
           selectedImages.push({
             'alt1': {'id': colorA.id, 'src':colorA.src},
             'alt2': {'id': colorB.id, 'src':colorB.src},
-            'alt1Choosed': null
+            'altChoosed': null
           });
         }
         return selectedImages;
