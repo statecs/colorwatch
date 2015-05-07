@@ -30,7 +30,7 @@ angular.module('colorwatchApp')
      console.log('Question changed to: ' + $scope.currentQuestion);
      $location.path('/test/' + $scope.currentQuestion);
      $scope.twoImagesToChoose = $rootScope.imagesToRate[$scope.currentQuestion-1];
-     console.log("TestImages",$rootScope.imagesToRate);
+     console.log('TestImages',$rootScope.imagesToRate);
     };
     /**
      * [chooseImage description]
@@ -41,7 +41,7 @@ angular.module('colorwatchApp')
       var idColorB = $scope.twoImagesToChoose.alt2.id;
       var scoreA = 0;
       var scoreB = 0;
-      if(altChoosed == 'Alt1'){
+      if(altChoosed === 'Alt1'){
         scoreA = 1;
       }
       else{
@@ -55,12 +55,12 @@ angular.module('colorwatchApp')
      * @return {String} - the class for a button
      */
     $scope.selected = function(){
-      if($scope.twoImagesToChoose.altChoosed == 'Alt1'){
-        return "btn btn-primary btn-lg";
+      if($scope.twoImagesToChoose.altChoosed === 'Alt1'){
+        return 'btn btn-primary btn-lg';
       }
       else{
-        return "btn btn-default btn-lg";
+        return 'btn btn-default btn-lg';
       }
-    }
+    };
 
   });

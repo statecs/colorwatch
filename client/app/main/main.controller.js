@@ -10,7 +10,7 @@ angular.module('colorwatchApp')
      */
     $scope.initTest = function(numQuestions){
       $rootScope.imagesToRate = EloRating.getImagesToRate(numQuestions);
-      console.log("initialize test",$rootScope.imagesToRate);
+      console.log('initialize test',$rootScope.imagesToRate);
     };
 
     /*$scope.awesomeThings = [];
