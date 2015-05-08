@@ -56,10 +56,10 @@ angular.module('colorwatchApp')
      */
     $scope.selected = function(){
       if($scope.twoImagesToChoose.altChoosed === 'Alt1'){
-        return 'btn btn-primary btn-lg';
+        return 'btn btn-primary';
       }
       else{
-        return 'btn btn-default btn-lg';
+        return 'btn btn-default';
       }
     };
 
