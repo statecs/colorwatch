@@ -23,6 +23,9 @@ angular.module('colorwatchApp')
      */
     $scope.twoImagesToChoose = $rootScope.imagesToRate[$scope.currentQuestion-1];
 
+    $scope.alt1ButtonText = 'Välj alternativ 1';
+    $scope.alt2ButtonText = 'Välj alternativ 2';
+
     /**
      * When question changes in the pagination this method is called
      */
@@ -42,9 +45,11 @@ angular.module('colorwatchApp')
       var scoreA = 0;
       var scoreB = 0;
       if(altChoosed === 'Alt1'){
+        $scope.alt1ButtonText = 'Du har valt alterativ 1';
         scoreA = 1;
       }
-      else{
+      else{ 
+        $scope.alt2ButtonText = 'Du har valt alterativ 2';
         scoreB = 1;
       }
       EloRating.setNewRatings(idColorA, idColorB, scoreA, scoreB);

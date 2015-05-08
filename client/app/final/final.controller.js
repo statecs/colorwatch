@@ -1,8 +1,11 @@
 'use strict';
 
 angular.module('colorwatchApp')
-  .controller('FinalCtrl', function ($scope) {
+  .controller('FinalCtrl', function ($scope, $location) {
 
+  	$scope.noDisabilities = false;
+  	$scope.noDiagnoses = false;
+  	
 	$scope.disabilitiesModel = [
 	   	{name: 'Lässvårigheter', state: false},
 	   	{name: 'Skrivsvårigheter', state: false},
@@ -32,4 +35,8 @@ angular.module('colorwatchApp')
 	   	{name: 'Schizofreni', state: false},
 	   	{name: 'Tvångssyndrom, OCD', state: false}
 	 ];
+
+	 $scope.submit = function(){
+	 	$location.path('/final-result');
+	 }
   });

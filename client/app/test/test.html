@@ -5,11 +5,11 @@
 	<div class="row text-center">
 		<div class="col col-md-3 col-xs-6 col-md-offset-2">
 			<img ng-src="{{twoImagesToChoose.alt1.src}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
-			<a ng-href="/test/{{currentQuestion+1}}" ng-click="chooseImage('Alt1')" ng-class="selected()">Välj alternativ 1</a>
+			<a ng-href="/test/{{currentQuestion+1}}" ng-click="chooseImage('Alt1')" ng-class="selected()">{{alt1ButtonText}}</a>
 		</div>
 		<div class="col col-md-3 col-xs-6 col-md-offset-1">
 			<img ng-src="{{twoImagesToChoose.alt2.src}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
-			<a ng-href="/test/{{currentQuestion+1}}" ng-click="chooseImage('Alt2')" class="btn btn-default">Välj alternativ 2</a>
+			<a ng-href="/test/{{currentQuestion+1}}" ng-click="chooseImage('Alt2')" class="btn btn-default">{{alt2ButtonText}}</a>
 		</div>
 	</div>
 	<hr/>
