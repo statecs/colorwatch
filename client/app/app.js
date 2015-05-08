@@ -43,13 +43,20 @@ angular.module('colorwatchApp', [
     };
   })
 
-  .run(function ($rootScope, $location, Auth) {
+  .run(function ($rootScope, $location, Auth, EloRating) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$routeChangeStart', function (event, next) {
+      
       Auth.isLoggedInAsync(function(loggedIn) {
         if (next.authenticate && !loggedIn) {
           $location.path('/login');
         }
       });
+      //Small fix for tmp solving reload, fix later by storing in cookie or database
+      console.log("Route changed", $rootScope.imagesToRate);
+      if($rootScope.imagesToRate === undefined){
+        $rootScope.imagesToRate = EloRating.getImagesToRate(10);
+        console.log("Reinitialize images", $rootScope.imagesToRate);
+      }
     });
   });

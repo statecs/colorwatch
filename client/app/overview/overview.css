@@ -1,0 +1,24 @@
+.odd{
+    background: #ccc;
+    margin: 0.2em 0;
+    padding: 0.2em 0;
+}
+
+.even{
+	background: #fff;
+    margin: 0.2em 0;
+    padding: 0.2em 0;
+}
+
+/* Used for horizontal spacing between radiobuttons*/
+.blocks .btn-default
+{
+    margin: 0 20px;  
+    border-radius: 0;
+}
+
+/*Used for spacing between question blocks*/
+.questionBlock
+{
+	margin: 20px 0;
+}

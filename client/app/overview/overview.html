@@ -1,3 +1,23 @@
-<div class="col-md-12">
-This is the overview view.
+<div class="container">
+
+	<div class="row text-center">
+		<h1>Översikt</h1>
+	    <p class="lead">{{overviewDescText}}</p>
+	    <a href="/final-form" id="confirmTest" class="btn btn-default btn-lg">Fortsätt</a>
+	</div>	
+	<form>
+		<div class="questionBlock" ng-repeat="question in choosedImages">
+		<fieldset>
+			<legend>Fråga {{$index + 1}}</legend>
+			<div class="row btn-group blocks text-center" role="group">
+				<label class="btn btn-default col-sm-5 col-xs-5" ng-model="question.altChoosed" btn-radio="'Alt1'" uncheckable>
+				        	<img ng-src="{{question.alt1.src}}" class="img-responsive"/>
+				        </label>
+				        <label class="btn btn-default col-sm-5 col-xs-5" ng-model="question.altChoosed" btn-radio="'Alt2'" uncheckable>
+				        	<img ng-src="{{question.alt2.src}}" class="img-responsive"/>
+				        </label>
+			</div>
+		</fieldset>
+		</div>
+	</form>
 </div>

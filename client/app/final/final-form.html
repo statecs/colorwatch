@@ -1,0 +1,37 @@
+<div class="container">			
+	<form role="form">
+		<div class="form-group">
+			<label for="disabilities">
+				Har du problem med något av nedanstående? - Med problem menar vi att det skapar svårigheter för dig i din vardag
+			</label>
+			<div class="form-group btn-group" id="disabilities">
+			        <label ng-repeat="disability in disabilitiesModel" class="btn btn-default" ng-model="disability.state" btn-checkbox>{{disability.name}}</label>
+			        <div class="input-group col-xs-12 col-sm-12 col-md-12">
+			        	<span class="input-group-addon">Annan:</span>
+			        	<input type="text" class="form-control" placeholder="Fyll i om du har någon annan funktionsnedsättning">
+			        </div>
+			        <label class="radio-inline">
+			            <input type="radio" name="optionDisability" id="optDisability" value="noDisability">Nej, jag har ingen funktionsnedsättning
+			        </label>
+		    </div>
+		</div>
+		<div class="form-group">
+			<label for="diagnoses">
+				Har du någon diagnos?
+			</label>
+			<div class="form-group btn-group" id="diagnoses">
+			        <label ng-repeat="diagnose in diagnosesModel" class="btn btn-default" ng-model="diagnose.state" btn-checkbox>{{diagnose.name}}</label>
+			        <div class="input-group col-xs-12 col-sm-12 col-md-12">
+			        	<span class="input-group-addon">Annan:</span>
+			        	<input type="text" class="form-control" placeholder="Fyll i om du har någon annan diagnos">
+			        </div>
+			        <label class="radio-inline">
+			            <input type="radio" name="optionDisability" id="optDiagnose" value="noDiagnose">Nej, jag har ingen diagnos
+			        </label>
+		    </div>
+		</div>
+	</form>
+	<div class="row text-center">
+		<a href="/final-result" class="btn btn-primary btn-lg">Skicka in</a>
+	</div>
+</div>

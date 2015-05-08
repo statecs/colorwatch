@@ -6,9 +6,6 @@ module.exports = function(config) {
     // base path, that will be used to resolve files and exclude
     basePath: '',
 
-    // testing framework to use (jasmine/mocha/qunit/...)
-    frameworks: ['jasmine'],
-
     // list of files / patterns to load in the browser
     files: [
       'client/bower_components/jquery/dist/jquery.js',
@@ -24,9 +21,9 @@ module.exports = function(config) {
       'client/app/app.coffee',
       'client/app/**/*.js',
       'client/app/**/*.coffee',
+      'client/app/**/*.jade',
       'client/components/**/*.js',
       'client/components/**/*.coffee',
-      'client/app/**/*.jade',
       'client/components/**/*.jade',
       'client/app/**/*.html',
       'client/components/**/*.html'
@@ -60,6 +57,8 @@ module.exports = function(config) {
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,
 
+    // testing framework to use (jasmine/mocha/qunit/...)
+    frameworks: ['jasmine'],
 
     // Start these browsers, currently available:
     // - Chrome
@@ -69,7 +68,7 @@ module.exports = function(config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode
