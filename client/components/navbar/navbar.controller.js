@@ -13,7 +13,7 @@ angular.module('colorwatchApp')
       'link': '/oversikt'
     },
     { 'title': 'Slut',
-      'link': '/slut-form'}];
+      'link': '/final-form'}];
 
     $scope.isCollapsed = true;
 
