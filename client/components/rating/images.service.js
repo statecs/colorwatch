@@ -41,6 +41,11 @@ angular.module('colorwatchApp')
       }];
 
     return {
+      /**
+       * get images to rate
+       * @param  {Number} numQuestions - number of questions in test
+       * @return {Object} selectedImages - Array with images for each question
+       */
       get: function(numQuestions){
 
         var selectedImages = [];
