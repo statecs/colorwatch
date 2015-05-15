@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-  .controller('OverviewCtrl', function ($scope, $rootScope) {
+  .controller('OverviewCtrl', function ($scope, TestRating) {
     $scope.overviewDescText = 'Här av du möjlighet att ändra dina val, tryck sedan fortsätt.';
-    $scope.choosedImages = $rootScope.imagesToRate;
+    $scope.choosedImages = TestRating.getAllQuestions();
   });

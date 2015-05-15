@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-.controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, EloRating) {
+.controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, TestRating) {
 	   /**
       * total questions in the test
       * @type {Number}
@@ -21,7 +21,7 @@ angular.module('colorwatchApp')
      * Two images to choose between at current question
      * @type {Object}
      */
-    $scope.twoImagesToChoose = $rootScope.imagesToRate[$scope.currentQuestion-1];
+    $scope.twoImagesToChoose = TestRating.getCurrentQuestion($scope.currentQuestion-1);
 
     $scope.alt1ButtonText = 'Välj alternativ 1';
     $scope.alt2ButtonText = 'Välj alternativ 2';
@@ -31,17 +31,20 @@ angular.module('colorwatchApp')
      */
    $scope.questionChanged = function() {
      console.log('Question changed to: ' + $scope.currentQuestion);
-     $location.path('/test/' + $scope.currentQuestion);
-     $scope.twoImagesToChoose = $rootScope.imagesToRate[$scope.currentQuestion-1];
-     console.log('TestImages',$rootScope.imagesToRate);
+     if($scope.currentQuestion == $scope.totalQuestions){
+      $location.path('/oversikt');
+     }
+     else{
+       $location.path('/test/' + $scope.currentQuestion);
+       $scope.twoImagesToChoose = TestRating.getCurrentQuestion($scope.currentQuestion-1);
+       console.log('TestImages',$scope.twoImagesToChoose);
+     }
     };
     /**
      * [chooseImage description]
      * @param  {String} altChoosed - which alternative is choosed, eg 'Alt1' or 'Alt2'
      */
     $scope.chooseImage = function(altChoosed){
-      var idColorA = $scope.twoImagesToChoose.alt1.id;
-      var idColorB = $scope.twoImagesToChoose.alt2.id;
       var scoreA = 0;
       var scoreB = 0;
       if(altChoosed === 'Alt1'){
@@ -52,7 +55,7 @@ angular.module('colorwatchApp')
         $scope.alt2ButtonText = 'Du har valt alterativ 2';
         scoreB = 1;
       }
-      EloRating.setNewRatings(idColorA, idColorB, scoreA, scoreB);
+      TestRating.setNewScore($scope.currentQuestion-1, scoreA, scoreB);
       $scope.twoImagesToChoose.altChoosed = altChoosed;
     };
     /**
