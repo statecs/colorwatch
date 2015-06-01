@@ -31,7 +31,7 @@ angular.module('colorwatchApp')
      */
    $scope.questionChanged = function() {
      console.log('Question changed to: ' + $scope.currentQuestion);
-     if($scope.currentQuestion == $scope.totalQuestions){
+     if($scope.currentQuestion > $scope.totalQuestions){
       $location.path('/oversikt');
      }
      else{
@@ -45,6 +45,7 @@ angular.module('colorwatchApp')
      * @param  {String} altChoosed - which alternative is choosed, eg 'Alt1' or 'Alt2'
      */
     $scope.chooseImage = function(altChoosed){
+      var questionToChoose = $scope.currentQuestion;
       var scoreA = 0;
       var scoreB = 0;
       if(altChoosed === 'Alt1'){
@@ -55,7 +56,7 @@ angular.module('colorwatchApp')
         $scope.alt2ButtonText = 'Du har valt alterativ 2';
         scoreB = 1;
       }
-      TestRating.setNewScore($scope.currentQuestion-1, scoreA, scoreB);
+      TestRating.setNewScore(questionToChoose-1, scoreA, scoreB);
       $scope.twoImagesToChoose.altChoosed = altChoosed;
     };
     /**

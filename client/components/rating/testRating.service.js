@@ -17,7 +17,7 @@ angular.module('colorwatchApp')
        * @return {Object} imagesToRate - An array with one object for each question
        */
       initTest: function(numQuestions){
-        var imagesToRate = ImagesToRate.get(numQuestions);
+        imagesToRate = ImagesToRate.get(numQuestions);
         $cookieStore.put('imagesToRate', imagesToRate);
         return imagesToRate;
       },
