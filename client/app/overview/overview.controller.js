@@ -6,5 +6,5 @@ angular.module('colorwatchApp')
     $scope.choosedImages = TestRating.getAllQuestions();
     $scope.calculateELO = function(){
     	EloRating.setELORating($scope.choosedImages);
-    }
+    };
   });

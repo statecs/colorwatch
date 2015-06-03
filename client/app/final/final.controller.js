@@ -38,5 +38,5 @@ angular.module('colorwatchApp')
 
 	 $scope.submit = function(){
 	 	$location.path('/final-result');
-	 }
+	 };
   });

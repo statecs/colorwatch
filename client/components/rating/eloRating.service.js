@@ -52,7 +52,7 @@ angular.module('colorwatchApp')
 	      		for(var i = 0; i < imagesToRate.length;i++){
               scoreA = 0;
               scoreB = 0;
-              if(imagesToRate[i].altChoosen == 'Alt1'){
+              if(imagesToRate[i].altChoosen === 'Alt1'){
                 scoreA = 1;
               }
               else{

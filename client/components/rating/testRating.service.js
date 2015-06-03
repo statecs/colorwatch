@@ -3,11 +3,11 @@
 angular.module('colorwatchApp')
   .factory('TestRating', function ($cookieStore, ImagesToRate) {
     var imagesToRate = $cookieStore.get('imagesToRate');
-    console.log("imagesToRate", imagesToRate);
+    console.log('imagesToRate', imagesToRate);
     if(imagesToRate === undefined){
       imagesToRate = ImagesToRate.get(10);
       $cookieStore.put('imagesToRate', imagesToRate);
-      console.log("No cookie for imagesToRate, new values are:", imagesToRate);
+      console.log('No cookie for imagesToRate, new values are:', imagesToRate);
     }
 
     return {
@@ -28,7 +28,7 @@ angular.module('colorwatchApp')
        * @param {Number} scoreB - Score for second alternative (1 or 0)
        */
       setNewScore: function(questionNr, scoreA, scoreB){
-        if(scoreA == 1){
+        if(scoreA === 1){
           imagesToRate[questionNr].altChoosed = 'Alt1';
         }
         else{

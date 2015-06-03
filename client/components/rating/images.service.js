@@ -68,7 +68,7 @@ angular.module('colorwatchApp')
             'alt2': {'id': colorB.id, 'src':colorB.src},
             'altChoosed': null
           });
-        };
+        }
         return selectedImages;
       }
     };
