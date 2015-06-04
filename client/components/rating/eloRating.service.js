@@ -42,6 +42,14 @@ angular.module('colorwatchApp')
       }];
 
   	var kFactor = 32;
+    /**
+     * [grepRatingList description]
+     * @param  {Number} id [description]
+     * @return {Array}    [description]
+     */
+    function grepRatingList(id){
+      return $.grep(_ratingList, function(e){ return e.id === id; })[0];
+    }
     return {
           /**
            * method for calculating the ELO rating based on user choices
@@ -58,9 +66,9 @@ angular.module('colorwatchApp')
               else{
                 scoreB = 1;
               }
-			        var colorA = $.grep(_ratingList, function(e){ return e.id === imagesToRate[i].alt1.id; })[0];
-			        var colorB = $.grep(_ratingList, function(e){ return e.id === imagesToRate[i].alt2.id; })[0];
-
+			        var colorA = grepRatingList(imagesToRate[i].alt1.id);
+			        var colorB = grepRatingList(imagesToRate[i].alt2.id);
+              
 			        expectedScoreA = 1 / (1 + Math.pow(10, (colorB.rating - colorA.rating) / 400));
 			        expectedScoreB = 1 / (1 + Math.pow(10, (colorA.rating - colorB.rating) / 400));
 			        
