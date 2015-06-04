@@ -1,9 +1,8 @@
 test:
-  override:
+  pre:
     - bower install
-    - npm test || echo "forcing a pass"
 deployment:
   production:
-    branch: master
+    branch: joakim-branch
     heroku:
       appname: colorwatch
