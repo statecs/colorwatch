@@ -2,7 +2,11 @@ test:
   pre:
     - bower install
 deployment:
-  production:
-    branch: joakim-branch
+  prod:
+    branch: master
     heroku:
       appname: colorwatch
+  staging:
+    branch: staging
+    heroku:
+      appname: colorwatch-staging
