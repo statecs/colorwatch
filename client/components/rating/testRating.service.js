@@ -25,9 +25,8 @@ angular.module('colorwatchApp')
        * Set new score when user chooses one of the images in the test
        * @param {Number} questionNr - questionNumber to update information for
        * @param {Number} scoreA - Score for first alternative (1 or 0)
-       * @param {Number} scoreB - Score for second alternative (1 or 0)
        */
-      setNewScore: function(questionNr, scoreA, scoreB){
+      setNewScore: function(questionNr, scoreA){
         if(scoreA === 1){
           imagesToRate[questionNr].altChoosed = 'Alt1';
         }
