@@ -7,6 +7,7 @@
 
 var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
+var Poll = require('../api/poll/poll.model');
 
 Thing.find({}).remove(function() {
   Thing.create({
@@ -44,6 +45,39 @@ User.find({}).remove(function() {
     password: 'admin'
   }, function() {
       console.log('finished populating users');
+    }
+  );
+});
+
+Poll.find({}).remove(function() {
+  Poll.create({
+    provider: 'local',
+    question: 'Svart/vit mot vit/svart',
+    choices: [{
+        text: 'svart/vit', 
+        image_url: 'https://s3.eu-central-1.amazonaws.com/colorwatch/color-images-test/color_blw.png', 
+        votes: []
+      },{
+          text: 'vit/svart', 
+          image_url: 'https://s3.eu-central-1.amazonaws.com/colorwatch/color-images-test/color_wbl.png',
+          votes: []
+      }
+    ]
+  },{
+    provider: 'local',
+    question: 'Svart/vit mot blå/vit',
+    choices: [{
+        text: 'svart/vit', 
+        image_url: 'https://s3.eu-central-1.amazonaws.com/colorwatch/color-images-test/color_blw.png', 
+        votes: []
+      },{
+          text: 'blå/vit', 
+          image_url: 'https://s3.eu-central-1.amazonaws.com/colorwatch/color-images-test/color_bw.png',
+          votes: []
+      }
+    ]  
+  }, function() {
+      console.log('finished populating polls - with urls');
     }
   );
 });

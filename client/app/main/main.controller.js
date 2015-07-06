@@ -8,10 +8,10 @@ angular.module('colorwatchApp')
      * initialize images to rate in test
      * @param  {Number} numQuestions - number of questions in test
      */
-    $scope.initTest = function(numQuestions){
+   /* $scope.initTest = function(numQuestions){
       var imagesToRate = TestRating.initTest(numQuestions);
       console.log('initialize test',imagesToRate);
-    };
+    };*/
 
     /*$scope.awesomeThings = [];
 

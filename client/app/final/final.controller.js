@@ -37,6 +37,7 @@ angular.module('colorwatchApp')
 	 ];
 
 	 $scope.submit = function(){
+	 	//Add calculations of ratings, send to database
 	 	$location.path('/final-result');
 	 };
   });
