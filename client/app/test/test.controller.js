@@ -2,6 +2,14 @@
 
 angular.module('colorwatchApp')
 .controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, TestRating, Poll, socket) {
+    $scope.$on('socket:error', function (ev, data) {
+      console.log("error");
+    });
+    
+    socket.forward('myvote', $scope);
+    $scope.$on('socket:myvote', function (ev, data) {
+      console.log(data);
+    });
 
     $scope.polls = Poll.query().$promise.then(function(polls){
   	   console.log(polls);
@@ -37,9 +45,9 @@ angular.module('colorwatchApp')
     
       if(choiceId) {
         var voteObj = { pollId: pollId, choice: choiceId };
-        console.log("vote: ", voteObj);
-
+        console.log("vote: ", voteObj, " with socket: ", socket);
         socket.emit('send:vote', voteObj);
+        // socket.emit('news', voteObj);
       } else {
         alert('You must select an option to vote for');
       }

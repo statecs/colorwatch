@@ -130,8 +130,9 @@ exports.poll = function(req, res) {
  * @return {[type]}        [description]
  */
 exports.vote = function(socket) {
-  console.log("socket vote", socket);
+  console.log("VOTE");
   socket.on('send:vote', function(data) {
+    console.log("data from send:vote", data);
     var ip = socket.handshake.headers['x-forwarded-for'] || socket.handshake.address.address;
     console.log('data on vote', data);
     Polls.findById(data.poll_id, function(err, poll) {

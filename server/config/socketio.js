@@ -43,7 +43,7 @@ module.exports = function (socketio) {
     var socketId = socket.id;
     var clientIp = socket.request.connection.remoteAddress;
 
-    console.log("socket", socket);
+    socket.emit('news', { hello: 'world' });
     // Call onDisconnect.
     socket.on('disconnect', function () {
       onDisconnect(socket);
