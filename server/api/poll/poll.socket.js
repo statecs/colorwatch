@@ -1,24 +1,29 @@
-/**
+/*
  * Broadcast updates to client when the model changes
  */
 
 'use strict';
 
-var Polls = require('./poll.model');
+var Poll = require('./poll.model');
 
+/**
+ * Register the socket for polls
+ * @param  {[type]} socket [description]
+ * @return {[type]}        [description]
+ */
 exports.register = function(socket) {
   console.log('register socket');
-  Polls.schema.post('save', function (doc) {
+  /*Poll.schema.post('save', function (doc) {
     onSave(socket, doc);
   });
-  Polls.schema.post('remove', function (doc) {
+  Poll.schema.post('remove', function (doc) {
     onRemove(socket, doc);
-  });
+  });*/
   socket.on('send:vote', function(data) {
-    console.log("data from send:vote", data);
-    var ip = socket.handshake.headers['x-forwarded-for'] || socket.handshake.address.address;
-    console.log('data on vote', data);
-   /* Polls.findById(data.poll_id, function(err, poll) {
+  	console.log("data:",data);
+     var ip = socket.handshake.headers['x-forwarded-for'] || socket.handshake.address.address;
+    Poll.findById(data.pollId, function(err, poll) {
+    	console.log("poll", poll);
       var choice = poll.choices.id(data.choice);
       choice.votes.push({ ip: ip });
       
@@ -43,18 +48,18 @@ exports.register = function(socket) {
               theDoc.userChoice = { _id: choice._id, text: choice.text };
             }
           }
-        }*/
-        
-        socket.emit('myvote', {ack: data});
-        // socket.broadcast.emit('vote', theDoc);
-    // });
+        }
+       
+        socket.emit('myvote', theDoc);
+        socket.broadcast.emit('vote', theDoc);
+      });
+  	});
   });
 }
-
-function onSave(socket, doc, cb) {
+/*function onSave(socket, doc, cb) {
   socket.emit('poll:save', doc);
 }
 
 function onRemove(socket, doc, cb) {
   socket.emit('poll:remove', doc);
-}
+}*/

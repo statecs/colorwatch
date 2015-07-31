@@ -38,6 +38,9 @@ angular.module('colorwatchApp')
 
 	 $scope.submit = function(){
 	 	//Add calculations of ratings, send to database
+	 	console.log("disabilitiesModel", $scope.disabilitiesModel);
+
+	 	console.log("diagnosesModel", $scope.diagnosesModel);
 	 	$location.path('/final-result');
 	 };
   });

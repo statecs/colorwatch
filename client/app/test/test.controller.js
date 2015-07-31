@@ -44,8 +44,8 @@ angular.module('colorwatchApp')
       var pollId = $scope.poll._id;
     
       if(choiceId) {
-        var voteObj = { pollId: pollId, choice: choiceId };
-        console.log("vote: ", voteObj, " with socket: ", socket);
+        var voteObj = { pollId: $scope.poll._id, choice: choiceId};
+        console.log("vote: ", voteObj);
         socket.emit('send:vote', voteObj);
         // socket.emit('news', voteObj);
       } else {

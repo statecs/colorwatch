@@ -21,6 +21,7 @@ exports.show = function(req, res) {
 };
 
 // JSON API for list of polls
+// 
 exports.list = function(req, res) {
   // Query Mongo for polls, just get back the question text
   Poll.find({}, 'question', function(error, polls) {
@@ -129,7 +130,7 @@ exports.poll = function(req, res) {
  * @param  {[type]} socket [description]
  * @return {[type]}        [description]
  */
-exports.vote = function(socket) {
+/*exports.vote = function(socket) {
   console.log("VOTE");
   socket.on('send:vote', function(data) {
     console.log("data from send:vote", data);
@@ -167,7 +168,7 @@ exports.vote = function(socket) {
       });     
     });
   });
-};
+};*/
 
 function handleError(res, err) {
   return res.send(500, err);
