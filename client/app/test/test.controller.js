@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-.controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, TestRating, Poll, socket) {
+.controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, Poll, socket) {
     $scope.$on('socket:error', function (ev, data) {
       console.log("error");
     });
