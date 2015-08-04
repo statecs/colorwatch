@@ -9,6 +9,9 @@ var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
 var Poll = require('../api/poll/poll.model');
 
+var ColorCombs = require('../api/colorcombs/colorcombs.model');
+var mongoose = require('mongoose');
+
 Thing.find({}).remove(function() {
   Thing.create({
     name : 'Development Tools',
@@ -31,10 +34,31 @@ Thing.find({}).remove(function() {
   });
 });
 
+//Creating colorcombinations used in test
+/*ColorCombs.find({}).remove(function() {
+  ColorCombs.create({
+    provider: 'local',
+    _id: mongoose.Schema.Types.ObjectID('AAAA'),
+    name: 'Svart text med vit bakgrund',
+    image_url: 'https://s3.eu-central-1.amazonaws.com/colorwatch/color-images-test/color_blw.png',
+    votes: []
+  }, {
+    provider: 'local',
+    _id: mongoose.Schema.Types.ObjectID('AAAB'),
+    name: 'Vit text med svart bakgrund',
+    image_url: 'https://s3.eu-central-1.amazonaws.com/colorwatch/color-images-test/color_wbl.png',
+    votes: []
+  }, function() {
+      console.log('finished populating colorcombs');
+    }
+  );
+});
+*/
+//Creating user for login possibility
 User.find({}).remove(function() {
   User.create({
     provider: 'local',
-    name: 'Test User',
+    name: 'Test',
     email: 'test@test.com',
     password: 'test'
   }, {
@@ -49,6 +73,7 @@ User.find({}).remove(function() {
   );
 });
 
+//Creating polls used in test
 Poll.find({}).remove(function() {
   Poll.create({
     provider: 'local',
