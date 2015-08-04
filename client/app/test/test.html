@@ -3,13 +3,12 @@
 </div>
 <div class="container">
 	<div class="row text-center">
-		<div class="col col-md-3 col-xs-6 col-md-offset-2">
-			<img ng-src="{{twoImagesToChoose.alt1.src}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
-			<a ng-href="/test/{{currentQuestion+1}}" ng-click="chooseImage('Alt1')" ng-class="selected()">{{alt1ButtonText}}</a>
-		</div>
-		<div class="col col-md-3 col-xs-6 col-md-offset-1">
-			<img ng-src="{{twoImagesToChoose.alt2.src}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
-			<a ng-href="/test/{{currentQuestion+1}}" ng-click="chooseImage('Alt2')" class="btn btn-default">{{alt2ButtonText}}</a>
+	 	<div ng-repeat="choice in poll.choices" class="col col-md-3 col-xs-6 col-md-offset-2">
+	 		<img ng-src="{{choice.image_url}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
+   			<!-- <button class="btn btn-info" ng-click="setQuestion(currentQuestion)">Väljer</button> -->
+   			<label>
+				<input class="btn btn-default" type="button" ng-click="vote(choice._id)" name="choice" ng-model="poll.userVote" value="Välj">
+			</label>
 		</div>
 	</div>
 	<hr/>
