@@ -7,6 +7,6 @@ deployment:
     heroku:
       appname: colorwatch
   staging:
-    branch: staging
+    branch: colorwatch-staging
     heroku:
       appname: colorwatch-staging
