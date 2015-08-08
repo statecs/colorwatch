@@ -11,6 +11,11 @@ angular.module('colorwatchApp')
         templateUrl: 'app/account/signup/signup.html',
         controller: 'SignupCtrl'
       })
+      .when('/dashboard', {
+        templateUrl: 'app/account/dashboard/dashboard.html',
+        controller: 'DashboardCtrl', 
+        authenticate: true
+      })
       .when('/settings', {
         templateUrl: 'app/account/settings/settings.html',
         controller: 'SettingsCtrl',

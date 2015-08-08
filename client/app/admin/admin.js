@@ -6,5 +6,10 @@ angular.module('colorwatchApp')
       .when('/admin', {
         templateUrl: 'app/admin/admin.html',
         controller: 'AdminCtrl'
+      })
+      .when('/new', {
+        templateUrl: 'app/admin/new_poll.html',
+        controller: 'PollNewCtrl'
       });
+
   });

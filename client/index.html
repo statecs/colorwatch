@@ -42,7 +42,7 @@
 
     <footer class="footer">
     <div class="container">
-        <p>ColorWatch - Funka - KTH | <a href="#">Adminpanel</a></p>
+        <p>ColorWatch - Funka - KTH | <a href="/dashboard">Adminpanel</a></p>
         <p>Joakim Larsson & Christopher State</p>
     </div>
   </footer>
@@ -74,12 +74,14 @@
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
       <script src="bower_components/angular-socket-io/socket.js"></script>
       <!-- endbower -->
+      <script src="socket.io-client/socket.io.js"></script>
     <!-- endbuild -->
 
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
           <!-- injector:js -->
           <script src="app/account/account.js"></script>
+          <script src="app/account/dashboard/dashboard.controller.js"></script>
           <script src="app/account/login/login.controller.js"></script>
           <script src="app/account/settings/settings.controller.js"></script>
           <script src="app/account/signup/signup.controller.js"></script>
@@ -103,6 +105,11 @@
           <script src="components/rating/testRating.service.js"></script>
           <script src="components/socket/socket.service.js"></script>
           <!-- endinjector -->
+
+          <!-- Removed - used in old solution with cookies - eventually used later on
+          <script src="components/rating/eloRating.service.js"></script>
+          <script src="components/rating/images.service.js"></script>
+          <script src="components/rating/testRating.service.js"></script> -->
         <!-- endbuild -->
 </body>
 </html>

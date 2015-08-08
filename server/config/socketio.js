@@ -14,11 +14,12 @@ function onDisconnect(socket) {
 function onConnect(socket) {
   // When the client emits 'info', this listens and executes
   socket.on('info', function (data) {
-    console.info('[%s] %s', socket.address, JSON.stringify(data, null, 2));
+    console.info('[%s] %s', socket.request.connection.remoteAddress, JSON.stringify(data, null, 2));
   });
 
   // Insert sockets below
-  require('../api/thing/thing.socket').register(socket);
+  require('../api/colorcombs/colorcombs.socket').register(socket);
+  require('../api/poll/poll.socket').register(socket);
 }
 
 module.exports = function (socketio) {
@@ -36,22 +37,21 @@ module.exports = function (socketio) {
   //   secret: config.secrets.session,
   //   handshake: true
   // }));
+  // 
+  //socketio.set('log level', 1); // reduce logging
 
   socketio.on('connection', function (socket) {
-    socket.address = socket.handshake.address !== null ?
-            socket.handshake.address.address + ':' + socket.handshake.address.port :
-            process.env.DOMAIN;
-
-    socket.connectedAt = new Date();
+    var socketId = socket.id;
+    var clientIp = socket.request.connection.remoteAddress;
 
     // Call onDisconnect.
     socket.on('disconnect', function () {
       onDisconnect(socket);
-      console.info('[%s] DISCONNECTED', socket.address);
+      console.info('[%s] DISCONNECTED', clientIp);
     });
 
     // Call onConnect.
     onConnect(socket);
-    console.info('[%s] CONNECTED', socket.address);
+    console.info('[%s] CONNECTED', clientIp);
   });
 };

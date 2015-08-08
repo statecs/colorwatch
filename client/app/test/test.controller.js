@@ -1,43 +1,70 @@
 'use strict';
 
 angular.module('colorwatchApp')
-.controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, TestRating) {
-	   /**
-      * total questions in the test
-      * @type {Number}
-      */
-    $scope.totalQuestions = 10;
-    /**
-     * current question in the test, used also for activate current tab in pagination
-     * @type {Number}
-     */
-    $scope.currentQuestion = parseInt($routeParams.questionNr);
-    /**
-     * number of pages per page, always set to 1 in this project
-     * @type {Number}
-     */
-    $scope.itemsPerPage = 1;
-    /**
-     * Two images to choose between at current question
-     * @type {Object}
-     */
-    $scope.twoImagesToChoose = TestRating.getCurrentQuestion($scope.currentQuestion-1);
+.controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, Poll, socket) {
+    $scope.$on('socket:error', function (ev, data) {
+      console.log("error");
+    });
+    
+    socket.forward('myvote', $scope);
+    $scope.$on('socket:myvote', function (ev, data) {
+      console.log(data);
+    });
 
-    $scope.alt1ButtonText = 'Välj alternativ 1';
-    $scope.alt2ButtonText = 'Välj alternativ 2';
+    $scope.polls = Poll.query().$promise.then(function(polls){
+  	   console.log(polls);
+       /**
+        * total questions in the test
+        * @type {Number}
+        */
+      $scope.totalQuestions = polls.length;
+      /**
+       * current question in the test, used also for activate current tab in pagination
+       * @type {Number}
+       */
+      $scope.currentQuestion = $routeParams.questionNr || 1;
+      /**
+       * number of pages per page, always set to 1 in this project
+       * @type {Number}
+       */
+      $scope.itemsPerPage = 1;
+      /**
+       * Two images to choose between at current question
+       * @type {Object}
+       */
+      console.log("currentQuestion", $scope.currentQuestion);
+      Poll.get({pollId: polls[$scope.currentQuestion-1]._id}).$promise.then(function(data){
+        $scope.poll = data;
+        console.log("scope.poll", $scope.poll);
+      });
+
+    });
+
+    $scope.vote = function(choiceId){
+      var pollId = $scope.poll._id;
+    
+      if(choiceId) {
+        var voteObj = { pollId: $scope.poll._id, choice: choiceId};
+        console.log("vote: ", voteObj);
+        socket.emit('send:vote', voteObj);
+        // socket.emit('news', voteObj);
+      } else {
+        alert('You must select an option to vote for');
+      }
+    }
 
     /**
      * When question changes in the pagination this method is called
      */
    $scope.questionChanged = function() {
      console.log('Question changed to: ' + $scope.currentQuestion);
+
      if($scope.currentQuestion > $scope.totalQuestions){
       $location.path('/oversikt');
      }
      else{
        $location.path('/test/' + $scope.currentQuestion);
-       $scope.twoImagesToChoose = TestRating.getCurrentQuestion($scope.currentQuestion-1);
-       console.log('TestImages',$scope.twoImagesToChoose);
+      // console.log('TestImages',$scope.twoImagesToChoose);
      }
     };
     /**
@@ -48,28 +75,5 @@ angular.module('colorwatchApp')
       var questionToChoose = $scope.currentQuestion;
       var scoreA = 0;
       var scoreB = 0;
-      if(altChoosed === 'Alt1'){
-        $scope.alt1ButtonText = 'Du har valt alterativ 1';
-        scoreA = 1;
-      }
-      else{ 
-        $scope.alt2ButtonText = 'Du har valt alterativ 2';
-        scoreB = 1;
-      }
-      TestRating.setNewScore(questionToChoose-1, scoreA, scoreB);
-      $scope.twoImagesToChoose.altChoosed = altChoosed;
     };
-    /**
-     * Changes class of button of selected color combination
-     * @return {String} - the class for a button
-     */
-    $scope.selected = function(){
-      if($scope.twoImagesToChoose.altChoosed === 'Alt1'){
-        return 'btn btn-primary';
-      }
-      else{
-        return 'btn btn-default';
-      }
-    };
-
   });
