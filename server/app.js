@@ -11,8 +11,14 @@ var express = require('express');
 var mongoose = require('mongoose');
 var config = require('./config/environment');
 
+mongoose.connect('mongodb://heroku_colorwatch:heroku_app3@ds039301.mongolab.com:39301/heroku_app37498952', function (error) {
+    if (error) {
+        console.log(error);
+    }
+});
+
 // Connect to database
-mongoose.connect(config.mongo.uri, config.mongo.options);
+//mongoose.connect(config.mongo.uri, config.mongo.options);
 
 // Populate DB with sample data
 if(config.seedDB) { require('./config/seed'); }
