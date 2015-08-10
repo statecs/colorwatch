@@ -3,9 +3,31 @@
 
 angular.module('colorwatchApp')
   .factory('Poll', function($resource) {
-      return $resource('/api/polls/:pollId', {}, {
+      return $resource('/api/polls/:id', {}, {
         // Use this method for getting a list of polls
-        query: { method: 'GET', params: { pollId: 'list' }, isArray: true }
+        newpolls: { 
+          method: 'GET', 
+          params: { 
+            id: 'newpolls' 
+          }},
+        getPoll: {
+          method: 'GET',
+          params: {
+            id: 'poll'
+          },
+          isArray: true
+        }
+
+      });
+  })
+  .factory('ColorCombs', function($resource) {
+    return $resource('/api/colorcombs/:id', {}, {
+        // Use this method for getting a list of polls
+        getColorComb: {
+          method: 'GET',
+          isArray: true
+        }
+
       });
   })
   .factory('socket', function(socketFactory) {

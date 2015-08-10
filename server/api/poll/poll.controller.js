@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var Poll = require('./poll.model');
 var ColorCombs = require('../colorcombs/colorcombs.model');
+var mongoose = require('mongoose');
 
 // Get list of polls
 exports.index = function(req, res) {
@@ -22,7 +23,7 @@ exports.show = function(req, res) {
 };
 
 /**
- * JSON API for creating new polls, stored on clientside in sessionStorage
+ * JSON API for creating new polls, stored on clientside in sessionStorage/cookieStorage
  * @param  {[type]} req [description]
  * @param  {[type]} res [description]
  * @return {[type]}     [description]
@@ -35,24 +36,27 @@ exports.newpolls = function(req, res) {
     .exec(function(err, colors) {
        // `posts` will be of length 20
        if(err) { return handleError(res, err);}
-       //res.json(colors);
-       res.json({
-        ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-        questions:[{
-          img1:{
-            id: colors[0].id,
-            img_url: colors[0].image_url,
-            vote: null
-          },
-          img2:{
-            id: colors[1].id,
-            img_url: colors[1].image_url,
-            vote: null
-          }
-        }],
-        disabilities: [],
-        diagnoses: []
-       });
+       
+       var questions = [];
+       questions.push({
+        img1: colors[0].id, 
+        img1_url: colors[0].image_url,
+        img2: colors[1].id,
+        img2_url: colors[1].image_url,
+        userVote: 'alt1'
+      });
+       var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+        
+
+       var poll = new Poll({ip: ip, questions: questions});
+       // Save poll to DB
+      poll.save(function(err, doc) {
+        if(err || !doc) {
+          throw 'Error';
+        } else {
+          res.json(doc);
+        }   
+      });
     });
 }
 // JSON API for list of polls
@@ -125,41 +129,16 @@ exports.destroy = function(req, res) {
 // JSON API for getting a single poll
 exports.poll = function(req, res) {
   // Poll ID comes in the URL
-  var pollId = req.params.id;
-  
-  // Find the poll by its ID, use lean as we won't be changing it
-  Poll.findById(pollId, '', { lean: true }, function(err, poll) {
-    if(poll) {
-      var userVoted = false,
-          userChoice,
-          totalVotes = 0;
+  if(req.cookies.myTest){
+    var myTestId = mongoose.Types.ObjectId(req.cookies.myTest.replace(/['"]+/g, ''));
+    console.log('testid', myTestId);
+  }
 
-      // Loop through poll choices to determine if user has voted
-      // on this poll, and if so, what they selected
-      for (var c in poll.choices) {
-        var choice = poll.choices[c]; 
-
-        for (var v in choice.votes) {
-          var vote = choice.votes[v];
-          totalVotes++;
-
-          if(vote.ip === (req.header('x-forwarded-for') || req.ip)) {
-            userVoted = true;
-            userChoice = { _id: choice._id, text: choice.text };
-          }
-        }
-      }
-
-      // Attach info about user's past voting on this poll
-      poll.userVoted = userVoted;
-      poll.userChoice = userChoice;
-
-      poll.totalVotes = totalVotes;
+  // Find the test by its ID, and return all the questions
+  Poll.findById(myTestId, function(err, poll) {
+    if(err) { return handleError(res, err); }
+    return res.json(poll.questions);
     
-      res.json(poll);
-    } else {
-      res.json({error:true});
-    }
   });
 };
 

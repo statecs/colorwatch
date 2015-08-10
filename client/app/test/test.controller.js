@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-.controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, Poll, socket) {
+.controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, Poll, socket, ColorCombs) {
     $scope.$on('socket:error', function (ev, data) {
       console.log("error");
     });
@@ -10,9 +10,8 @@ angular.module('colorwatchApp')
     $scope.$on('socket:myvote', function (ev, data) {
       console.log(data);
     });
-
-    $scope.polls = Poll.query().$promise.then(function(polls){
-  	   console.log(polls);
+    $scope.polls = Poll.getPoll({id: $routeParams.questionNr}).$promise.then(function(polls){
+  	   console.log('polls',polls);
        /**
         * total questions in the test
         * @type {Number}
@@ -32,12 +31,16 @@ angular.module('colorwatchApp')
        * Two images to choose between at current question
        * @type {Object}
        */
-      console.log("currentQuestion", $scope.currentQuestion);
+      /*console.log("currentQuestion", $scope.currentQuestion);
       Poll.get({pollId: polls[$scope.currentQuestion-1]._id}).$promise.then(function(data){
         $scope.poll = data;
         console.log("scope.poll", $scope.poll);
-      });
-
+      });*/
+      $scope.poll = polls[$routeParams.questionNr-1 || 0];
+      /*Poll.get({pollId: polls[$scope.currentQuestion-1]._id}).$promise.then(function(data){
+        $scope.poll = data;
+      });*/
+      console.log("scope.poll", $scope.poll);
     });
 
     $scope.vote = function(choiceId){
