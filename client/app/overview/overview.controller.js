@@ -1,14 +1,15 @@
 'use strict';
 
 angular.module('colorwatchApp')
-  .controller('OverviewCtrl', function ($scope, socket) {
+  .controller('OverviewCtrl', function ($scope, socket, Poll, $location) {
     $scope.overviewDescText = 'Här av du möjlighet att ändra dina val, tryck sedan fortsätt.';
-    $scope.choosedImages = null;
-    $scope.$on('socket:myvote', function (ev, data) {
-      console.log(data);
+   
+    Poll.getPoll().$promise.then(function(poll){
+      $scope.questions = poll;
     });
 
-    $scope.calculateELO = function(){
-    	// EloRating.setELORating($scope.choosedImages);
-    };
+    $scope.update = function(){
+      $location.path('/final-form')
+    }
+
   });
