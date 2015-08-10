@@ -25,7 +25,9 @@ var PollSchema = new Schema({
 		img2: {type: Schema.Types.ObjectId, ref: 'ColorCombs'},
 		img2_url: String,
 		userVote: String
-	}]
+	}],
+	diagnoses: Array,
+	disabilities: Array
 });
 
 module.exports = mongoose.model('Poll', PollSchema);

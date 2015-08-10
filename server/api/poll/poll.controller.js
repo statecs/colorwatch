@@ -124,7 +124,26 @@ exports.update = function(req, res) {
     });
   });
 };
-
+// Updates an existing poll in the DB.
+exports.updateFinalForm = function(req, res) {
+  console.log('updateFinalForm', req.body);
+  var diagnoses = req.body.diagnoses;
+  var disabilities = req.body.disabilities;
+  var pollId = mongoose.Types.ObjectId(req.cookies.myTest.replace(/['"]+/g, ''));
+  console.log(pollId);
+  if(req.body._id) { delete req.body._id; }
+  Poll.findById(pollId, function (err, polls) {
+    if (err) { return handleError(res, err); }
+    if(!polls) { return res.send(404); }
+    console.log(diagnoses)
+    polls.diagnoses = diagnoses;
+    polls.disabilities = disabilities;
+    polls.save(function (err) {
+      if (err) { return handleError(res, err); }
+      return res.json(200, polls);
+    });
+  });
+};
 // Deletes a poll from the DB.
 exports.destroy = function(req, res) {
   Poll.findById(req.params.id, function (err, poll) {

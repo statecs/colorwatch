@@ -22,6 +22,12 @@ angular.module('colorwatchApp')
           params: {
             id: '@id'
           }
+        },
+        updateFinalForm: {
+          method: 'PUT',
+          params:{
+            id: 'final'
+          }
         }
 
       });
