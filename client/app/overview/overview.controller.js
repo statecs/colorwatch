@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-  .controller('OverviewCtrl', function ($scope, socket, Poll, $location) {
+  .controller('OverviewCtrl', function ($scope, Poll, $location) {
     $scope.overviewDescText = 'Här av du möjlighet att ändra dina val, tryck sedan fortsätt.';
    
     Poll.getPoll().$promise.then(function(poll){

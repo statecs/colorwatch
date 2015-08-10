@@ -11,6 +11,20 @@ exports.index = function(req, res) {
   });
 };
 
+
+
+// Get list of colorcombss
+exports.list = function(req, res) {
+  
+  ColorCombs.find({}, 'image_url', function(error, polls) {
+      if(error){
+        throw 'Error in list';
+      }
+      else{
+        res.json(polls);
+      }
+    });
+};
 // Get a single colorcombs
 exports.show = function(req, res) {
   Colorcombs.findById(req.params.id, function (err, colorcombs) {

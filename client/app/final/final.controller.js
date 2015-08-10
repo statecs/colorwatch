@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-  .controller('FinalCtrl', function ($scope, $cookieStore, $location, Poll) {
+  .controller('FinalCtrl', function ($scope, $cookieStore, $location, Poll, socket) {
 
   	$scope.noDisabilities = false;
   	$scope.noDiagnoses = false;
@@ -38,11 +38,8 @@ angular.module('colorwatchApp')
 
 	 $scope.submit = function(){
 	 	//Add calculations of ratings, send to database
-	 	Poll.updateFinalForm({}, {id: $cookieStore.get('myTest'), diagnoses: $scope.diagnosesModel, disabilities: $scope.disabilitiesModel});
-
-	 	console.log("disabilitiesModel", $scope.disabilitiesModel);
-
-	 	console.log("diagnosesModel", $scope.diagnosesModel);
+	 	var finalResult = Poll.updateFinalForm({}, {id: $cookieStore.get('myTest'), diagnoses: $scope.diagnosesModel, disabilities: $scope.disabilitiesModel});
+	 	socket.emit('send:vote', finalResult);
 	 	$location.path('/final-result');
 	 };
   });
