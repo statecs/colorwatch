@@ -16,6 +16,12 @@ angular.module('colorwatchApp')
             id: 'poll'
           },
           isArray: true
+        },
+        update: {
+          method: 'PUT',
+          params: {
+            id: '@id'
+          }
         }
 
       });

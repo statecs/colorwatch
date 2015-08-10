@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-.controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, Poll, socket, ColorCombs) {
+.controller('TestCtrl', function ($scope, $rootScope, $routeParams, $cookieStore, $location, Poll, socket, ColorCombs) {
     $scope.$on('socket:error', function (ev, data) {
       console.log("error");
     });
@@ -40,20 +40,19 @@ angular.module('colorwatchApp')
       /*Poll.get({pollId: polls[$scope.currentQuestion-1]._id}).$promise.then(function(data){
         $scope.poll = data;
       });*/
-      console.log("scope.poll", $scope.poll);
     });
 
-    $scope.vote = function(choiceId){
-      var pollId = $scope.poll._id;
-    
-      if(choiceId) {
-        var voteObj = { pollId: $scope.poll._id, choice: choiceId};
-        console.log("vote: ", voteObj);
-        socket.emit('send:vote', voteObj);
-        // socket.emit('news', voteObj);
-      } else {
-        alert('You must select an option to vote for');
-      }
+    $scope.vote = function(){
+      Poll.update({id: $cookieStore.get('myTest')}, {questionNr: $routeParams.questionNr, userVote: $scope.poll.userVote});
+
+       /* if(choiceId) {
+          var voteObj = { pollId: $scope.poll._id, choice: choiceId};
+          console.log("vote: ", voteObj);
+          socket.emit('send:vote', voteObj);
+          // socket.emit('news', voteObj);
+        } else {
+          alert('You must select an option to vote for');
+        }*/
     }
 
     /**

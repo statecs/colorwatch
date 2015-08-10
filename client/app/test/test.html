@@ -10,11 +10,11 @@
 			</div> -->
 			<div class="col col-md-3 col-xs-6 col-md-offset-2">
 				<img ng-src="{{poll.img1_url}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
-		   		<label class="btn btn-default" ng-model="poll.userVote" btn-radio="'alt1'">Välj</label>
+		   		<label class="btn btn-default" ng-model="poll.userVote" ng-click="vote(poll.img1)" btn-radio="'alt1'">Välj</label>
 	   		</div>
 	   		<div class="col col-md-3 col-xs-6">
 	   			<img ng-src="{{poll.img2_url}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
-		   		<label class="btn btn-default" ng-model="poll.userVote" btn-radio="'alt2'">Välj</label>
+		   		<label class="btn btn-default" ng-model="poll.userVote" ng-click="vote(poll.img2)" btn-radio="'alt2'">Välj</label>
 	   		</div>
 		</div>
 	</div>
