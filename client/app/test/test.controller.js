@@ -2,14 +2,14 @@
 
 angular.module('colorwatchApp')
 .controller('TestCtrl', function ($scope, $rootScope, $routeParams, $cookieStore, $location, Poll, ColorCombs) {
-    $scope.$on('socket:error', function (ev, data) {
+    /*$scope.$on('socket:error', function (ev, data) {
       console.log("error");
     });
     
     socket.forward('myvote', $scope);
     $scope.$on('socket:myvote', function (ev, data) {
       console.log(data);
-    });
+    });*/
     $scope.polls = Poll.getPoll({id: $routeParams.questionNr}).$promise.then(function(polls){
   	   console.log('polls',polls);
        /**

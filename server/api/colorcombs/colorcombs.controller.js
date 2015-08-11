@@ -11,20 +11,22 @@ exports.index = function(req, res) {
   });
 };
 
-
-
-// Get list of colorcombss
+// JSON API for list of colorcombs
+// 
 exports.list = function(req, res) {
+  // Query Mongo for polls, just get back the question text
+  // 
   
-  ColorCombs.find({}, 'image_url', function(error, polls) {
-      if(error){
-        throw 'Error in list';
-      }
-      else{
-        res.json(polls);
-      }
-    });
+  Colorcombs.find({}, 'image_url', function(error, colors) {
+    if(error){
+      throw 'Error in list';
+    }
+    else{
+      res.json(colors);
+    }
+  });
 };
+
 // Get a single colorcombs
 exports.show = function(req, res) {
   Colorcombs.findById(req.params.id, function (err, colorcombs) {

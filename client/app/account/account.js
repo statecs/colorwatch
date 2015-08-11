@@ -20,5 +20,10 @@ angular.module('colorwatchApp')
         templateUrl: 'app/account/settings/settings.html',
         controller: 'SettingsCtrl',
         authenticate: true
+      })
+      .when('/newcolor', {
+        templateUrl: 'app/account/newcolor/newcolor.html',
+        controller: 'NewcolorCtrl',
+        authenticate: true
       });
   });
