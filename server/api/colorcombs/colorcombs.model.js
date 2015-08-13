@@ -7,9 +7,10 @@ var mongoose = require('mongoose'),
 var voteSchema = new Schema({ ip: 'String' });
 
 var ColorcombsSchema = new Schema({
-  name: String,
-  image_url: String,
-  test: Number,
+  textcolor: String,
+  backcolor: String,
+  image_data: Buffer,
+  image_contentType: String,
   votes: [voteSchema]
 });
 

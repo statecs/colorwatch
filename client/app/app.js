@@ -6,7 +6,9 @@ angular.module('colorwatchApp', [
   'ngSanitize',
   'ngRoute',
   'ui.bootstrap',
-  'btford.socket-io'
+  'btford.socket-io',
+  'cloudinary',
+  'ngFileUpload'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
@@ -23,7 +25,7 @@ angular.module('colorwatchApp', [
       // Add authorization token to headers
       request: function (config) {
         config.headers = config.headers || {};
-        if ($cookieStore.get('token')) {
+        if ($cookieStore.get('token') && config.url.indexOf('api.cloudinary.com')===-1) {
           config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
         }
         return config;

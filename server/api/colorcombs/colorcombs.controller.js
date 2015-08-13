@@ -32,15 +32,25 @@ exports.show = function(req, res) {
   Colorcombs.findById(req.params.id, function (err, colorcombs) {
     if(err) { return handleError(res, err); }
     if(!colorcombs) { return res.send(404); }
-    return res.json(colorcombs);
+    res.contentType(colorcombs.image_contentType);
+    return res.json(201, colorcombs.image_data);
   });
 };
 
 // Creates a new colorcombs in the DB.
 exports.create = function(req, res) {
-  Colorcombs.create(req.body, function(err, colorcombs) {
+  var colorObj = {
+    textcolor: req.body.textcolor,
+    backcolor: req.body.backcolor,
+    image_data: req.body.image_data,
+    image_contentType: req.body.image_contentType
+  };
+  console.log(colorObj);
+  var color = new Colorcombs(colorObj);
+
+  color.save(function(err, doc) {
     if(err) { return handleError(res, err); }
-    return res.json(201, colorcombs);
+    return res.json(201, doc);
   });
 };
 

@@ -12,9 +12,9 @@ var ColorCombs = require('../api/colorcombs/colorcombs.model');
 var mongoose = require('mongoose');
 
 //Creating colorcombinations used in test
-ColorCombs.find({}).remove(function() {
+/*ColorCombs.find({}).remove(function() {
   ColorCombs.create({
-    name: 'Svart text med vit bakgrund1',
+    name: 'Svart text med vit bakgrund',
     image_url: 'https://s3.eu-central-1.amazonaws.com/colorwatch/color-images-test/color_blw.png',
     test: 1,
     votes: []
@@ -27,7 +27,7 @@ ColorCombs.find({}).remove(function() {
       console.log('finished populating colorcombs');
     }
   );
-});
+});*/
 //Creating user for login possibility
 User.find({}).remove(function() {
   User.create({

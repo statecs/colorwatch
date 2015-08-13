@@ -38,8 +38,18 @@ angular.module('colorwatchApp')
         getColorComb: {
           method: 'GET',
           isArray: true
+        },
+        create: {
+          method: 'POST',
+          params: {
+            id: 'create',
+            image_data: "@img_data",
+            image_contentType: "image/png",
+            textcolor: "@textcolor",
+            backcolor: "@backcolor"
+          }
         }
-
+//FORTSÄTT HÄR!!!!
       });
   })
   .factory('socket', function(socketFactory) {

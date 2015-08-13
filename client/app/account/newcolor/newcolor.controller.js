@@ -10,9 +10,15 @@ function draw(textColor, backgroundColor) {
 			ctx.textAlign = "center";
 			ctx.fillText("Hello World", canvas.width/2, canvas.height/2);
 };
+function blobToFile(theBlob, fileName){
+    //A Blob() is almost a File() - it's just missing the two properties below which we will add
+    theBlob.lastModifiedDate = new Date();
+    theBlob.name = fileName;
+    return theBlob;
+}
 
 angular.module('colorwatchApp')
-  .controller('NewcolorCtrl', function ($scope, ColorCombs) {
+  .controller('NewcolorCtrl', function ($scope, ColorCombs, Upload) {
       // Define an empty poll model object
 		$scope.textcolor = "#ffffff";
 		$scope.backcolor = "#000000";
@@ -24,8 +30,46 @@ angular.module('colorwatchApp')
 	    });		
 
 	    $scope.createColor = function(){
-	    	var img = canvas.toDataURL("image/png");
-	    	console.log(img);
+	    	// var image = canvas.toDataURL("image/png");
+	    	// console.log(document.write('<img src="'+image+'"/>'));
+	 		
+			if (canvas.toBlob) {
+			    canvas.toBlob(
+			        function (blob) {
+			            // Saves blobfile to a real file and upload to cloudinairy
+			            var theFile = blobToFile(blob, $scope.textcolor + $scope.backcolor + '.png');
+			            $scope.upload(theFile);
+			        },
+			        'image/png'
+			    );
+			}
+
+	    	/*ColorCombs.create({}, {
+	    		image_data: img, 
+	    		textcolor: $scope.textcolor, 
+	    		backcolor: $scope.backcolor, 
+	    		image_contentType: 'image/png'
+	    	});*/
+	    };
+	    /**
+	     * Upload a image file to cloudinary
+	     * @param  {[type]} file image file
+	     * @return {[type]}      [description]
+	     */
+	    $scope.upload = function (file) {
+	    	console.log($.cloudinary.config().upload_preset);
+	        Upload.upload({
+	            url: 'https://api.cloudinary.com/v1_1/' + $.cloudinary.config().cloud_name + '/upload',
+	            fields: {upload_preset: $.cloudinary.config().upload_preset, tags: 'myphotoalbum', context:'photo='+$scope.textcolor+$scope.backcolor},
+	            file: file,
+	        }).progress(function (evt) {
+	            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+	            console.log('Upload progress to cloudinary: ' + progressPercentage + '% ' + evt.config.file.name);
+	        }).success(function (data, status, headers, config) {
+	            console.log('file ' + config.file.name + 'uploaded. Response: ', data);
+	        }).error(function (data, status, headers, config) {
+	            console.log('error status: ' + status);
+	        })
 	    };
 /*
 		$scope.$watchCollection('[textcolor, backcolor]', function(newValue, oldValue){
