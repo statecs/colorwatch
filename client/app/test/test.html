@@ -3,12 +3,19 @@
 </div>
 <div class="container">
 	<div class="row text-center">
-	 	<div ng-repeat="choice in poll.choices" class="col col-md-3 col-xs-6 col-md-offset-2">
-	 		<img ng-src="{{choice.image_url}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
-   			<!-- <button class="btn btn-info" ng-click="setQuestion(currentQuestion)">Väljer</button> -->
-   			<label>
-				<input class="btn btn-default" type="button" ng-click="vote(choice._id)" name="choice" ng-model="poll.userVote" value="Välj">
-			</label>
+	 	<div class="btn-group">
+		 	<!-- <div ng-repeat="choice in poll.choices" class="col col-md-3 col-xs-6 col-md-offset-2">
+		 		<img ng-src="{{choice.image_url}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
+	   			<button class="btn btn-info" ng-click="setQuestion(currentQuestion)">Väljer</button>
+			</div> -->
+			<div class="col col-md-3 col-xs-6 col-md-offset-2">
+				<img ng-src="{{poll.img1_url}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
+		   		<label class="btn btn-default" ng-model="poll.userVote" ng-click="vote(poll.img1)" btn-radio="'alt1'">Välj</label>
+	   		</div>
+	   		<div class="col col-md-3 col-xs-6">
+	   			<img ng-src="{{poll.img2_url}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
+		   		<label class="btn btn-default" ng-model="poll.userVote" ng-click="vote(poll.img2)" btn-radio="'alt2'">Välj</label>
+	   		</div>
 		</div>
 	</div>
 	<hr/>

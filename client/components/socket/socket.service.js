@@ -3,9 +3,53 @@
 
 angular.module('colorwatchApp')
   .factory('Poll', function($resource) {
-      return $resource('/api/polls/:pollId', {}, {
+      return $resource('/api/polls/:id', {}, {
         // Use this method for getting a list of polls
-        query: { method: 'GET', params: { pollId: 'list' }, isArray: true }
+        newpolls: { 
+          method: 'GET', 
+          params: { 
+            id: 'newpolls' 
+          }},
+        getPoll: {
+          method: 'GET',
+          params: {
+            id: 'poll'
+          },
+          isArray: true
+        },
+        update: {
+          method: 'PUT',
+          params: {
+            id: '@id'
+          }
+        },
+        updateFinalForm: {
+          method: 'PUT',
+          params:{
+            id: 'final'
+          }
+        }
+
+      });
+  })
+  .factory('ColorCombs', function($resource) {
+    return $resource('/api/colorcombs/:id', {}, {
+        // Use this method for getting a list of polls
+        getColorComb: {
+          method: 'GET',
+          isArray: true
+        },
+        create: {
+          method: 'POST',
+          params: {
+            id: 'create',
+            image_data: "@img_data",
+            image_contentType: "image/png",
+            textcolor: "@textcolor",
+            backcolor: "@backcolor"
+          }
+        }
+//FORTSÄTT HÄR!!!!
       });
   })
   .factory('socket', function(socketFactory) {

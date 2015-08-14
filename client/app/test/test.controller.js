@@ -1,18 +1,17 @@
 'use strict';
 
 angular.module('colorwatchApp')
-.controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, Poll, socket) {
-    $scope.$on('socket:error', function (ev, data) {
+.controller('TestCtrl', function ($scope, $rootScope, $routeParams, $cookieStore, $location, Poll, ColorCombs) {
+    /*$scope.$on('socket:error', function (ev, data) {
       console.log("error");
     });
     
     socket.forward('myvote', $scope);
     $scope.$on('socket:myvote', function (ev, data) {
       console.log(data);
-    });
-
-    $scope.polls = Poll.query().$promise.then(function(polls){
-  	   console.log(polls);
+    });*/
+    $scope.polls = Poll.getPoll({id: $routeParams.questionNr}).$promise.then(function(polls){
+  	   console.log('polls',polls);
        /**
         * total questions in the test
         * @type {Number}
@@ -32,25 +31,28 @@ angular.module('colorwatchApp')
        * Two images to choose between at current question
        * @type {Object}
        */
-      console.log("currentQuestion", $scope.currentQuestion);
+      /*console.log("currentQuestion", $scope.currentQuestion);
       Poll.get({pollId: polls[$scope.currentQuestion-1]._id}).$promise.then(function(data){
         $scope.poll = data;
         console.log("scope.poll", $scope.poll);
-      });
-
+      });*/
+      $scope.poll = polls[$routeParams.questionNr-1 || 0];
+      /*Poll.get({pollId: polls[$scope.currentQuestion-1]._id}).$promise.then(function(data){
+        $scope.poll = data;
+      });*/
     });
 
-    $scope.vote = function(choiceId){
-      var pollId = $scope.poll._id;
-    
-      if(choiceId) {
-        var voteObj = { pollId: $scope.poll._id, choice: choiceId};
-        console.log("vote: ", voteObj);
-        socket.emit('send:vote', voteObj);
-        // socket.emit('news', voteObj);
-      } else {
-        alert('You must select an option to vote for');
-      }
+    $scope.vote = function(){
+      Poll.update({id: $cookieStore.get('myTest')}, {questionNr: $routeParams.questionNr, userVote: $scope.poll.userVote});
+
+       /* if(choiceId) {
+          var voteObj = { pollId: $scope.poll._id, choice: choiceId};
+          console.log("vote: ", voteObj);
+          socket.emit('send:vote', voteObj);
+          // socket.emit('news', voteObj);
+        } else {
+          alert('You must select an option to vote for');
+        }*/
     }
 
     /**

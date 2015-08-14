@@ -2,6 +2,8 @@
 
 var _ = require('lodash');
 var Poll = require('./poll.model');
+var ColorCombs = require('../colorcombs/colorcombs.model');
+var mongoose = require('mongoose');
 
 // Get list of polls
 exports.index = function(req, res) {
@@ -20,10 +22,56 @@ exports.show = function(req, res) {
   });
 };
 
+/**
+ * JSON API for creating new polls, stored on clientside in sessionStorage/cookieStorage
+ * @param  {[type]} req [description]
+ * @param  {[type]} res [description]
+ * @return {[type]}     [description]
+ */
+exports.newpolls = function(req, res) {
+  ColorCombs
+    .find()
+    .sort({'__v': 1})
+    .limit(2)
+    .exec(function(err, colors) {
+       // `posts` will be of length 20
+       if(err) { return handleError(res, err);}
+       
+       var questions = [];
+       questions.push({
+        img1: colors[0].id, 
+        img1_url: colors[0].image_secureurl,
+        img2: colors[1].id,
+        img2_url: colors[1].image_secureurl,
+        userVote: 'alt1'
+      });
+       questions.push({
+        img1: colors[1].id, 
+        img1_url: colors[1].image_secureurl,
+        img2: colors[0].id,
+        img2_url: colors[0].image_secureurl,
+        userVote: 'alt1'
+      });
+       var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+        
+
+       var poll = new Poll({ip: ip, questions: questions});
+       // Save poll to DB
+      poll.save(function(err, doc) {
+        if(err || !doc) {
+          throw 'Error';
+        } else {
+          res.json(doc);
+        }   
+      });
+    });
+}
 // JSON API for list of polls
 // 
 exports.list = function(req, res) {
   // Query Mongo for polls, just get back the question text
+  // 
+  
   Poll.find({}, 'question', function(error, polls) {
     if(error){
       throw 'Error in list';
@@ -61,18 +109,41 @@ exports.create = function(req, res) {
 
 // Updates an existing poll in the DB.
 exports.update = function(req, res) {
+  console.log('update', req.body);
+  var userVote = String(req.body.userVote);
+  var questionNr = parseInt(req.body.questionNr);
+
   if(req.body._id) { delete req.body._id; }
-  Poll.findById(req.params.id, function (err, poll) {
+  Poll.findById(req.params.id, function (err, polls) {
     if (err) { return handleError(res, err); }
-    if(!poll) { return res.send(404); }
-    var updated = _.merge(poll, req.body);
-    updated.save(function (err) {
+    if(!polls) { return res.send(404); }
+    polls.questions[questionNr-1].userVote = userVote;
+    polls.save(function (err) {
       if (err) { return handleError(res, err); }
-      return res.json(200, poll);
+      return res.json(200, polls);
     });
   });
 };
-
+// Updates an existing poll in the DB.
+exports.updateFinalForm = function(req, res) {
+  console.log('updateFinalForm', req.body);
+  var diagnoses = req.body.diagnoses;
+  var disabilities = req.body.disabilities;
+  var pollId = mongoose.Types.ObjectId(req.cookies.myTest.replace(/['"]+/g, ''));
+  console.log(pollId);
+  if(req.body._id) { delete req.body._id; }
+  Poll.findById(pollId, function (err, polls) {
+    if (err) { return handleError(res, err); }
+    if(!polls) { return res.send(404); }
+    console.log(diagnoses)
+    polls.diagnoses = diagnoses;
+    polls.disabilities = disabilities;
+    polls.save(function (err) {
+      if (err) { return handleError(res, err); }
+      return res.json(200, polls);
+    });
+  });
+};
 // Deletes a poll from the DB.
 exports.destroy = function(req, res) {
   Poll.findById(req.params.id, function (err, poll) {
@@ -88,87 +159,18 @@ exports.destroy = function(req, res) {
 // JSON API for getting a single poll
 exports.poll = function(req, res) {
   // Poll ID comes in the URL
-  var pollId = req.params.id;
-  
-  // Find the poll by its ID, use lean as we won't be changing it
-  Poll.findById(pollId, '', { lean: true }, function(err, poll) {
-    if(poll) {
-      var userVoted = false,
-          userChoice,
-          totalVotes = 0;
+  if(req.cookies.myTest){
+    var myTestId = mongoose.Types.ObjectId(req.cookies.myTest.replace(/['"]+/g, ''));
+    console.log('testid', myTestId);
+  }
 
-      // Loop through poll choices to determine if user has voted
-      // on this poll, and if so, what they selected
-      for (var c in poll.choices) {
-        var choice = poll.choices[c]; 
-
-        for (var v in choice.votes) {
-          var vote = choice.votes[v];
-          totalVotes++;
-
-          if(vote.ip === (req.header('x-forwarded-for') || req.ip)) {
-            userVoted = true;
-            userChoice = { _id: choice._id, text: choice.text };
-          }
-        }
-      }
-
-      // Attach info about user's past voting on this poll
-      poll.userVoted = userVoted;
-      poll.userChoice = userChoice;
-
-      poll.totalVotes = totalVotes;
+  // Find the test by its ID, and return all the questions
+  Poll.findById(myTestId, function(err, poll) {
+    if(err) { return handleError(res, err); }
+    return res.json(poll.questions);
     
-      res.json(poll);
-    } else {
-      res.json({error:true});
-    }
   });
 };
-/**
- * [vote description]
- * @param  {[type]} socket [description]
- * @return {[type]}        [description]
- */
-/*exports.vote = function(socket) {
-  console.log("VOTE");
-  socket.on('send:vote', function(data) {
-    console.log("data from send:vote", data);
-    var ip = socket.handshake.headers['x-forwarded-for'] || socket.handshake.address.address;
-    console.log('data on vote', data);
-    Polls.findById(data.poll_id, function(err, poll) {
-      var choice = poll.choices.id(data.choice);
-      choice.votes.push({ ip: ip });
-      
-      poll.save(function(err, doc) {
-        var theDoc = { 
-          question: doc.question, _id: doc._id, choices: doc.choices, 
-          userVoted: false, totalVotes: 0 
-        };
-
-        // Loop through poll choices to determine if user has voted
-        // on this poll, and if so, what they selected
-        for(var i = 0, ln = doc.choices.length; i < ln; i++) {
-          var choice = doc.choices[i]; 
-
-          for(var j = 0, jLn = choice.votes.length; j < jLn; j++) {
-            var vote = choice.votes[j];
-            theDoc.totalVotes++;
-            theDoc.ip = ip;
-
-            if(vote.ip === ip) {
-              theDoc.userVoted = true;
-              theDoc.userChoice = { _id: choice._id, text: choice.text };
-            }
-          }
-        }
-        
-        socket.emit('myvote', theDoc);
-        socket.broadcast.emit('vote', theDoc);
-      });     
-    });
-  });
-};*/
 
 function handleError(res, err) {
   return res.send(500, err);
