@@ -18,11 +18,18 @@ ColorCombs.find({}).remove(function() {
     backcolor: '000000',
     image_secureurl: 'https://res.cloudinary.com/duff92/image/upload/v1439563172/colors/53f297_000000.png',
     votes: []
+  },
+  {
+    textcolor: 'ffffff',
+    backcolor: '000000',
+    image_secureurl: 'https://res.cloudinary.com/duff92/image/upload/v1439564281/colors/ffffff_000000.png',
+    votes: []
   }, function() {
       console.log('finished populating colorcombs');
     }
   );
 });
+
 //Creating user for login possibility
 User.find({}).remove(function() {
   User.create({

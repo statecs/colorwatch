@@ -40,16 +40,16 @@ exports.newpolls = function(req, res) {
        var questions = [];
        questions.push({
         img1: colors[0].id, 
-        img1_url: colors[0].image_url,
+        img1_url: colors[0].image_secureurl,
         img2: colors[1].id,
-        img2_url: colors[1].image_url,
+        img2_url: colors[1].image_secureurl,
         userVote: 'alt1'
       });
        questions.push({
         img1: colors[1].id, 
-        img1_url: colors[1].image_url,
+        img1_url: colors[1].image_secureurl,
         img2: colors[0].id,
-        img2_url: colors[0].image_url,
+        img2_url: colors[0].image_secureurl,
         userVote: 'alt1'
       });
        var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
