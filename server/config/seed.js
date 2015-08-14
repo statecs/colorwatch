@@ -12,22 +12,17 @@ var ColorCombs = require('../api/colorcombs/colorcombs.model');
 var mongoose = require('mongoose');
 
 //Creating colorcombinations used in test
-/*ColorCombs.find({}).remove(function() {
+ColorCombs.find({}).remove(function() {
   ColorCombs.create({
-    name: 'Svart text med vit bakgrund',
-    image_url: 'https://s3.eu-central-1.amazonaws.com/colorwatch/color-images-test/color_blw.png',
-    test: 1,
-    votes: []
-  }, {
-    name: 'Vit text med svart bakgrund2',
-    image_url: 'https://s3.eu-central-1.amazonaws.com/colorwatch/color-images-test/color_wbl.png',
-    test: 10,
+    textcolor: '53f297',
+    backcolor: '000000',
+    image_secureurl: 'https://res.cloudinary.com/duff92/image/upload/v1439563172/colors/53f297_000000.png',
     votes: []
   }, function() {
       console.log('finished populating colorcombs');
     }
   );
-});*/
+});
 //Creating user for login possibility
 User.find({}).remove(function() {
   User.create({

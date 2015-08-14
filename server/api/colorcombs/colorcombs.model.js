@@ -9,8 +9,7 @@ var voteSchema = new Schema({ ip: 'String' });
 var ColorcombsSchema = new Schema({
   textcolor: String,
   backcolor: String,
-  image_data: Buffer,
-  image_contentType: String,
+  image_secureurl: String,
   votes: [voteSchema]
 });
 

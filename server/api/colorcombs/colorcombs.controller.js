@@ -17,7 +17,7 @@ exports.list = function(req, res) {
   // Query Mongo for polls, just get back the question text
   // 
   
-  Colorcombs.find({}, 'image_url', function(error, colors) {
+  Colorcombs.find({}, function(error, colors) {
     if(error){
       throw 'Error in list';
     }
@@ -42,8 +42,7 @@ exports.create = function(req, res) {
   var colorObj = {
     textcolor: req.body.textcolor,
     backcolor: req.body.backcolor,
-    image_data: req.body.image_data,
-    image_contentType: req.body.image_contentType
+    image_secureurl: req.body.image_secureurl
   };
   console.log(colorObj);
   var color = new Colorcombs(colorObj);

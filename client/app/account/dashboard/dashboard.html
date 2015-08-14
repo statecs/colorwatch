@@ -18,8 +18,10 @@
 	</ul>
 	<ul ng-switch-default>
 		<li ng-repeat="color in colors | filter: query">
-			<img width="200px" ng-src="{{color.image_url}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
-		   		
+			<img width="200px" ng-src="{{color.image_secureurl}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
+			<span>Textfärg: {{color.textcolor}}</span>
+			<span>Backgrundsfärg: {{color.backcolor}}</span>
+		   	<hr/>	
 		</li>
 	</ul>
 </div>

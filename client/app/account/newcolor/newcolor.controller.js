@@ -57,7 +57,6 @@ angular.module('colorwatchApp')
 	     * @return {[type]}      [description]
 	     */
 	    $scope.upload = function (file) {
-	    	console.log($.cloudinary.config().upload_preset);
 	        Upload.upload({
 	            url: 'https://api.cloudinary.com/v1_1/duff92/upload',
 	            fields: {upload_preset: 'zvesrhqn', tags: 'myphotoalbum', context:'photo='+$scope.textcolor+$scope.backcolor},
@@ -67,6 +66,12 @@ angular.module('colorwatchApp')
 	            console.log('Upload progress to cloudinary: ' + progressPercentage + '% ' + evt.config.file.name);
 	        }).success(function (data, status, headers, config) {
 	            console.log('file ' + config.file.name + 'uploaded. Response: ', data);
+	            ColorCombs.create({
+				    textcolor: $scope.textcolor,
+				    backcolor: $scope.backcolor,
+				    image_secureurl: data.secure_url,
+				    votes: []
+				});
 	        }).error(function (data, status, headers, config) {
 	            console.log('error status: ' + status);
 	        })
