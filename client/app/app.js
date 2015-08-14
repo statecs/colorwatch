@@ -1,14 +1,13 @@
 'use strict';
 
 angular.module('colorwatchApp', [
+  'ngFileUpload',
   'ngCookies',
   'ngResource',
   'ngSanitize',
   'ngRoute',
   'ui.bootstrap',
-  'btford.socket-io',
-  'cloudinary',
-  'ngFileUpload'
+  'btford.socket-io'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider

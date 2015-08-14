@@ -59,8 +59,8 @@ angular.module('colorwatchApp')
 	    $scope.upload = function (file) {
 	    	console.log($.cloudinary.config().upload_preset);
 	        Upload.upload({
-	            url: 'https://api.cloudinary.com/v1_1/' + $.cloudinary.config().cloud_name + '/upload',
-	            fields: {upload_preset: $.cloudinary.config().upload_preset, tags: 'myphotoalbum', context:'photo='+$scope.textcolor+$scope.backcolor},
+	            url: 'https://api.cloudinary.com/v1_1/duff92/upload',
+	            fields: {upload_preset: 'zvesrhqn', tags: 'myphotoalbum', context:'photo='+$scope.textcolor+$scope.backcolor},
 	            file: file,
 	        }).progress(function (evt) {
 	            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
