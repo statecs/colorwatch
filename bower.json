@@ -24,6 +24,6 @@
     "angular-scenario": ">=1.2.*"
   },
   "resolutions": {
-    "angular": ">=1.2.*"
+    "angular": "1.4.4"
   }
 }
