@@ -8,5 +8,7 @@ deployment:
       appname: colorwatch
   staging:
     branch: staging
+    commands:
+      - git pull https://git.heroku.com/colorwatch-staging.git
     heroku:
       appname: colorwatch-staging
