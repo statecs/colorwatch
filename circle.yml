@@ -9,4 +9,5 @@ deployment:
   staging:
     branch: staging
     commands:
-      - git push -f git@heroku.com:colorwatch-staging.git
+      - grunt build
+      - grunt buildcontrol:heroku
