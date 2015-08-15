@@ -18,11 +18,12 @@ function blobToFile(theBlob, fileName){
 }
 
 angular.module('colorwatchApp')
-  .controller('NewcolorCtrl', function ($scope, ColorCombs, Upload) {
+  .controller('NewcolorCtrl', function ($scope, ColorCombs, Upload, $location) {
       // Define an empty poll model object
 		$scope.textcolor = "#ffffff";
 		$scope.backcolor = "#000000";
-		
+		$scope.file = {};
+
 		$scope.$watchCollection('[textcolor,backcolor]', function(val) {
 	        canvas = document.getElementById('myCanvas');
 			ctx = canvas.getContext('2d');
@@ -55,10 +56,12 @@ angular.module('colorwatchApp')
 	            fields: {upload_preset: 'zvesrhqn', tags: 'myphotoalbum', context:'photo='+$scope.textcolor+$scope.backcolor},
 	            file: file,
 	        }).progress(function (evt) {
-	            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-	            console.log('Upload progress to cloudinary: ' + progressPercentage + '% ' + evt.config.file.name);
+	            $scope.file.progress = parseInt(100.0 * evt.loaded / evt.total);
+	            console.log('Upload progress to cloudinary: ' + $scope.file.progress + '% ' + evt.config.file.name);
+	            $scope.file.status = "Uploading... " + $scope.file.progress + "%";
 	        }).success(function (data, status, headers, config) {
 	            console.log('file ' + config.file.name + 'uploaded. Response: ', data);
+	            $scope.file.result = data;
 	            ColorCombs.create({
 				    textcolor: $scope.textcolor,
 				    backcolor: $scope.backcolor,
@@ -66,7 +69,13 @@ angular.module('colorwatchApp')
 				    votes: []
 				});
 	        }).error(function (data, status, headers, config) {
-	            console.log('error status: ' + status);
+	        	$scope.file.errorStatus = {'error': 'error'};
+	            console.log('error status: ' + status, data);
 	        })
 	    };
+
+	    $scope.prevPage = function(){
+
+	    	$location.path('/dashboard');
+	    }
 	});
