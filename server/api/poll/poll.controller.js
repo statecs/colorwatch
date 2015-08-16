@@ -109,7 +109,7 @@ exports.create = function(req, res) {
 
 // Updates an existing poll in the DB.
 exports.update = function(req, res) {
-  console.log('update', req.body);
+  // console.log('update', req.body);
   var userVote = String(req.body.userVote);
   var questionNr = parseInt(req.body.questionNr);
 
@@ -126,7 +126,7 @@ exports.update = function(req, res) {
 };
 // Updates an existing poll in the DB.
 exports.updateFinalForm = function(req, res) {
-  console.log('updateFinalForm', req.body);
+  // console.log('updateFinalForm', req.body);
   var diagnoses = req.body.diagnoses;
   var disabilities = req.body.disabilities;
   var pollId = mongoose.Types.ObjectId(req.cookies.myTest.replace(/['"]+/g, ''));
@@ -159,7 +159,6 @@ exports.destroy = function(req, res) {
 // JSON API for getting a single poll
 exports.poll = function(req, res) {
   // Poll ID comes in the URL
-  console.log('poll',req.params.id);
   if(req.params.id){
     var myTestId = mongoose.Types.ObjectId(req.params.id.replace(/['"]+/g, ''));
     console.log('testid', myTestId);
