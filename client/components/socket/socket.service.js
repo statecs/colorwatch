@@ -3,7 +3,9 @@
 
 angular.module('colorwatchApp')
   .factory('Poll', function($resource) {
-      return $resource('/api/polls/:id', {}, {
+      return $resource('/api/polls/:id', {
+      id: '@id'
+    }, {
         // Use this method for getting a list of polls
         newpolls: { 
           method: 'GET', 
@@ -13,15 +15,12 @@ angular.module('colorwatchApp')
         getPoll: {
           method: 'GET',
           params: {
-            id: 'poll'
+            id: '@id'
           },
           isArray: true
         },
         update: {
-          method: 'PUT',
-          params: {
-            id: '@id'
-          }
+          method: 'PUT'
         },
         updateFinalForm: {
           method: 'PUT',

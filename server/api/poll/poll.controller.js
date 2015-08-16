@@ -159,17 +159,22 @@ exports.destroy = function(req, res) {
 // JSON API for getting a single poll
 exports.poll = function(req, res) {
   // Poll ID comes in the URL
-  if(req.cookies.myTest){
-    var myTestId = mongoose.Types.ObjectId(req.cookies.myTest.replace(/['"]+/g, ''));
+  console.log('poll',req.params.id);
+  if(req.params.id){
+    var myTestId = mongoose.Types.ObjectId(req.params.id.replace(/['"]+/g, ''));
     console.log('testid', myTestId);
+    // Find the test by its ID, and return all the questions
+    Poll.findById(myTestId, function(err, poll) {
+      console.log('myTestId', myTestId, 'err', err, 'poll', poll)
+      if(err) { return handleError(res, err); }
+      return res.json(poll.questions);
+      
+    });
+  }
+  else{
+    res.send(500, 'error');
   }
 
-  // Find the test by its ID, and return all the questions
-  Poll.findById(myTestId, function(err, poll) {
-    if(err) { return handleError(res, err); }
-    return res.json(poll.questions);
-    
-  });
 };
 
 function handleError(res, err) {

@@ -2,6 +2,14 @@
 	<h1 class="text-center">Vilken text tycker du är lättast att läsa?</h1>
 </div>
 <div class="container">
+	<div class="row">
+		<div class="col-md-3 col-xs-3 col-md-offset-1">
+			<button type="button" class="btn btn-default btn-large" ng-click="prevPage()">Tillbaka</button>
+		</div>
+		<div class="col-md-3 col-xs-3 col-md-offset-4 col-xs-offset-6 text-right">
+			<button type="button" class="btn btn-default btn-large" ng-click="nextPage()">Fortsätt</button>
+		</div>
+	</div>
 	<div class="row text-center">
 	 	<div class="btn-group">
 		 	<!-- <div ng-repeat="choice in poll.choices" class="col col-md-3 col-xs-6 col-md-offset-2">
@@ -10,11 +18,11 @@
 			</div> -->
 			<div class="col col-md-3 col-xs-6 col-md-offset-2">
 				<img ng-src="{{poll.img1_url}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
-		   		<label class="btn btn-default" ng-model="poll.userVote" ng-click="vote(poll.img1)" btn-radio="'alt1'">Välj</label>
+		   		<label class="btn btn-default" ng-model="poll.userVote" ng-click="vote(poll.img1)" btn-radio="'alt1'" uncheckable>Välj</label>
 	   		</div>
 	   		<div class="col col-md-3 col-xs-6">
 	   			<img ng-src="{{poll.img2_url}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
-		   		<label class="btn btn-default" ng-model="poll.userVote" ng-click="vote(poll.img2)" btn-radio="'alt2'">Välj</label>
+		   		<label class="btn btn-default" ng-model="poll.userVote" ng-click="vote(poll.img2)" btn-radio="'alt2'" uncheckable>Välj</label>
 	   		</div>
 		</div>
 	</div>

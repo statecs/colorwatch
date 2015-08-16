@@ -5,7 +5,14 @@
 	    <p class="lead">{{overviewDescText}}</p>
 	</div>	
 	<form>
-		<input type="submit" class="btn btn-default" ng-click="update()" value="Fortsätt" />
+		<div class="row">
+			<div class="col-md-3 col-xs-3 col-md-offset-1">
+				<button type="button" class="btn btn-default btn-large" ng-click="prevPage()">Tillbaka</button>
+			</div>
+			<div class="col-md-3 col-xs-3 col-md-offset-4 col-xs-offset-6 text-right">
+				<input type="submit" class="btn btn-default" ng-click="nextPage()" value="Fortsätt" />
+			</div>
+		</div>
 		<div class="questionBlock" ng-repeat="question in questions">
 			<fieldset>
 				<legend>Fråga {{$index + 1}}</legend>

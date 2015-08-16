@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-.controller('TestCtrl', function ($scope, $rootScope, $routeParams, $cookieStore, $location, Poll, ColorCombs) {
+.controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, Poll, ColorCombs, $sessionStorage) {
     /*$scope.$on('socket:error', function (ev, data) {
       console.log("error");
     });
@@ -10,7 +10,9 @@ angular.module('colorwatchApp')
     $scope.$on('socket:myvote', function (ev, data) {
       console.log(data);
     });*/
-    $scope.polls = Poll.getPoll({id: $routeParams.questionNr}).$promise.then(function(polls){
+    console.log('sessionStorage',$sessionStorage.myTest);
+
+    $scope.polls = Poll.getPoll({id: $sessionStorage.myTest},{}).$promise.then(function(polls){
   	   console.log('polls',polls);
        /**
         * total questions in the test
@@ -43,7 +45,7 @@ angular.module('colorwatchApp')
     });
 
     $scope.vote = function(){
-      Poll.update({id: $cookieStore.get('myTest')}, {questionNr: $routeParams.questionNr, userVote: $scope.poll.userVote});
+      Poll.update({id: $sessionStorage.myTest}, {questionNr: $routeParams.questionNr, userVote: $scope.poll.userVote});
 
        /* if(choiceId) {
           var voteObj = { pollId: $scope.poll._id, choice: choiceId};
@@ -78,4 +80,12 @@ angular.module('colorwatchApp')
       var scoreA = 0;
       var scoreB = 0;
     };
+
+    $scope.prevPage = function(){
+      $location.path('/');
+    }
+
+    $scope.nextPage = function(){
+      $location.path('/oversikt');
+    }
   });
