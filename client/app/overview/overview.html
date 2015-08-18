@@ -19,11 +19,11 @@
 				<div class="btn-group">
 					<div class="col col-md-3 col-xs-6 col-md-offset-2">
 						<img ng-src="{{question.img1_url}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
-				   		<label class="btn btn-default" ng-model="question.userVote" btn-radio="'alt1'">Välj</label>
+				   		<label class="btn btn-default" ng-model="question.userVote" ng-click="vote('choice_alt1', $index+1)" btn-radio="'choice_alt1'">Välj</label>
 			   		</div>
 			   		<div class="col col-md-3 col-xs-6">
 			   			<img ng-src="{{question.img2_url}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
-				   		<label class="btn btn-default" ng-model="question.userVote" btn-radio="'alt2'">Välj</label>
+				   		<label class="btn btn-default" ng-model="question.userVote" ng-click="vote('choice_alt2', $index+1)" btn-radio="'choice_alt2'">Välj</label>
 			   		</div>
 		   		</div>
 			</fieldset>

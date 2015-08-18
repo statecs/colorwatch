@@ -10,10 +10,12 @@ angular.module('colorwatchApp')
     $scope.$on('socket:myvote', function (ev, data) {
       console.log(data);
     });*/
-    console.log('sessionStorage',$sessionStorage.myTest);
 
-    $scope.polls = Poll.getPoll({id: $sessionStorage.myTest},{}).$promise.then(function(polls){
-  	   console.log('polls',polls);
+    console.log('sessionStorage',$sessionStorage.myTest);
+    $scope.poll = {};
+    Poll.getPoll({id: $sessionStorage.myTest},{}).$promise.then(function(polls){
+      
+       $scope.polls = polls;
        /**
         * total questions in the test
         * @type {Number}
@@ -42,43 +44,20 @@ angular.module('colorwatchApp')
       /*Poll.get({pollId: polls[$scope.currentQuestion-1]._id}).$promise.then(function(data){
         $scope.poll = data;
       });*/
+      console.log('userVote is', $scope.poll.userVote);
     });
 
-    $scope.vote = function(){
-      Poll.update({id: $sessionStorage.myTest}, {questionNr: $routeParams.questionNr, userVote: $scope.poll.userVote});
+    $scope.vote = function(userChoice){
+      $scope.poll.userVote = userChoice;
+      $scope.poll.userHasVoted = true;
 
-       /* if(choiceId) {
-          var voteObj = { pollId: $scope.poll._id, choice: choiceId};
-          console.log("vote: ", voteObj);
-          socket.emit('send:vote', voteObj);
-          // socket.emit('news', voteObj);
-        } else {
-          alert('You must select an option to vote for');
-        }*/
+      Poll.update({id: $sessionStorage.myTest}, {questionNr: $routeParams.questionNr, userVote: userChoice});
     }
-
     /**
      * When question changes in the pagination this method is called
      */
    $scope.questionChanged = function() {
      console.log('Question changed to: ' + $scope.currentQuestion);
-
-     if($scope.currentQuestion > $scope.totalQuestions){
-      $location.path('/oversikt');
-     }
-     else{
-       $location.path('/test/' + $scope.currentQuestion);
-      // console.log('TestImages',$scope.twoImagesToChoose);
-     }
-    };
-    /**
-     * [chooseImage description]
-     * @param  {String} altChoosed - which alternative is choosed, eg 'Alt1' or 'Alt2'
-     */
-    $scope.chooseImage = function(altChoosed){
-      var questionToChoose = $scope.currentQuestion;
-      var scoreA = 0;
-      var scoreB = 0;
     };
 
     $scope.prevPage = function(){
@@ -86,6 +65,17 @@ angular.module('colorwatchApp')
     }
 
     $scope.nextPage = function(){
-      $location.path('/oversikt');
+      var questionsNotAns = [];
+      $.each($scope.polls, function(index, element){
+        if(!element.userHasVoted){
+          questionsNotAns.push(index+1);
+        }
+      });
+      if(questionsNotAns.length != 0){
+          console.log('Not answeared', questionsNotAns);
+      }
+      else{
+        $location.path('/oversikt');
+      }
     }
   });
