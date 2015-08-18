@@ -6,7 +6,6 @@ angular.module('colorwatchApp')
    	
     Poll.getPoll({id: $sessionStorage.myTest}).$promise.then(function(questions){
       $scope.questions = questions;
-      console.log(questions);
     });
     
 

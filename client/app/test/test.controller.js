@@ -44,25 +44,34 @@ angular.module('colorwatchApp')
       /*Poll.get({pollId: polls[$scope.currentQuestion-1]._id}).$promise.then(function(data){
         $scope.poll = data;
       });*/
-      console.log('userVote is', $scope.poll.userVote);
     });
 
     $scope.vote = function(userChoice){
       $scope.poll.userVote = userChoice;
       $scope.poll.userHasVoted = true;
+      var nextQuestion = parseInt($routeParams.questionNr) + 1;
 
       Poll.update({id: $sessionStorage.myTest}, {questionNr: $routeParams.questionNr, userVote: userChoice});
+      
+      if(nextQuestion > $scope.totalQuestions){
+        $scope.nextPage();
+      }
+      else{
+        $location.path('test/' + nextQuestion);
+      }
     }
     /**
      * When question changes in the pagination this method is called
      */
    $scope.questionChanged = function() {
      console.log('Question changed to: ' + $scope.currentQuestion);
+     $location.path('test/' + $scope.currentQuestion);
     };
 
     $scope.prevPage = function(){
       $location.path('/');
     }
+
 
     $scope.nextPage = function(){
       var questionsNotAns = [];
@@ -72,6 +81,7 @@ angular.module('colorwatchApp')
         }
       });
       if(questionsNotAns.length != 0){
+          //Need to add proper alert here to the user!
           console.log('Not answeared', questionsNotAns);
       }
       else{
