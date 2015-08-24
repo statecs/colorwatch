@@ -8,7 +8,9 @@ angular.module('colorwatchApp', [
   'ngSanitize',
   'ngRoute',
   'ui.bootstrap',
-  'btford.socket-io'
+  'btford.socket-io',
+  'ngAria',
+  'ng-breadcrumbs'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider

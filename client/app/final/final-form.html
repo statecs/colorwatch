@@ -1,8 +1,20 @@
-<div class="container">			
+<div class="container jumbotron">			
+			<div class="form-top row final-form">
 	<form role="form" ng-submit="submit()">
+
+	<h2>Vi behöver veta lite mer om dig för att kunna få ett så bra resultat som möjligt</h2>
+    <hr />
+
+
+    		<div class="form-group"><p>Kön</p>
+				  <label><input type="radio" name="optradio">Kvinna</label>
+				  <label><input type="radio" name="optradio">Man</label>
+				  <label><input type="radio" name="optradio">Vill ej ange</label>
+				  <label><input type="radio" name="optradio">Annat</label>
+			</div>
 		<div class="form-group">
 			<label for="disabilities">
-				Har du problem med något av nedanstående? - Med problem menar vi att det skapar svårigheter för dig i din vardag
+				<p>Har du problem med något av nedanstående? - Med problem menar vi att det skapar svårigheter för dig i din vardag</p>
 			</label>
 			<div class="btn-group" id="disabilities">
 			        <label ng-repeat="disability in disabilitiesModel" class="btn btn-default" ng-model="disability.state" ng-disabled="noDisabilities" btn-checkbox>{{disability.name}}</label>
@@ -17,7 +29,7 @@
 		</div>
 		<div class="form-group">
 			<label for="diagnoses">
-				Har du någon diagnos?
+				<p>Har du någon diagnos?</p>
 			</label>
 			<div class="btn-group" id="diagnoses">
 			        <label ng-repeat="diagnose in diagnosesModel" class="btn btn-default" ng-model="diagnose.state" ng-disabled="noDiagnoses" btn-checkbox>{{diagnose.name}}</label>
@@ -31,9 +43,8 @@
 	        </label>
 		</div>
 		<div class="form-group">
-		    <div class="col-sm-offset-2 col-xs-10 col-md-offset-2 col-md-10">
-		      <button type="submit" class="btn btn-primary">Skicka in</button>
-		    </div>
+		<div class="col-md-2 col-md-offset-5"><button type="submit" class="btn btn-primary">Skicka in</button></div>
+		    
 		  </div>
-	</form>
+	</form></div>
 </div>

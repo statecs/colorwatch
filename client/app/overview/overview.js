@@ -5,6 +5,7 @@ angular.module('colorwatchApp')
     $routeProvider
       .when('/oversikt', {
         templateUrl: 'app/overview/overview.html',
-        controller: 'OverviewCtrl'
+        controller: 'OverviewCtrl',
+        label: 'Overview'
       });
   });
