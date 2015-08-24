@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-  .controller('FinalCtrl', function ($scope, $location) {
+  .controller('FinalCtrl', function ($scope, $sessionStorage, $location, Poll) {
 
   	$scope.noDisabilities = false;
   	$scope.noDiagnoses = false;
@@ -38,9 +38,23 @@ angular.module('colorwatchApp')
 
 	 $scope.submit = function(){
 	 	//Add calculations of ratings, send to database
-	 	console.log("disabilitiesModel", $scope.disabilitiesModel);
+	 	//
+	 	var choosedDisabilities = [];
+	 	var choosedDiagnoses = [];
 
-	 	console.log("diagnosesModel", $scope.diagnosesModel);
+	 	$.each($scope.disabilitiesModel, function(index, disability){
+	        if(disability.state){
+	          choosedDisabilities.push(disability);
+	        }
+	    });
+
+	    $.each($scope.diagnosesModel, function(index, diagnose){
+	        if(diagnose.state){
+	          choosedDiagnoses.push(diagnose);
+	        }
+	    });
+	 	var finalResult = Poll.update({id: $sessionStorage.myTest}, {diagnoses: choosedDiagnoses, disabilities: choosedDisabilities});
+	 //	socket.emit('send:vote', finalResult);
 	 	$location.path('/final-result');
 	 };
   });

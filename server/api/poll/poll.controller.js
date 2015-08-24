@@ -2,6 +2,8 @@
 
 var _ = require('lodash');
 var Poll = require('./poll.model');
+var ColorCombs = require('../colorcombs/colorcombs.model');
+var mongoose = require('mongoose');
 
 // Get list of polls
 exports.index = function(req, res) {
@@ -20,10 +22,55 @@ exports.show = function(req, res) {
   });
 };
 
+/**
+ * JSON API for creating new polls, stored on clientside in sessionStorage/cookieStorage
+ * @param  {[type]} req [description]
+ * @param  {[type]} res [description]
+ * @return {[type]}     [description]
+ */
+exports.newpolls = function(req, res) {
+  ColorCombs
+    .find()
+    .sort({'__v': 1})
+    .limit(5)
+    .exec(function(err, colors) {
+       // `posts` will be of length 20
+       if(err) { return handleError(res, err);}
+       console.log('colors', colors);
+       var questions = [];
+
+       for(var i = 0; i < 10; i++){
+          var index1 = Math.floor((Math.random() * colors.length));
+          do{
+            var index2 = Math.floor((Math.random() * colors.length));
+          } 
+          while(index1 == index2);
+          questions.push({
+            img1: colors[index1].id, 
+            img1_url: colors[index1].image_secureurl,
+            img2: colors[index2].id,
+            img2_url: colors[index2].image_secureurl,
+            userVote: null,
+            userHasVoted: false
+          });
+       }
+
+       var poll = new Poll({questions: questions});
+       // Save poll to DB
+      poll.save(function(err, doc) {
+        if(err || !doc) {
+          throw 'Error';
+        } else {
+          res.json(doc);
+        }   
+      });
+    });
+}
 // JSON API for list of polls
 // 
 exports.list = function(req, res) {
-  // Query Mongo for polls, just get back the question text
+  // 
+  
   Poll.find({}, 'question', function(error, polls) {
     if(error){
       throw 'Error in list';
@@ -61,14 +108,31 @@ exports.create = function(req, res) {
 
 // Updates an existing poll in the DB.
 exports.update = function(req, res) {
+  var userVote = String(req.body.userVote);
+  var questionNr = parseInt(req.body.questionNr);
+  var diagnoses = req.body.diagnoses;
+  var disabilities = req.body.disabilities;
+
   if(req.body._id) { delete req.body._id; }
-  Poll.findById(req.params.id, function (err, poll) {
+  Poll.findById(req.params.id, function (err, polls) {
     if (err) { return handleError(res, err); }
-    if(!poll) { return res.send(404); }
-    var updated = _.merge(poll, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, poll);
+    if(!polls) { return res.send(404); }
+    if(userVote != "undefined"){
+      polls.questions[questionNr-1].userVote = userVote;
+      if(userVote){
+        polls.questions[questionNr-1].userHasVoted = true;
+      }
+      else{
+        polls.questions[questionNr-1].userHasVoted = false; 
+      }
+    }
+    else{
+      polls.diagnoses = diagnoses;
+      polls.disabilities = disabilities;
+    }
+    polls.save(function (err) {
+      if (err) { return handleError(res, err); }  
+      return res.json(200, polls);
     });
   });
 };
@@ -88,87 +152,20 @@ exports.destroy = function(req, res) {
 // JSON API for getting a single poll
 exports.poll = function(req, res) {
   // Poll ID comes in the URL
-  var pollId = req.params.id;
-  
-  // Find the poll by its ID, use lean as we won't be changing it
-  Poll.findById(pollId, '', { lean: true }, function(err, poll) {
-    if(poll) {
-      var userVoted = false,
-          userChoice,
-          totalVotes = 0;
-
-      // Loop through poll choices to determine if user has voted
-      // on this poll, and if so, what they selected
-      for (var c in poll.choices) {
-        var choice = poll.choices[c]; 
-
-        for (var v in choice.votes) {
-          var vote = choice.votes[v];
-          totalVotes++;
-
-          if(vote.ip === (req.header('x-forwarded-for') || req.ip)) {
-            userVoted = true;
-            userChoice = { _id: choice._id, text: choice.text };
-          }
-        }
-      }
-
-      // Attach info about user's past voting on this poll
-      poll.userVoted = userVoted;
-      poll.userChoice = userChoice;
-
-      poll.totalVotes = totalVotes;
-    
-      res.json(poll);
-    } else {
-      res.json({error:true});
-    }
-  });
-};
-/**
- * [vote description]
- * @param  {[type]} socket [description]
- * @return {[type]}        [description]
- */
-/*exports.vote = function(socket) {
-  console.log("VOTE");
-  socket.on('send:vote', function(data) {
-    console.log("data from send:vote", data);
-    var ip = socket.handshake.headers['x-forwarded-for'] || socket.handshake.address.address;
-    console.log('data on vote', data);
-    Polls.findById(data.poll_id, function(err, poll) {
-      var choice = poll.choices.id(data.choice);
-      choice.votes.push({ ip: ip });
+  if(req.params.id){
+    var myTestId = mongoose.Types.ObjectId(req.params.id.replace(/['"]+/g, ''));
+    // Find the test by its ID, and return all the questions
+    Poll.findById(myTestId, function(err, poll) {
+      if(err) { return handleError(res, err); }
+      return res.json(poll.questions);
       
-      poll.save(function(err, doc) {
-        var theDoc = { 
-          question: doc.question, _id: doc._id, choices: doc.choices, 
-          userVoted: false, totalVotes: 0 
-        };
-
-        // Loop through poll choices to determine if user has voted
-        // on this poll, and if so, what they selected
-        for(var i = 0, ln = doc.choices.length; i < ln; i++) {
-          var choice = doc.choices[i]; 
-
-          for(var j = 0, jLn = choice.votes.length; j < jLn; j++) {
-            var vote = choice.votes[j];
-            theDoc.totalVotes++;
-            theDoc.ip = ip;
-
-            if(vote.ip === ip) {
-              theDoc.userVoted = true;
-              theDoc.userChoice = { _id: choice._id, text: choice.text };
-            }
-          }
-        }
-        
-        socket.emit('myvote', theDoc);
-        socket.broadcast.emit('vote', theDoc);
-      });     
     });
-  });
-};*/
+  }
+  else{
+    res.send(500, 'error');
+  }
+
+};
 
 function handleError(res, err) {
   return res.send(500, err);

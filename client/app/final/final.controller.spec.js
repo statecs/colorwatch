@@ -4,7 +4,8 @@ describe('Controller: FinalCtrl', function () {
 
   // load the controller's module
   beforeEach(module('colorwatchApp'));
-
+  beforeEach(module('socketMock'));
+  
   var FinalCtrl, scope;
 
   // Initialize the controller and a mock scope

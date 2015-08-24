@@ -4,7 +4,6 @@ describe('Controller: OverviewCtrl', function () {
 
   // load the controller's module
   beforeEach(module('colorwatchApp'));
-  beforeEach(module('socketMock'));
   
   var OverviewCtrl, scope;
 
