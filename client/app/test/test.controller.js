@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-.controller('TestCtrl', function ($scope, $rootScope, $routeParams, $cookieStore, $location, Poll, ColorCombs) {
+.controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, Poll, ColorCombs, $sessionStorage) {
     /*$scope.$on('socket:error', function (ev, data) {
       console.log("error");
     });
@@ -10,8 +10,12 @@ angular.module('colorwatchApp')
     $scope.$on('socket:myvote', function (ev, data) {
       console.log(data);
     });*/
-    $scope.polls = Poll.getPoll({id: $routeParams.questionNr}).$promise.then(function(polls){
-  	   console.log('polls',polls);
+
+    console.log('sessionStorage',$sessionStorage.myTest);
+    $scope.poll = {};
+    Poll.getPoll({id: $sessionStorage.myTest},{}).$promise.then(function(polls){
+      
+       $scope.polls = polls;
        /**
         * total questions in the test
         * @type {Number}
@@ -42,40 +46,46 @@ angular.module('colorwatchApp')
       });*/
     });
 
-    $scope.vote = function(){
-      Poll.update({id: $cookieStore.get('myTest')}, {questionNr: $routeParams.questionNr, userVote: $scope.poll.userVote});
+    $scope.vote = function(userChoice){
+      $scope.poll.userVote = userChoice;
+      $scope.poll.userHasVoted = true;
+      var nextQuestion = parseInt($routeParams.questionNr) + 1;
 
-       /* if(choiceId) {
-          var voteObj = { pollId: $scope.poll._id, choice: choiceId};
-          console.log("vote: ", voteObj);
-          socket.emit('send:vote', voteObj);
-          // socket.emit('news', voteObj);
-        } else {
-          alert('You must select an option to vote for');
-        }*/
+      Poll.update({id: $sessionStorage.myTest}, {questionNr: $routeParams.questionNr, userVote: userChoice});
+      
+      if(nextQuestion > $scope.totalQuestions){
+        $scope.nextPage();
+      }
+      else{
+        $location.path('test/' + nextQuestion);
+      }
     }
-
     /**
      * When question changes in the pagination this method is called
      */
    $scope.questionChanged = function() {
      console.log('Question changed to: ' + $scope.currentQuestion);
+     $location.path('test/' + $scope.currentQuestion);
+    };
 
-     if($scope.currentQuestion > $scope.totalQuestions){
-      $location.path('/oversikt');
-     }
-     else{
-       $location.path('/test/' + $scope.currentQuestion);
-      // console.log('TestImages',$scope.twoImagesToChoose);
-     }
-    };
-    /**
-     * [chooseImage description]
-     * @param  {String} altChoosed - which alternative is choosed, eg 'Alt1' or 'Alt2'
-     */
-    $scope.chooseImage = function(altChoosed){
-      var questionToChoose = $scope.currentQuestion;
-      var scoreA = 0;
-      var scoreB = 0;
-    };
+    $scope.prevPage = function(){
+      $location.path('/');
+    }
+
+
+    $scope.nextPage = function(){
+      var questionsNotAns = [];
+      $.each($scope.polls, function(index, element){
+        if(!element.userHasVoted){
+          questionsNotAns.push(index+1);
+        }
+      });
+      if(questionsNotAns.length != 0){
+          //Need to add proper alert here to the user!
+          console.log('Not answeared', questionsNotAns);
+      }
+      else{
+        $location.path('/oversikt');
+      }
+    }
   });

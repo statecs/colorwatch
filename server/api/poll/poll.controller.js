@@ -32,30 +32,30 @@ exports.newpolls = function(req, res) {
   ColorCombs
     .find()
     .sort({'__v': 1})
-    .limit(2)
+    .limit(5)
     .exec(function(err, colors) {
        // `posts` will be of length 20
        if(err) { return handleError(res, err);}
-       
+       console.log('colors', colors);
        var questions = [];
-       questions.push({
-        img1: colors[0].id, 
-        img1_url: colors[0].image_secureurl,
-        img2: colors[1].id,
-        img2_url: colors[1].image_secureurl,
-        userVote: 'alt1'
-      });
-       questions.push({
-        img1: colors[1].id, 
-        img1_url: colors[1].image_secureurl,
-        img2: colors[0].id,
-        img2_url: colors[0].image_secureurl,
-        userVote: 'alt1'
-      });
-       var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-        
 
-       var poll = new Poll({ip: ip, questions: questions});
+       for(var i = 0; i < 10; i++){
+          var index1 = Math.floor((Math.random() * colors.length));
+          do{
+            var index2 = Math.floor((Math.random() * colors.length));
+          } 
+          while(index1 == index2);
+          questions.push({
+            img1: colors[index1].id, 
+            img1_url: colors[index1].image_secureurl,
+            img2: colors[index2].id,
+            img2_url: colors[index2].image_secureurl,
+            userVote: null,
+            userHasVoted: false
+          });
+       }
+
+       var poll = new Poll({questions: questions});
        // Save poll to DB
       poll.save(function(err, doc) {
         if(err || !doc) {
@@ -69,7 +69,6 @@ exports.newpolls = function(req, res) {
 // JSON API for list of polls
 // 
 exports.list = function(req, res) {
-  // Query Mongo for polls, just get back the question text
   // 
   
   Poll.find({}, 'question', function(error, polls) {
@@ -109,41 +108,35 @@ exports.create = function(req, res) {
 
 // Updates an existing poll in the DB.
 exports.update = function(req, res) {
-  console.log('update', req.body);
   var userVote = String(req.body.userVote);
   var questionNr = parseInt(req.body.questionNr);
+  var diagnoses = req.body.diagnoses;
+  var disabilities = req.body.disabilities;
 
   if(req.body._id) { delete req.body._id; }
   Poll.findById(req.params.id, function (err, polls) {
     if (err) { return handleError(res, err); }
     if(!polls) { return res.send(404); }
-    polls.questions[questionNr-1].userVote = userVote;
+    if(userVote != "undefined"){
+      polls.questions[questionNr-1].userVote = userVote;
+      if(userVote){
+        polls.questions[questionNr-1].userHasVoted = true;
+      }
+      else{
+        polls.questions[questionNr-1].userHasVoted = false; 
+      }
+    }
+    else{
+      polls.diagnoses = diagnoses;
+      polls.disabilities = disabilities;
+    }
     polls.save(function (err) {
-      if (err) { return handleError(res, err); }
+      if (err) { return handleError(res, err); }  
       return res.json(200, polls);
     });
   });
 };
-// Updates an existing poll in the DB.
-exports.updateFinalForm = function(req, res) {
-  console.log('updateFinalForm', req.body);
-  var diagnoses = req.body.diagnoses;
-  var disabilities = req.body.disabilities;
-  var pollId = mongoose.Types.ObjectId(req.cookies.myTest.replace(/['"]+/g, ''));
-  console.log(pollId);
-  if(req.body._id) { delete req.body._id; }
-  Poll.findById(pollId, function (err, polls) {
-    if (err) { return handleError(res, err); }
-    if(!polls) { return res.send(404); }
-    console.log(diagnoses)
-    polls.diagnoses = diagnoses;
-    polls.disabilities = disabilities;
-    polls.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, polls);
-    });
-  });
-};
+
 // Deletes a poll from the DB.
 exports.destroy = function(req, res) {
   Poll.findById(req.params.id, function (err, poll) {
@@ -159,17 +152,19 @@ exports.destroy = function(req, res) {
 // JSON API for getting a single poll
 exports.poll = function(req, res) {
   // Poll ID comes in the URL
-  if(req.cookies.myTest){
-    var myTestId = mongoose.Types.ObjectId(req.cookies.myTest.replace(/['"]+/g, ''));
-    console.log('testid', myTestId);
+  if(req.params.id){
+    var myTestId = mongoose.Types.ObjectId(req.params.id.replace(/['"]+/g, ''));
+    // Find the test by its ID, and return all the questions
+    Poll.findById(myTestId, function(err, poll) {
+      if(err) { return handleError(res, err); }
+      return res.json(poll.questions);
+      
+    });
+  }
+  else{
+    res.send(500, 'error');
   }
 
-  // Find the test by its ID, and return all the questions
-  Poll.findById(myTestId, function(err, poll) {
-    if(err) { return handleError(res, err); }
-    return res.json(poll.questions);
-    
-  });
 };
 
 function handleError(res, err) {

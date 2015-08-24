@@ -50,7 +50,7 @@ User.find({}).remove(function() {
 });
 
 //Creating polls used in test
-Poll.find({}).remove(function() {
+/*Poll.find({}).remove(function() {
   Poll.create({
     provider: 'local',
     question: 'Svart/vit mot vit/svart',
@@ -81,4 +81,4 @@ Poll.find({}).remove(function() {
       console.log('finished populating polls - with urls');
     }
   );
-});
+});*/
