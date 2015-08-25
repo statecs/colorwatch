@@ -22,4 +22,10 @@ angular.module('colorwatchApp')
       $location.path('/final-form')
     }
 
+
+/* ColorCombs.update({
+            votes: finalResult
+        });*/
+
+
   });

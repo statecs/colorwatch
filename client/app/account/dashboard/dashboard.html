@@ -1,5 +1,8 @@
+<div class="container jumbotron">
+
+
 <div class="page-header">
-	<h1>Colors</h1>
+	<h2>Colors</h2>
 </div>
 <div class="row">
 	<div class="col-xs-5">
@@ -16,7 +19,7 @@
 	<ul ng-switch-when="0">
 		<li><em>No colors in databases. Would you like to <a href="#/new">create one</a>?</li>
 	</ul>
-	<ul ng-switch-default>
+	<ul class="no-bullet" ng-switch-default>
 		<li ng-repeat="color in colors | filter: query">
 			<img width="200px" ng-src="{{color.image_secureurl}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
 			<span>Textfärg: {{color.textcolor}}</span>
@@ -24,4 +27,4 @@
 		   	<hr/>	
 		</li>
 	</ul>
-</div>
+</div></div>

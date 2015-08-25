@@ -53,8 +53,15 @@ angular.module('colorwatchApp')
 	          choosedDiagnoses.push(diagnose);
 	        }
 	    });
+
+
 	 	var finalResult = Poll.update({id: $sessionStorage.myTest}, {diagnoses: choosedDiagnoses, disabilities: choosedDisabilities});
-	 //	socket.emit('send:vote', finalResult);
+	 	//socket.emit('send:vote', finalResult);
+
+	 	 /* ColorCombs.update({
+				    votes: finalResult
+				});*/
+
 	 	$location.path('/final-result');
 	 };
   });
