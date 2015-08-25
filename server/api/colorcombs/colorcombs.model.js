@@ -10,7 +10,8 @@ var ColorcombsSchema = new Schema({
   textcolor: String,
   backcolor: String,
   image_secureurl: String,
-  votes: [voteSchema]
+  ELO_rating: Number,
+  numOfVotes: Number
 });
 
 module.exports = mongoose.model('Colorcombs', ColorcombsSchema);

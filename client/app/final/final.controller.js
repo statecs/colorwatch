@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-  .controller('FinalCtrl', function ($scope, $sessionStorage, $location, Poll) {
+  .controller('FinalCtrl', function ($scope, $sessionStorage, $location, Poll, socket) {
 
   	$scope.noDisabilities = false;
   	$scope.noDiagnoses = false;
@@ -56,12 +56,16 @@ angular.module('colorwatchApp')
 
 
 	 	var finalResult = Poll.update({id: $sessionStorage.myTest}, {diagnoses: choosedDiagnoses, disabilities: choosedDisabilities});
+<<<<<<< Updated upstream
 	 	//socket.emit('send:vote', finalResult);
 
 	 	 /* ColorCombs.update({
 				    votes: finalResult
 				});*/
 
+=======
+	 	socket.emit('send:vote', {pollId: $sessionStorage.myTest});
+>>>>>>> Stashed changes
 	 	$location.path('/final-result');
 	 };
   });

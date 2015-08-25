@@ -17,13 +17,15 @@ ColorCombs.find({}).remove(function() {
     textcolor: '53f297',
     backcolor: '000000',
     image_secureurl: 'https://res.cloudinary.com/duff92/image/upload/v1439563172/colors/53f297_000000.png',
-    votes: []
+    ELO_rating: 1400,
+    numOfVotes: 0
   },
   {
     textcolor: 'ffffff',
     backcolor: '000000',
     image_secureurl: 'https://res.cloudinary.com/duff92/image/upload/v1439564281/colors/ffffff_000000.png',
-    votes: []
+    ELO_rating: 1400,
+    numOfVotes: 0
   }, function() {
       console.log('finished populating colorcombs');
     }
