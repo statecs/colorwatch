@@ -1,10 +1,26 @@
-<div class="container">
+<div class="container jumbotron">
 
 	<div class="row text-center">
 		<h1>Översikt</h1>
 	    <p class="lead">{{overviewDescText}}</p>
 	</div>	
 	<form>
+	
+		<div class="questionBlock" ng-repeat="question in questions">
+			<fieldset>
+				<legend>Fråga {{$index + 1}}</legend>
+				<div class="btn-group">
+					<div class="col col-md-4 col-xs-6 col-md-offset-2">
+						<img ng-src="{{question.img1_url}}" ng-model="question.userVote" ng-click="vote('choice_alt1', $index+1)" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
+				   		<label class="btn btn-default " ng-model="question.userVote" ng-click="vote('choice_alt1', $index+1)" btn-radio="'choice_alt1'">Välj</label>
+			   		</div>
+			   		<div class="col col-md-4 col-xs-6">
+			   			<img ng-src="{{question.img2_url}}" ng-model="question.userVote" ng-click="vote('choice_alt2', $index+1)" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
+				   		<label class="btn btn-default" ng-model="question.userVote" ng-click="vote('choice_alt2', $index+1)" btn-radio="'choice_alt2'">Välj</label>
+			   		</div>
+		   		</div>
+			</fieldset>
+		</div>
 		<div class="row">
 			<div class="col-md-3 col-xs-3 col-md-offset-1">
 				<button type="button" class="btn btn-default btn-large" ng-click="prevPage()">Tillbaka</button>
@@ -12,21 +28,6 @@
 			<div class="col-md-3 col-xs-3 col-md-offset-4 col-xs-offset-6 text-right">
 				<input type="submit" class="btn btn-default" ng-click="nextPage()" value="Fortsätt" />
 			</div>
-		</div>
-		<div class="questionBlock" ng-repeat="question in questions">
-			<fieldset>
-				<legend>Fråga {{$index + 1}}</legend>
-				<div class="btn-group">
-					<div class="col col-md-3 col-xs-6 col-md-offset-2">
-						<img ng-src="{{question.img1_url}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
-				   		<label class="btn btn-default" ng-model="question.userVote" ng-click="vote('choice_alt1', $index+1)" btn-radio="'choice_alt1'">Välj</label>
-			   		</div>
-			   		<div class="col col-md-3 col-xs-6">
-			   			<img ng-src="{{question.img2_url}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"></img>
-				   		<label class="btn btn-default" ng-model="question.userVote" ng-click="vote('choice_alt2', $index+1)" btn-radio="'choice_alt2'">Välj</label>
-			   		</div>
-		   		</div>
-			</fieldset>
 		</div>
 	</form>
 </div>

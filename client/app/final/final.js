@@ -5,10 +5,12 @@ angular.module('colorwatchApp')
     $routeProvider
       .when('/final-form', {
         templateUrl: 'app/final/final-form.html',
-        controller: 'FinalCtrl'
+        controller: 'FinalCtrl',
+        label: 'Final Form'
       })
       .when('/final-result', {
         templateUrl: 'app/final/final.html',
-        controller: 'FinalCtrl'
+        controller: 'FinalCtrl',
+        label: 'Final Result'
       });
   });

@@ -5,7 +5,8 @@ angular.module('colorwatchApp')
     $routeProvider
       .when('/admin', {
         templateUrl: 'app/admin/admin.html',
-        controller: 'AdminCtrl'
+        controller: 'AdminCtrl',
+        label: 'Admin'
       })
       .when('/new', {
         templateUrl: 'app/admin/new_poll.html',

@@ -5,6 +5,7 @@ angular.module('colorwatchApp')
     $routeProvider
       .when('/test/:questionNr', {
         templateUrl: 'app/test/test.html',
-        controller: 'TestCtrl'
+        controller: 'TestCtrl',
+        label: 'Test'
       });
   });

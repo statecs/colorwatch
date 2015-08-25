@@ -1,0 +1,19 @@
+
+.btn-group img{
+	-moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px;
+}
+.pagination > li > a{
+	background: #f2f2f2;
+	color:#000000;
+}
+
+.pagination > li > a:hover{
+	opacity: 0.6; color: #fff; background: #000;
+}
+.pagination .active > a{
+	opacity: 0.6; color: #fff; background: #000; border-color: #000;
+}
+.pagination .active > a:hover{
+	opacity: 0.6; color: #fff; background: #000; border-color: #000;
+}
+

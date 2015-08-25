@@ -24,6 +24,8 @@ module.exports = function(config) {
       'client/bower_components/blueimp-canvas-to-blob/js/canvas-to-blob.js',
       'client/bower_components/ng-file-upload/ng-file-upload.js',
       'client/bower_components/ngstorage/ngStorage.js',
+      'client/bower_components/angular-aria/angular-aria.js',
+      'client/bower_components/ng-breadcrumbs/dist/ng-breadcrumbs.js',
       'client/app/app.js',
       'client/app/app.coffee',
       'client/app/**/*.js',

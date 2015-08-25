@@ -2,7 +2,25 @@
 {
     margin: 5px 5px;  
 }
+.form-top {
+    padding: 0px 50px 0px 50px;
+    background: #fafafa;
+    -moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px;
+    text-align: left;
+    max-width:800px;
+    width:100%;
+    margin:0 auto;
+}
 
+.form-top form textarea {
+    height: 100px;
+}
+.input-group{
+    margin: 10px 0 10px 0;
+}
+.form-group input{
+    margin: 0 5px 0 5px;
+}
 /*Sharing block*/
 .sharing-block{
 	margin: 5px;
