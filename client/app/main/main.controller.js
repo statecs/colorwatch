@@ -9,19 +9,15 @@ angular.module('colorwatchApp')
      * @param  {Number} numQuestions - number of questions in test
      */
     $scope.initTest = function(){
-      console.log('initTest', $sessionStorage.myTest);
-      if(!$sessionStorage.myTest){
+        $sessionStorage.$reset();
+        console.log('test');
         Poll.newpolls().$promise.then(function(mytest){
-          $scope.$storage = $sessionStorage.$default({
+          $sessionStorage.$default({
             myTest: mytest._id
           });
+          console.log($sessionStorage.myTest);
           $location.path('/test/1');
         });
-      }
-      else{
-          $location.path('/test/1');
-      }
-
     };
 
     /*$scope.awesomeThings = [];

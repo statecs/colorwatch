@@ -4,7 +4,7 @@
 
 'use strict';
 
-//GET IMAGE FROM MONGODB VIA ID (line 40-44), THEN UPDATE RATINGS IN DATABASE (line 46-55)!!! 
+//GET IMAGE FROM MONGODB VIA ID (line 40-44), THEN UPDATE RATINGS IN DATABASE (line 46-55)!!!
 
 var Poll = require('./poll.model');
 var ColorCombs = require('../colorcombs/colorcombs.model');
@@ -23,58 +23,61 @@ exports.register = function(socket) {
     onRemove(socket, doc);
   });*/
   socket.on('send:vote', function(data) {
-  	console.log("data:",data);
-    Poll.findById(data.pollId, function(err, poll) {
+  	Poll.findById(data.pollId, function(err, poll) {
       if(err) { return res.send(500, err); }
 
-     // console.log("poll", poll);
-      var expectedScoreA, expectedScoreB, newRatingA, colorA, colorB, newRatingB, scoreA = 0, scoreB = 0;
+      //console.log("poll", poll);
+      var expectedScoreA, expectedScoreB, newRatingA, colorA, colorB, newRatingB, scoreA, scoreB, kFactor = 32;
       var imagesInTest = [];
-      for(var i = 0; i < poll.questions.length; i++){
-          console.log(typeof(poll.questions[i].img1), poll.questions[i].img1);
-          if(!(String(poll.questions[i].img1) in imagesInTest)){
-            imagesInTest.push(String(poll.questions[i].img1))
+      ColorCombs.find(poll.questions, function(err, colors){
+        //console.log(colors);
+        for(var i = 0; i < poll.questions.length; i++){
+          console.log('------------' + i + '-----------------');
+          scoreA = 0;
+          scoreB = 0;
+          for(var j = 0; j < colors.length; j++){
+            if(poll.questions[i].img1.equals(colors[j]._id)){
+              colorA = colors[j];
+            }
+            else if(poll.questions[i].img2.equals(colors[j]._id)){
+              colorB = colors[j];
+            }
+          }
+          if(poll.questions[i].userVote == 'choice_alt1'){
+            scoreA = 1;
+          }
+          else{
+            scoreB = 1;
           }
 
-          if(!(String(poll.questions[i].img2) in imagesInTest)){
-            imagesInTest.push(String(poll.questions[i].img2))
-          }
-      }
-      console.log(imagesInTest);
-      for(var i = 0; i < poll.questions.length; i++){
-        if(poll.questions[i].userVote == 'choice_alt1'){
-          scoreA = 1;
-        }
-        else{
-          scoreB = 1;
-        }
-      /*ColorCombs.find({
-            '_id': { $in: [
-                poll.questions[i].img1,
-                poll.questions[i].img2
-            ]}
-        }, function(err, docs){
-             console.log(docs);
-        });*/
-        /*ColorCombs.find(mongoose.Types.ObjectId(question.img1.replace(/['"]+/g, ''), function(err, color){
-            colorA = color;
-        });
+          expectedScoreA = 1 / (1 + Math.pow(10, (colorB.ELO_rating - colorA.ELO_rating) / 400));
+          expectedScoreB = 1 / (1 + Math.pow(10, (colorA.ELO_rating - colorB.ELO_rating) / 400));
 
-        ColorCombs.findById(mongoose.Types.ObjectId(question.img1.replace(/['"]+/g, ''), function(err, color){
-            colorB = color;
-        });
+          newRatingA = colorA.ELO_rating + (kFactor * (scoreA - expectedScoreA));
+          newRatingB = colorB.ELO_rating + (kFactor * (scoreB - expectedScoreB));
+          console.log(
+            "scoreA", scoreA,
+            "scoreB", scoreB,
+            "expectedScoreA", expectedScoreA,
+            "expectedScoreB", expectedScoreB,
+            "newRatingA", newRatingA,
+            "newRatingB", newRatingB);
 
-        expectedScoreA = 1 / (1 + Math.pow(10, (colorB.rating - colorA.rating) / 400));
-        expectedScoreB = 1 / (1 + Math.pow(10, (colorA.rating - colorB.rating) / 400));
-        
-        newRatingA = colorA.rating + (kFactor * (scoreA - expectedScoreA));
-        newRatingB = colorB.rating + (kFactor * (scoreB - expectedScoreB));
-      
-        colorA.rating = newRatingA;
-        colorB.rating = newRatingB;
-        
-        console.log('new ratings', newRatingA, newRatingB, _ratingList);*/  
-  	}
+          colorA.ELO_rating = newRatingA;
+          colorB.ELO_rating = newRatingB;
+        }
+        // Save ratings to DB
+        console.log(colors);
+        //console.log('new ratings', newRatingA, newRatingB);
+        colors.forEach(function(color){
+          color.save(function (err) {
+            if (err) {
+              throw 'Error in save ratings';
+            }
+          });
+        });
+      });
+  	//}
   });
 });
 }
