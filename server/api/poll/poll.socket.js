@@ -32,7 +32,6 @@ exports.register = function(socket) {
       ColorCombs.find(poll.questions, function(err, colors){
         //console.log(colors);
         for(var i = 0; i < poll.questions.length; i++){
-          console.log('------------' + i + '-----------------');
           scoreA = 0;
           scoreB = 0;
           for(var j = 0; j < colors.length; j++){
@@ -55,13 +54,6 @@ exports.register = function(socket) {
 
           newRatingA = colorA.ELO_rating + (kFactor * (scoreA - expectedScoreA));
           newRatingB = colorB.ELO_rating + (kFactor * (scoreB - expectedScoreB));
-          console.log(
-            "scoreA", scoreA,
-            "scoreB", scoreB,
-            "expectedScoreA", expectedScoreA,
-            "expectedScoreB", expectedScoreB,
-            "newRatingA", newRatingA,
-            "newRatingB", newRatingB);
 
           colorA.ELO_rating = newRatingA;
           colorB.ELO_rating = newRatingB;
@@ -75,6 +67,10 @@ exports.register = function(socket) {
               throw 'Error in save ratings';
             }
           });
+        });
+        ColorCombs.find(function (err, colors) {
+          if(err) { throw 'Error in finding all colorcombs';}
+          socket.broadcast.emit('vote', colors);
         });
       });
   	//}

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-  .controller('SettingsCtrl', function ($scope, User, Auth) {
+  .controller('SettingsCtrl', function ($scope, ColorCombs, User, Auth) {
     $scope.errors = {};
 
     $scope.changePassword = function(form) {
@@ -18,4 +18,9 @@ angular.module('colorwatchApp')
         });
       }
 		};
+
+    ColorCombs.getColorComb({id: 'list'}).$promise.then(function(colors){
+      $scope.colors = colors;
+      console.log($scope.colors);
+    });
   });

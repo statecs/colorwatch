@@ -14,15 +14,15 @@ var mongoose = require('mongoose');
 //Creating colorcombinations used in test
 ColorCombs.find({}).remove(function() {
   ColorCombs.create({
-    textcolor: '53f297',
-    backcolor: '000000',
+    textcolor: '#53f297',
+    backcolor: '#000000',
     image_secureurl: 'https://res.cloudinary.com/duff92/image/upload/v1439563172/colors/53f297_000000.png',
     ELO_rating: 1400,
     numOfVotes: 0
   },
   {
-    textcolor: 'ffffff',
-    backcolor: '000000',
+    textcolor: '#ffffff',
+    backcolor: '#000000',
     image_secureurl: 'https://res.cloudinary.com/duff92/image/upload/v1439564281/colors/ffffff_000000.png',
     ELO_rating: 1400,
     numOfVotes: 0
@@ -57,11 +57,11 @@ User.find({}).remove(function() {
     provider: 'local',
     question: 'Svart/vit mot vit/svart',
     choices: [{
-        text: 'svart/vit', 
-        image_url: 'https://s3.eu-central-1.amazonaws.com/colorwatch/color-images-test/color_blw.png', 
+        text: 'svart/vit',
+        image_url: 'https://s3.eu-central-1.amazonaws.com/colorwatch/color-images-test/color_blw.png',
         votes: []
       },{
-          text: 'vit/svart', 
+          text: 'vit/svart',
           image_url: 'https://s3.eu-central-1.amazonaws.com/colorwatch/color-images-test/color_wbl.png',
           votes: []
       }
@@ -70,15 +70,15 @@ User.find({}).remove(function() {
     provider: 'local',
     question: 'Svart/vit mot blå/vit',
     choices: [{
-        text: 'svart/vit', 
-        image_url: 'https://s3.eu-central-1.amazonaws.com/colorwatch/color-images-test/color_blw.png', 
+        text: 'svart/vit',
+        image_url: 'https://s3.eu-central-1.amazonaws.com/colorwatch/color-images-test/color_blw.png',
         votes: []
       },{
-          text: 'blå/vit', 
+          text: 'blå/vit',
           image_url: 'https://s3.eu-central-1.amazonaws.com/colorwatch/color-images-test/color_bw.png',
           votes: []
       }
-    ]  
+    ]
   }, function() {
       console.log('finished populating polls - with urls');
     }

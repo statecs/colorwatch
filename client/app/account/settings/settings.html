@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <h1>Change Password</h1>
+      <h2>Change Password</h2>
     </div>
     <div class="col-sm-12">
       <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
@@ -33,5 +33,29 @@
         <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
       </form>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-5">
+      <a href="/newcolor" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> New Color</a>
+    </div>
+    <div class="col-xs-7">
+      <input type="text" class="form-control" ng-model="query" placeholder="Search for a color">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12"><hr></div>
+  </div>
+  <div class="row" ng-switch on="colors.length">
+    <ul ng-switch-when="0">
+      <li>No colors in databases. Would you like to <a href="#/new">create one</a>?</li>
+    </ul>
+    <ul class="no-bullet" ng-switch-default>
+      <li ng-repeat="color in colors | filter: query">
+        <img width="200px" ng-src="{{color.image_secureurl}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"/>
+        <span>Textfärg: {{color.textcolor}}</span>
+        <span>Backgrundsfärg: {{color.backcolor}}</span>
+        <hr/>
+      </li>
+    </ul>
   </div>
 </div>
