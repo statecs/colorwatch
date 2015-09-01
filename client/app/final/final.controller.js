@@ -5,7 +5,7 @@ angular.module('colorwatchApp')
 
   	$scope.noDisabilities = false;
   	$scope.noDiagnoses = false;
-  	
+
 	$scope.disabilitiesModel = [
 	   	{name: 'Lässvårigheter', state: false},
 	   	{name: 'Skrivsvårigheter', state: false},
@@ -55,17 +55,14 @@ angular.module('colorwatchApp')
 	    });
 
 
-	 	var finalResult = Poll.update({id: $sessionStorage.myTest}, {diagnoses: choosedDiagnoses, disabilities: choosedDisabilities});
-<<<<<<< Updated upstream
+	 	Poll.update({id: $sessionStorage.myTest}, {diagnoses: choosedDiagnoses, disabilities: choosedDisabilities});
 	 	//socket.emit('send:vote', finalResult);
 
 	 	 /* ColorCombs.update({
 				    votes: finalResult
 				});*/
 
-=======
 	 	socket.emit('send:vote', {pollId: $sessionStorage.myTest});
->>>>>>> Stashed changes
 	 	$location.path('/final-result');
 	 };
   });
