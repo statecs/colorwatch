@@ -1,3 +1,49 @@
+<div class="row">
+  <div class="col-lg-3 col-md-3 col-md-offset-3 col-xs-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <i class="fa fa-comments fa-3x"></i>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="huge">1000</div>
+            <div>Antal röster</div>
+          </div>
+        </div>
+      </div>
+      <a href="#">
+        <div class="panel-footer">
+          <span class="pull-left">View Details</span>
+          <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+          <div class="clearfix"></div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-3 col-xs-6">
+    <div class="panel panel-green">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <i class="fa fa-tasks fa-4x"></i>
+          </div>
+          <div class="col-xs-9 text-right">
+            <div class="huge">12</div>
+            <div>Något annat...</div>
+          </div>
+        </div>
+      </div>
+      <a href="#">
+        <div class="panel-footer">
+          <span class="pull-left">View Details</span>
+          <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+          <div class="clearfix"></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
@@ -9,7 +55,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="color in colors">
+      <tr ng-repeat="color in colors | orderBy:'-ELO_rating'">
         <td>{{$index+1}}</td>
         <td>{{color.textcolor}}</td>
         <td>{{color.backcolor}}</td>
