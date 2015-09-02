@@ -17,13 +17,13 @@ var ColorCombs = require('../colorcombs/colorcombs.model');
 exports.register = function(socket) {
   console.log('register socket');
   /*Poll.schema.post('save', function (doc) {
-    onSave(socket, doc);
-  });
-  Poll.schema.post('remove', function (doc) {
-    onRemove(socket, doc);
-  });*/
+   onSave(socket, doc);
+   });
+   Poll.schema.post('remove', function (doc) {
+   onRemove(socket, doc);
+   });*/
   socket.on('send:vote', function(data) {
-  	Poll.findById(data.pollId, function(err, poll) {
+    Poll.findById(data.pollId, function(err, poll) {
       if(err) { return res.send(500, err); }
 
       //console.log("poll", poll);
@@ -59,21 +59,22 @@ exports.register = function(socket) {
           colorB.ELO_rating = newRatingB;
         }
         // Save ratings to DB
-        console.log(colors);
-        //console.log('new ratings', newRatingA, newRatingB);
-        colors.forEach(function(color){
+        colors.forEach(function(color, index, array){
           color.save(function (err) {
             if (err) {
               throw 'Error in save ratings';
             }
+            if (index === array.length - 1) {
+              ColorCombs.find(function (err, colors) {
+                if (err) {
+                  throw 'Error in finding all colorcombs';
+                }
+                socket.broadcast.emit('vote', colors);
+              });
+            }
           });
         });
-        ColorCombs.find(function (err, colors) {
-          if(err) { throw 'Error in finding all colorcombs';}
-          socket.broadcast.emit('vote', colors);
-        });
       });
-  	//}
+    });
   });
-});
 }
