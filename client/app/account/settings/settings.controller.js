@@ -23,4 +23,11 @@ angular.module('colorwatchApp')
       $scope.colors = colors;
       console.log($scope.colors);
     });
+
+    $scope.removeColor = function(colorId, index) {
+      ColorCombs.deleteColor({},{id: colorId}, function(){
+        console.log("color removed!");
+        $scope.colors.splice(index,1);
+      });
+    };
   });

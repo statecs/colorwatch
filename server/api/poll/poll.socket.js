@@ -16,24 +16,21 @@ var ColorCombs = require('../colorcombs/colorcombs.model');
  */
 exports.register = function(socket) {
   console.log('register socket');
-  /*Poll.schema.post('save', function (doc) {
-   onSave(socket, doc);
-   });
-   Poll.schema.post('remove', function (doc) {
-   onRemove(socket, doc);
-   });*/
+
   socket.on('send:vote', function(data) {
     Poll.findById(data.pollId, function(err, poll) {
       if(err) { return res.send(500, err); }
 
-      //console.log("poll", poll);
       var expectedScoreA, expectedScoreB, newRatingA, colorA, colorB, newRatingB, scoreA, scoreB, kFactor = 32;
-      var imagesInTest = [];
+
+      //First find all colors in test
       ColorCombs.find(poll.questions, function(err, colors){
-        //console.log(colors);
+        //Loop through all questions in poll to update ELO rating
         for(var i = 0; i < poll.questions.length; i++){
           scoreA = 0;
           scoreB = 0;
+
+          //Find which colors used in the question
           for(var j = 0; j < colors.length; j++){
             if(poll.questions[i].img1.equals(colors[j]._id)){
               colorA = colors[j];
@@ -42,13 +39,15 @@ exports.register = function(socket) {
               colorB = colors[j];
             }
           }
+          //Set score depending on user choice
           if(poll.questions[i].userVote == 'choice_alt1'){
             scoreA = 1;
+            colorA.numOfVotes++;
           }
           else{
             scoreB = 1;
+            colorB.numOfVotes++;
           }
-
           expectedScoreA = 1 / (1 + Math.pow(10, (colorB.ELO_rating - colorA.ELO_rating) / 400));
           expectedScoreB = 1 / (1 + Math.pow(10, (colorA.ELO_rating - colorB.ELO_rating) / 400));
 

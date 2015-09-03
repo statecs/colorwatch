@@ -16,6 +16,9 @@
     </ul>
     <ul class="no-bullet" ng-switch-default>
       <li ng-repeat="color in colors | filter: query">
+        <span class="pull-right button-group">
+                <button type="button" class="btn btn-danger" ng-click="removeColor(color._id, $index)">Ta bort <span class="glyphicon glyphicon-trash"></span></button>
+        </span>
         <img width="200px" ng-src="{{color.image_secureurl}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"/>
         <span>Textfärg: {{color.textcolor}}</span>
         <span>Backgrundsfärg: {{color.backcolor}}</span>

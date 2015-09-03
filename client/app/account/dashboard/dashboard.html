@@ -7,8 +7,8 @@
             <i class="fa fa-comments fa-3x"></i>
           </div>
           <div class="col-xs-9 text-right">
-            <div class="huge">1000</div>
-            <div>Antal röster</div>
+            <div class="huge">{{numOfCompletedTests}}</div>
+            <div>Antal genomförda tester</div>
           </div>
         </div>
       </div>
@@ -29,8 +29,8 @@
             <i class="fa fa-tasks fa-4x"></i>
           </div>
           <div class="col-xs-9 text-right">
-            <div class="huge">12</div>
-            <div>Något annat...</div>
+            <div class="huge">0</div>
+            <div>Inte implementerad..</div>
           </div>
         </div>
       </div>
@@ -52,14 +52,16 @@
         <th>Textfärg</th>
         <th>Backgrundsfärg</th>
         <th>Ranking</th>
+        <th>Antal röster</th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="color in colors | orderBy:'-ELO_rating'">
         <td>{{$index+1}}</td>
-        <td>{{color.textcolor}}</td>
-        <td>{{color.backcolor}}</td>
-        <td>{{color.ELO_rating}}</td>
+        <td><span ng-style="{'background-color': '{{color.textcolor}}'}" class="thumbnail"></span>{{color.textcolor}}</td>
+        <td><span ng-style="{'background-color': '{{color.backcolor}}'}" class="thumbnail"></span>{{color.backcolor}}</td>
+        <td>{{color.ELO_rating | number: 0}}</td>
+        <td>{{color.numOfVotes}}</td>
       </tr>
     </tbody>
   </table>

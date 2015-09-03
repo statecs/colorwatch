@@ -32,11 +32,14 @@ angular.module('colorwatchApp')
       });
   })
   .factory('ColorCombs', function($resource) {
-    return $resource('/api/colorcombs/:id', {}, {
+    return $resource('/api/colorcombs/:id', {id: '@id'}, {
         // Use this method for getting a list of polls
         getColorComb: {
           method: 'GET',
           isArray: true
+        },
+        deleteColor: {
+          method: 'DELETE'
         },
         create: {
           method: 'POST',
@@ -48,7 +51,6 @@ angular.module('colorwatchApp')
             backcolor: "@backcolor"
           }
         }
-//FORTSÄTT HÄR!!!!
       });
   })
   .factory('socket', function(socketFactory) {
