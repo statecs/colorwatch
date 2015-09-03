@@ -10,7 +10,8 @@ angular.module('colorwatchApp', [
   'ui.bootstrap',
   'btford.socket-io',
   'ngAria',
-  'ng-breadcrumbs'
+  'ng-breadcrumbs',
+  'angularSpectrumColorpicker'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
@@ -48,14 +49,14 @@ angular.module('colorwatchApp', [
     };
   })
 
-  .run(function ($rootScope, $location, Auth) {
-    // Redirect to login if route requires auth and you're not logged in
-    $rootScope.$on('$routeChangeStart', function (event, next) {
-      
-      Auth.isLoggedInAsync(function(loggedIn) {
-        if (next.authenticate && !loggedIn) {
-          $location.path('/login');
-        }
-      });
+.run(function ($rootScope, $location, Auth) {
+  // Redirect to login if route requires auth and you're not logged in
+  $rootScope.$on('$routeChangeStart', function (event, next) {
+
+    Auth.isLoggedInAsync(function(loggedIn) {
+      if (next.authenticate && !loggedIn) {
+        $location.path('/login');
+      }
     });
   });
+});

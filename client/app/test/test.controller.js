@@ -2,19 +2,10 @@
 
 angular.module('colorwatchApp')
 .controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, Poll, ColorCombs, $sessionStorage) {
-    /*$scope.$on('socket:error', function (ev, data) {
-      console.log("error");
-    });
-    
-    socket.forward('myvote', $scope);
-    $scope.$on('socket:myvote', function (ev, data) {
-      console.log(data);
-    });*/
 
-    console.log('sessionStorage',$sessionStorage.myTest);
     $scope.poll = {};
     Poll.getPoll({id: $sessionStorage.myTest},{}).$promise.then(function(polls){
-      
+
        $scope.polls = polls;
        /**
         * total questions in the test
@@ -35,15 +26,7 @@ angular.module('colorwatchApp')
        * Two images to choose between at current question
        * @type {Object}
        */
-      /*console.log("currentQuestion", $scope.currentQuestion);
-      Poll.get({pollId: polls[$scope.currentQuestion-1]._id}).$promise.then(function(data){
-        $scope.poll = data;
-        console.log("scope.poll", $scope.poll);
-      });*/
       $scope.poll = polls[$routeParams.questionNr-1 || 0];
-      /*Poll.get({pollId: polls[$scope.currentQuestion-1]._id}).$promise.then(function(data){
-        $scope.poll = data;
-      });*/
     });
 
     $scope.vote = function(userChoice){
@@ -52,14 +35,14 @@ angular.module('colorwatchApp')
       var nextQuestion = parseInt($routeParams.questionNr) + 1;
 
       Poll.update({id: $sessionStorage.myTest}, {questionNr: $routeParams.questionNr, userVote: userChoice});
-      
+
       if(nextQuestion > $scope.totalQuestions){
         $scope.nextPage();
       }
       else{
         $location.path('test/' + nextQuestion);
       }
-    }
+    };
     /**
      * When question changes in the pagination this method is called
      */
@@ -70,7 +53,7 @@ angular.module('colorwatchApp')
 
     $scope.prevPage = function(){
       $location.path('/');
-    }
+    };
 
 
     $scope.nextPage = function(){

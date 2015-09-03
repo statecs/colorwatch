@@ -3,13 +3,36 @@ var canvas, ctx;
 
 function draw(textColor, backgroundColor) {
   console.log(textColor, backgroundColor);
-  ctx.font="30px Comic Sans MS";
+  ctx.font="35px sans-serif";
   ctx.fillStyle = backgroundColor;
   ctx.fillRect(0,0,canvas.width,canvas.height);
   ctx.fillStyle = textColor;
-  ctx.textAlign = "center";
-  ctx.fillText("Hello World", canvas.width/2, canvas.height/2);
-};
+  ctx.textAlign = "start";
+  ctx.fillText("Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin. " +
+    "Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd boksättare " +
+    "tog att antalet bokstäver.", canvas.width/15, canvas.height/10);
+}
+
+function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+  var words = text.split(' ');
+  var line = '';
+
+  for(var n = 0; n < words.length; n++) {
+    var testLine = line + words[n] + ' ';
+    var metrics = ctx.measureText(testLine);
+    var testWidth = metrics.width;
+    if (testWidth > maxWidth && n > 0) {
+      ctx.fillText(line, x, y);
+      line = words[n] + ' ';
+      y += lineHeight;
+    }
+    else {
+      line = testLine;
+    }
+  }
+  ctx.fillText(line, x, y);
+}
+
 function blobToFile(theBlob, fileName){
   //A Blob() is almost a File() - it's just missing the two properties below which we will add
   theBlob.lastModifiedDate = new Date();
@@ -24,10 +47,27 @@ angular.module('colorwatchApp')
     $scope.backcolor = "#000000";
     $scope.file = {};
 
-    $scope.$watchCollection('[textcolor,backcolor]', function(val) {
+    $scope.$watchCollection('[textcolor,backcolor]', function() {
       canvas = document.getElementById('myCanvas');
       ctx = canvas.getContext('2d');
-      draw(val[0], val[1]);
+
+      var maxWidth = 600;
+      var lineHeight = 85;
+      var x = (canvas.width - maxWidth) / 2;
+      var y = 125;
+
+      ctx.fillStyle = $scope.backcolor;
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+
+      var text = "Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin. " +
+      "Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd boksättare " +
+      "tog att antalet bokstäver.";
+
+      ctx.font = '36pt sans-serif';
+      ctx.fillStyle = $scope.textcolor;
+
+      wrapText(ctx, text, x, y, maxWidth, lineHeight);
+      //draw(val[0], val[1]);
     });
 
     $scope.createColor = function(){
@@ -65,17 +105,14 @@ angular.module('colorwatchApp')
         ColorCombs.create({
           textcolor: $scope.textcolor,
           backcolor: $scope.backcolor,
-          image_secureurl: data.secure_url,
-          votes: []
+          image_secureurl: data.secure_url
         });
       }).error(function (data, status, headers, config) {
         $scope.file.errorStatus = {'error': 'error'};
         console.log('error status: ' + status, data);
       })
     };
-
     $scope.prevPage = function(){
-
       $location.path('/settings');
     }
   });

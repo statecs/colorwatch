@@ -1,6 +1,6 @@
 <div class="container jumbotron">
 <div class="page-header">
-	<h2>Create New Color</h2>
+	<h2>Skapa en ny färg</h2>
 </div>
 <div class="row">
 	<div class="col-md-3 col-md-offset-8 text-right">
@@ -26,7 +26,7 @@
 	   <div ng-show="file.errorStatus">
 	   		<div class="alert alert-danger col-md-6 col-md-offset-2" role="alert">Något gick fel!</div>
 	   </div>
-	
+
 <div class="row text-center">
 	<div class="col-md-4 col-md-offset-2">
 		<canvas class="img-responsive" id="myCanvas" width="752px" height="751px"></canvas>
@@ -35,39 +35,16 @@
 
 <form role="form" ng-submit="createColor()">
 	<div class="form-group col-md-offset-3">
-		<label for="textColor">Text color</label>
-		<input type="color" ng-model="textcolor" id="textColor" name="textcolor">
+		<label for="textColor">Textfärg</label><br>
+    <input type="text" ng-model="textcolor" size="7"/>
+    <input type="color" spectrum-colorpicker options="{preferredFormat: 'hex', showInput: true}" ng-model="textcolor" name="textColor" id="textColor"/>
 	</div>
-	
 	<div class="form-group col-md-offset-3">
-		<label for="backgroundColor">Background color</label>
-		<input type="color" ng-model="backcolor" id="backgroundColor" name="backgroundcolor">
+    <label for="backgroundColor">Bakgrundsfärg</label><br>
+    <input type="text" ng-model="backcolor" size="7"/>
+    <input type="color" spectrum-colorpicker options="{preferredFormat: 'hex', showInput: true}" ng-model="backcolor" name="backgroundColor" id="backgroundColor"/>
 	</div>
-	<!-- <div class="form-group">
-		<label>Choices</label>
-		<div ng-repeat="choice in poll.choices">
-			<input type="text" ng-model="choice.text" class="form-control" placeholder="Enter choice {{$index+1}} text"><br>
-		</div>
-	</div>		
-	
-	<div class="row">
-		<div class="col-xs-12">
-			<button type="button" class="btn btn-default" ng-click="addChoice()"><span class="glyphicon glyphicon-plus"></span> Add another</button>
-		</div>
-	</div>
-	
-	<p><hr></p>
-	
-	<div class="row">
-		<div class="col-xs-6">
-			<a href="#/polls" class="btn btn-default" role="button"><span class="glyphicon glyphicon-arrow-left"></span> Back to Poll List</a>
-		</div>
-		<div class="col-xs-6">
-			<button class="btn btn-primary pull-right" type="submit">Create Poll &raquo;</button>
-		</div>
-	</div> -->
 	<div class="row">
 		<input type="submit" class="btn btn-default col-md-offset-3" value="Create color combination"/>
 	</div>
-	<!-- <p>&nbsp;</p> -->
 </form></div>

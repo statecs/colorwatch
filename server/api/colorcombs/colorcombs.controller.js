@@ -12,11 +12,11 @@ exports.index = function(req, res) {
 };
 
 // JSON API for list of colorcombs
-// 
+//
 exports.list = function(req, res) {
   // Query Mongo for polls, just get back the question text
-  // 
-  
+  //
+
   Colorcombs.find({}, function(error, colors) {
     if(error){
       throw 'Error in list';
@@ -42,7 +42,9 @@ exports.create = function(req, res) {
   var colorObj = {
     textcolor: req.body.textcolor,
     backcolor: req.body.backcolor,
-    image_secureurl: req.body.image_secureurl
+    image_secureurl: req.body.image_secureurl,
+    ELO_rating: 1400,
+    numOfVotes: 0
   };
   console.log(colorObj);
   var color = new Colorcombs(colorObj);

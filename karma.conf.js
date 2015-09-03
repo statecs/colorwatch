@@ -26,6 +26,8 @@ module.exports = function(config) {
       'client/bower_components/ngstorage/ngStorage.js',
       'client/bower_components/angular-aria/angular-aria.js',
       'client/bower_components/ng-breadcrumbs/dist/ng-breadcrumbs.js',
+      'client/bower_components/spectrum/spectrum.js',
+      'client/bower_components/angular-spectrum-colorpicker/dist/angular-spectrum-colorpicker.js',
       'client/app/app.js',
       'client/app/app.coffee',
       'client/app/**/*.js',
