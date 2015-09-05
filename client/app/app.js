@@ -11,7 +11,8 @@ angular.module('colorwatchApp', [
   'btford.socket-io',
   'ngAria',
   'ng-breadcrumbs',
-  'angularSpectrumColorpicker'
+  'angularSpectrumColorpicker',
+  'ngTouch'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
