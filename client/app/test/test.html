@@ -1,30 +1,34 @@
-<div class="container jumbotron">
+<div class="container">
   <div class="page-header">
-	<h2 class="text-center">Vilken text tycker du är lättast att läsa?</h2>
-</div>
-	<div class="row text-center">
-	 	<div class="btn-group">
-					<div class="col-md-4 col-xs-6 col-md-offset-2">
-				<img ng-src="{{poll.img1_url}}" ng-click="vote('choice_alt1')" ng-model="poll.userVote" class="img-responsive" style="border:1px solid black" alt="Placeholder image"/>
-		   		<label class="btn btn-default" ng-model="poll.userVote" ng-click="vote('choice_alt1')" btn-radio="'choice_alt1'">Välj</label>
-	   		</div>
-	   		<div class="col-md-4 col-xs-6">
-	   			<img ng-src="{{poll.img2_url}}" ng-model="poll.userVote" ng-click="vote('choice_alt2')" class="img-responsive" style="border:1px solid black" alt="Placeholder image"/>
-		   		<label class="btn btn-default" ng-model="poll.userVote" ng-click="vote('choice_alt2')" btn-radio="'choice_alt2'">Välj</label>
-	   		</div>
-		</div>
-	</div>
-	<hr/>
-	<div class="row text-center">
-		<p>Sida {{currentQuestion}} av {{totalQuestions}}</p>
-    	<pagination next-text="Nästa" previous-text="Föregående" items-per-page="itemsPerPage" total-items="totalQuestions" ng-model="currentQuestion" ng-change="questionChanged()"></pagination>
-	</div>
-	<div class="row">
-		<div class="col-md-3 col-xs-3 col-md-offset-1">
-			<button type="button" class="btn btn-default btn-large" ng-click="prevPage()">Tillbaka</button>
-		</div>
-		<div class="col-md-3 col-xs-3 col-md-offset-4 col-xs-offset-6 text-right">
-			<button type="button" class="btn btn-default btn-large" ng-click="nextPage()">Fortsätt</button>
-		</div>
-	</div>
+    <h2 class="text-center">Vilken text tycker du är lättast att läsa?</h2>
+  </div>
+  <circle-spinner ng-show="loading"></circle-spinner>
+  <div ng-hide="loading">
+    <div class="row text-center">
+      <div class="btn-group">
+        <div class="col-md-4 col-xs-6 col-md-offset-2">
+          <img ng-src="{{poll.img1_url}}"  alt="Placeholder image" ng-click="vote('choice_alt1')"  ng-model="poll.userVote" class="img-responsive" />
+          <label class="btn btn-default" ng-model="poll.userVote" ng-click="vote('choice_alt1')" btn-radio="'choice_alt1'">Välj</label>
+        </div>
+        <div class="col-md-4 col-xs-6">
+          <img ng-src="{{poll.img2_url}}" alt="Placeholder image" ng-model="poll.userVote" ng-click="vote('choice_alt2')" class="img-responsive"/>
+          <label class="btn btn-default" ng-model="poll.userVote" ng-click="vote('choice_alt2')" btn-radio="'choice_alt2'">Välj</label>
+        </div>
+      </div>
+    </div>
+    <hr/>
+    <div class="row text-center">
+      <p>Sida {{currentQuestion}} av {{totalQuestions}}</p>
+      <pagination next-text="Nästa" previous-text="Föregående" items-per-page="itemsPerPage" total-items="totalQuestions" ng-model="currentQuestion" ng-change="questionChanged()"></pagination>
+    </div>
+    <div class="row">
+      <div class="col-md-3 col-xs-3 col-md-offset-1">
+        <button type="button" class="btn btn-default btn-large" ng-click="prevPage()">Tillbaka</button>
+      </div>
+      <div class="col-md-3 col-xs-3 col-md-offset-4 col-xs-offset-6 text-right">
+        <button type="button" class="btn btn-default btn-large" ng-click="nextPage()">Fortsätt</button>
+      </div>
+    </div>
+
+  </div>
 </div>

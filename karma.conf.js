@@ -29,6 +29,7 @@ module.exports = function(config) {
       'client/bower_components/spectrum/spectrum.js',
       'client/bower_components/angular-spectrum-colorpicker/dist/angular-spectrum-colorpicker.js',
       'client/bower_components/angular-touch/angular-touch.js',
+      'client/bower_components/angular-spinkit/build/angular-spinkit.js',
       'client/app/app.js',
       'client/app/app.coffee',
       'client/app/**/*.js',

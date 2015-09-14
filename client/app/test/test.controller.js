@@ -2,7 +2,7 @@
 
 angular.module('colorwatchApp')
 .controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, Poll, ColorCombs, $sessionStorage) {
-
+    $scope.loading = true;
     $scope.poll = {};
     Poll.getPoll({id: $sessionStorage.myTest},{}).$promise.then(function(polls){
 
@@ -27,6 +27,8 @@ angular.module('colorwatchApp')
        * @type {Object}
        */
       $scope.poll = polls[$routeParams.questionNr-1 || 0];
+    }).finally(function(){
+      $scope.loading = false;
     });
 
     $scope.vote = function(userChoice){
