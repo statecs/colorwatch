@@ -3,15 +3,13 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-// Subdocument schema for votes
-var voteSchema = new Schema({ ip: 'String' });
-
 var ColorcombsSchema = new Schema({
   textcolor: String,
   backcolor: String,
   image_secureurl: String,
-  ELO_rating: Number,
-  numOfVotes: Number
+  ELO_rating: [{name: String, rating: Number}],
+  numOfVotes: Number,
+  numOfTimesInTest: Number
 });
 
 module.exports = mongoose.model('Colorcombs', ColorcombsSchema);

@@ -39,14 +39,41 @@ exports.show = function(req, res) {
 
 // Creates a new colorcombs in the DB.
 exports.create = function(req, res) {
-  var colorObj = {
+  var colorObj;
+  colorObj = {
     textcolor: req.body.textcolor,
     backcolor: req.body.backcolor,
     image_secureurl: req.body.image_secureurl,
-    ELO_rating: 1400,
-    numOfVotes: 0
+    ELO_rating:[
+      {name: 'Total', rating:1400},
+      {name: 'Afasi', rating:1400},
+      {name: 'ADHD, ADD, Damp', rating:1400},
+      {name: 'Autism, autismspektrumtillstånd, asperger', rating:1400},
+      {name: 'Dyslexi', rating:1400},
+      {name: 'Dyskalkyli', rating:1400},
+      {name: 'Utvecklingsstörning', rating:1400},
+      {name: 'Diabetessynskada', rating:1400},
+      {name: 'Grå starr, katarakt', rating:1400},
+      {name: 'Grön starr, glaukom', rating:1400},
+      {name: 'Åldersförändringar i gula fläcken, makuladegeneration', rating:1400},
+      {name: 'Näthinneavlossning', rating:1400},
+      {name: 'RP, retinitis pigmentosa', rating:1400},
+      {name: 'Depression', rating:1400},
+      {name: 'Bipolär sjukdom', rating:1400},
+      {name: 'Schizofreni', rating:1400},
+      {name: 'Tvångssyndrom, OCD', rating:1400},
+      {name: 'Lässvårigheter', rating:1400},
+      {name: 'Skrivsvårigheter', rating:1400},
+      {name: 'Synnedsättning', rating:1400},
+      {name: 'Fokusering', rating:1400},
+      {name: 'Korttidsminne', rating:1400},
+      {name: 'Organisera och planera', rating:1400},
+      {name: 'Problemlösning', rating:1400},
+      {name: 'Tidshantering', rating:1400}
+    ],
+    numOfVotes: 0,
+    numOfTimesInTest: 0
   };
-  console.log(colorObj);
   var color = new Colorcombs(colorObj);
 
   color.save(function(err, doc) {

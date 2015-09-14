@@ -21,28 +21,6 @@
       </a>
     </div>
   </div>
-  <div class="col-lg-3 col-md-3 col-xs-6">
-    <div class="panel panel-green">
-      <div class="panel-heading">
-        <div class="row">
-          <div class="col-xs-3">
-            <i class="fa fa-tasks fa-4x"></i>
-          </div>
-          <div class="col-xs-9 text-right">
-            <div class="huge">0</div>
-            <div>Inte implementerad..</div>
-          </div>
-        </div>
-      </div>
-      <a href="#">
-        <div class="panel-footer">
-          <span class="pull-left">View Details</span>
-          <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-          <div class="clearfix"></div>
-        </div>
-      </a>
-    </div>
-  </div>
 </div>
 <div class="table-responsive">
   <table class="table table-striped">
@@ -53,15 +31,17 @@
         <th>Backgrundsfärg</th>
         <th>Ranking</th>
         <th>Antal röster</th>
+        <th>Medverkan i test</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="color in colors | orderBy:'-ELO_rating'">
+      <tr ng-repeat="color in colors | orderBy:'-ELO_rating[0].rating'">
         <td>{{$index+1}}</td>
         <td><span ng-style="{'background-color': '{{color.textcolor}}'}" class="thumbnail"></span>{{color.textcolor}}</td>
         <td><span ng-style="{'background-color': '{{color.backcolor}}'}" class="thumbnail"></span>{{color.backcolor}}</td>
-        <td>{{color.ELO_rating | number: 0}}</td>
+        <td>{{color.ELO_rating[0].rating | number: 0}}</td>
         <td>{{color.numOfVotes}}</td>
+        <td>{{color.numOfTimesInTest}}</td>
       </tr>
     </tbody>
   </table>

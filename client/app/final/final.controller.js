@@ -43,21 +43,23 @@ angular.module('colorwatchApp')
       //Filter out all choosen disabilities and diagnoses
       $.each($scope.disabilitiesModel, function(index, disability){
         if(disability.state){
-          choosedDisabilities.push(disability);
+          choosedDisabilities.push(disability.name);
         }
       });
 
       $.each($scope.diagnosesModel, function(index, diagnose){
         if(diagnose.state){
-          choosedDiagnoses.push(diagnose);
+          choosedDiagnoses.push(diagnose.name);
         }
       });
 
       //Update choices in database
-      Poll.update({id: $sessionStorage.myTest}, {diagnoses: choosedDiagnoses, disabilities: choosedDisabilities});
+      Poll.update({id: $sessionStorage.myTest}, {diagnoses: choosedDiagnoses, disabilities: choosedDisabilities},function(){
 
-      //Send vote
-      socket.emit('send:vote', {pollId: $sessionStorage.myTest});
-      $location.path('/final-result');
+        //Send vote
+        socket.emit('send:vote', {pollId: $sessionStorage.myTest});
+        $location.path('/final-result');
+      });
+
     };
   });
