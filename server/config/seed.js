@@ -62,7 +62,7 @@ ColorCombs.find({}).remove(function() {
         {name: 'Diabetessynskada', rating:1400},
         {name: 'Grå starr, katarakt', rating:1400},
         {name: 'Grön starr, glaukom', rating:1400},
-        {name: 'Åldersförändringar i gula fläcken, makuladegeneration', rating:1400},
+        {name: 'Gula fläcken', rating:1400},
         {name: 'Näthinneavlossning', rating:1400},
         {name: 'RP, retinitis pigmentosa', rating:1400},
         {name: 'Depression', rating:1400},
@@ -73,7 +73,7 @@ ColorCombs.find({}).remove(function() {
         {name: 'Skrivsvårigheter', rating:1400},
         {name: 'Synnedsättning', rating:1400},
         {name: 'Fokusering', rating:1400},
-        {name: 'Korttidsminne', rating:1400},
+        {name: 'Minne', rating:1400},
         {name: 'Organisera och planera', rating:1400},
         {name: 'Problemlösning', rating:1400},
         {name: 'Tidshantering', rating:1400}

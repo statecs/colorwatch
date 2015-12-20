@@ -11,7 +11,7 @@ angular.module('colorwatchApp')
       {name: 'Skrivsvårigheter', state: false},
       {name: 'Synnedsättning', state: false},
       {name: 'Fokusering', state: false},
-      {name: 'Korttidsminne', state: false},
+      {name: 'Minne', state: false},
       {name: 'Organisera och planera', state: false},
       {name: 'Problemlösning', state: false},
       {name: 'Tidshantering', state: false}
@@ -27,7 +27,7 @@ angular.module('colorwatchApp')
       {name: 'Diabetessynskada', state: false},
       {name: 'Grå starr, katarakt', state: false},
       {name: 'Grön starr, glaukom', state: false},
-      {name: 'Åldersförändringar i gula fläcken, makuladegeneration', state: false},
+      {name: 'Gula fläcken', state: false},
       {name: 'Näthinneavlossning', state: false},
       {name: 'RP, retinitis pigmentosa', state: false},
       {name: 'Depression', state: false},
