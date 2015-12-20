@@ -10,7 +10,6 @@ angular.module('colorwatchApp', [
   'ui.bootstrap',
   'btford.socket-io',
   'ngAria',
-  'ng-breadcrumbs',
   'angularSpectrumColorpicker',
   'ngTouch',
   'angular-spinkit'
