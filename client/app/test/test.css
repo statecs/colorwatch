@@ -14,6 +14,7 @@
 }
 /* box-shadow if selected  */
 .op-selected {
+	border: rgba(226, 126, 47, 1) 5px solid;
 	border-radius: 10px;
 	background-image: none;
 	outline: 0;

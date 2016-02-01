@@ -1,7 +1,23 @@
 'use strict';
 
 angular.module('colorwatchApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
+  .controller('NavbarCtrl', function ($rootScope, $scope, $location, Auth, $timeout) {
+  
+
+   var amt = 30;
+
+   console.log(amt);
+
+  $rootScope.countTo = amt;
+  $rootScope.countFrom = 0;
+  
+  $timeout(function(){
+    $rootScope.progressValue = amt;
+  }, 200);
+
+
+
+
     $scope.menu = [{
       'title': 'Start',
       'link': '/',
