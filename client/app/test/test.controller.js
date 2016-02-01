@@ -2,6 +2,7 @@
 
 angular.module('colorwatchApp')
 .controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, Poll, ColorCombs, $sessionStorage) {
+
     $scope.loading = true;
     $scope.poll = {};
     Poll.getPoll({id: $sessionStorage.myTest},{}).$promise.then(function(polls){
@@ -54,7 +55,7 @@ angular.module('colorwatchApp')
     };
 
     $scope.prevPage = function(){
-      $location.path('/');
+       window.history.back();
     };
 
 
@@ -65,12 +66,22 @@ angular.module('colorwatchApp')
           questionsNotAns.push(index+1);
         }
       });
-      if(questionsNotAns.length != 0){
-          //Need to add proper alert here to the user!
-          console.log('Not answeared', questionsNotAns);
+
+
+  $scope.checkQuestion = function(){
+        if(questionsNotAns.length == 0){
+
+              $location.path('/oversikt');
+          return false;
+            }
+            else{
+              return true;
+           //Need to add proper alert here to the user!
+           console.log('Not answeared', questionsNotAns);
+            
+            }
+
+         };
       }
-      else{
-        $location.path('/oversikt');
-      }
-    }
+
   });

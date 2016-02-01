@@ -53,6 +53,11 @@ angular.module('colorwatchApp')
         }
       });
 
+   $scope.prevPage = function(){
+       window.history.back();
+    };
+
+
       //Update choices in database
       Poll.update({id: $sessionStorage.myTest}, {diagnoses: choosedDiagnoses, disabilities: choosedDisabilities},function(){
 

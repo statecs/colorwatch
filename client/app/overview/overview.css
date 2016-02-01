@@ -1,23 +1,14 @@
-.odd{
-    background: #ccc;
-    margin: 0.2em 0;
-    padding: 0.2em 0;
-}
-
-.even{
-	background: #fff;
-    margin: 0.2em 0;
-    padding: 0.2em 0;
+.questionBlock:nth-child(2n){
+    background: rgba(0,0,0,0.03);
 }
 
 .questionBlock{
-    max-width:700px;
-    width:100%;
-    margin:0 auto;
+    padding: 20px;
+    padding-bottom:100px;
 }
-/* Used for horizontal spacing between radiobuttons*/
-.blocks .btn-default
-{
-    margin: 0 20px;  
-    border-radius: 0;
+
+@media (min-width: 680px){
+
+
+
 }

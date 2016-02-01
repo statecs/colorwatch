@@ -1,20 +1,24 @@
+
 <nav class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
-  <div class="container">
+
+  <div class="container ">
     <div ng-hide="isLoggedIn()" class="row">
+
+
+
       <div class="btn-group btn-group-justified" role="navigation">
-        <a ng-repeat="item in menu"  ng-class="{active: isActive(item.link)}" ng-href="{{item.link}}" class="btn btn-default">{{item.title}}</a>
+       <div ng-repeat="item in menu" ui-sref-active-eq="active" ui-sref-active="active" ng-class="{active: isActive(item.link)}" class="btn">{{item.title}}</div>
+
+<!--<div ng-class="{active: isActive(item.link)}" ng-controller="TestCtrl"><pagination  next-text="-" previous-text="-" items-per-page="itemsPerPage" total-items="totalQuestions" ng-model="currentQuestion" ng-change="questionChanged()"></pagination></div>-->
+
       </div>
     </div>
+
+
     <div ng-show="isLoggedIn()" class="row">
       <div class="navbar-header">
-        <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
       </div>
-      <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+      <div id="navbar-main">
         <ul class="nav navbar-nav navbar-right">
           <li ng-class="{active: isActive('/dashboard')}"><a href="/dashboard"><span class="glyphicon glyphicon-dashboard"/> Adminpanel</a></li>
           <li ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"/> Inställningar</a></li>
