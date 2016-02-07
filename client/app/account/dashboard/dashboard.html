@@ -26,7 +26,12 @@
     </div>
   </div>
 </div>
-<!--Table presenting the overall rating of the color combinations-->
+
+    <label for="searchDisability">Val av rankinglista</label>
+    <input id="searchDisability" type="search" class="form-control col-sm-2" placeholder="Sök efter funktionsnedsättning eller svårighet..." ng-model="selectedDisability" typeahead="disability as disability.name for disability in disabilities | filter:$viewValue | limitTo:8">
+
+    <h1>{{titleOfDashboard}}</h1>
+  <!--Table presenting the overall rating of the color combinations-->
 <div class="table-responsive">
   <table class="table table-striped">
     <thead>
@@ -40,11 +45,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="color in colors | orderBy:'-ELO_rating[0].rating'">
+      <tr ng-repeat="color in colors | orderBy:'-ELO_rating[index].rating'">
         <td>{{$index+1}}</td>
         <td><span ng-style="{'background-color': '{{color.textcolor}}'}" class="thumbnail"></span>{{color.textcolor}}</td>
         <td><span ng-style="{'background-color': '{{color.backcolor}}'}" class="thumbnail"></span>{{color.backcolor}}</td>
-        <td>{{color.ELO_rating[0].rating | number: 0}}</td>
+        <td>{{color.ELO_rating[index].rating | number: 0}}</td>
         <td>{{color.numOfVotes}}</td>
         <td>{{color.numOfTimesInTest}}</td>
       </tr>
