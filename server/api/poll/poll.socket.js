@@ -11,11 +11,11 @@ var ColorCombs = require('../colorcombs/colorcombs.model');
 
 function objectFindKey(array, key, value) {
   for (var i = 0; i < array.length; i++) {
-    if (array[i][key] === value) {
+    if (array[i].name === value) {
       return i;
     }
   }
-  return null;
+  return -1;
 }
 
 function calculateELORating(ratingObjectA, ratingObjectB, scoreA, scoreB){
@@ -52,7 +52,7 @@ exports.register = function(socket) {
           scoreA = 0;
           scoreB = 0;
 
-          //Find which colors used in the question
+          //Find which colors used in the current question
           for(var j = 0; j < colors.length; j++){
             if(poll.questions[i].img1.equals(colors[j]._id)){
               colorA = colors[j];
@@ -72,18 +72,31 @@ exports.register = function(socket) {
             scoreB = 1;
             colorB.numOfVotes++;
           }
+
           var k;
-
-          for(k = 0; k < poll.diagnoses.length; k++){
-            indexELO = objectFindKey(colorA.ELO_rating, 'name', poll.diagnoses[k]);
-            newELORating = calculateELORating(colorA.ELO_rating[indexELO], colorB.ELO_rating[indexELO], scoreA, scoreB);
-          }
-
+          //Updating ELO rating for the chosen disabilities
           for(k = 0; k < poll.disabilities.length; k++){
             indexELO = objectFindKey(colorA.ELO_rating, 'name', poll.disabilities[k]);
-            newELORating = calculateELORating(colorA.ELO_rating[indexELO], colorB.ELO_rating[indexELO], scoreA, scoreB);
+            if(indexELO != -1){
+              newELORating = calculateELORating(colorA.ELO_rating[indexELO], colorB.ELO_rating[indexELO], scoreA, scoreB);
+            }
+            else{
+              console.log("Couldn't update ELO rating for disabilities");
+            }
           }
-          //Update total rating
+
+          //Updating ELO rating for the chosen diagnoses
+          for(k = 0; k < poll.diagnoses.length; k++){
+            indexELO = objectFindKey(colorA.ELO_rating, 'name', poll.diagnoses[k]);
+            if(indexELO != -1){
+              newELORating = calculateELORating(colorA.ELO_rating[indexELO], colorB.ELO_rating[indexELO], scoreA, scoreB);
+            }
+            else{
+              console.log("Couldn't update ELO rating for diagnoses");
+            }
+          }
+
+          //Update total rating, index 0 indicates total
           calculateELORating(colorA.ELO_rating[0], colorB.ELO_rating[0], scoreA, scoreB);
         }
         // Save ratings to DB

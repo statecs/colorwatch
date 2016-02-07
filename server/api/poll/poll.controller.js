@@ -54,7 +54,9 @@ exports.newpolls = function(req, res) {
           });
        }
 
-       var poll = new Poll({questions: questions});
+       var poll = new Poll({
+         questions: questions
+       });
        // Save poll to DB
       poll.save(function(err, doc) {
         if(err || !doc) {
