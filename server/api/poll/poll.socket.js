@@ -56,21 +56,17 @@ exports.register = function(socket) {
           for(var j = 0; j < colors.length; j++){
             if(poll.questions[i].img1.equals(colors[j]._id)){
               colorA = colors[j];
-              colorA.numOfTimesInTest++;
             }
             else if(poll.questions[i].img2.equals(colors[j]._id)){
               colorB = colors[j];
-              colorB.numOfTimesInTest++;
             }
           }
           //Set score depending on user choice
           if(poll.questions[i].userVote == 'choice_alt1'){
             scoreA = 1;
-            colorA.numOfVotes++;
           }
           else{
             scoreB = 1;
-            colorB.numOfVotes++;
           }
 
           var k;
@@ -79,6 +75,14 @@ exports.register = function(socket) {
             indexELO = objectFindKey(colorA.ELO_rating, 'name', poll.disabilities[k]);
             if(indexELO != -1){
               newELORating = calculateELORating(colorA.ELO_rating[indexELO], colorB.ELO_rating[indexELO], scoreA, scoreB);
+
+              //Update number of votes for this ratinglist
+              if(scoreA == 1) colorA.ELO_rating[indexELO].numOfVotes++;
+              else colorB.ELO_rating[indexELO].numOfVotes++;
+
+              //Update number of times being shown in test for this ratinglist
+              colorA.ELO_rating[indexELO].numOfTimesInTest++;
+              colorB.ELO_rating[indexELO].numOfTimesInTest++;
             }
             else{
               console.log("Couldn't update ELO rating for disabilities");
@@ -90,6 +94,14 @@ exports.register = function(socket) {
             indexELO = objectFindKey(colorA.ELO_rating, 'name', poll.diagnoses[k]);
             if(indexELO != -1){
               newELORating = calculateELORating(colorA.ELO_rating[indexELO], colorB.ELO_rating[indexELO], scoreA, scoreB);
+
+              //Update number of votes for this ratinglist
+              if(scoreA == 1) colorA.ELO_rating[indexELO].numOfVotes++;
+              else colorB.ELO_rating[indexELO].numOfVotes++;
+
+              //Update number of times being shown in test for this ratinglist
+              colorA.ELO_rating[indexELO].numOfTimesInTest++;
+              colorB.ELO_rating[indexELO].numOfTimesInTest++;
             }
             else{
               console.log("Couldn't update ELO rating for diagnoses");
@@ -98,6 +110,15 @@ exports.register = function(socket) {
 
           //Update total rating, index 0 indicates total
           calculateELORating(colorA.ELO_rating[0], colorB.ELO_rating[0], scoreA, scoreB);
+
+
+          //Update number of votes for total ratinglist
+          if(scoreA == 1) colorA.ELO_rating[0].numOfVotes++;
+          else colorB.ELO_rating[0].numOfVotes++;
+
+          //Update number of times being shown in test for total ratinglist
+          colorA.ELO_rating[0].numOfTimesInTest++;
+          colorB.ELO_rating[0].numOfTimesInTest++;
         }
         // Save ratings to DB
         colors.forEach(function(color, index, array){

@@ -41,7 +41,7 @@
         <th>Backgrundsfärg</th>
         <th>Ranking</th>
         <th>Antal röster</th>
-        <th>Medverkan i test</th>
+        <th>Antal visningar</th>
       </tr>
     </thead>
     <tbody>
@@ -50,8 +50,8 @@
         <td><span ng-style="{'background-color': '{{color.textcolor}}'}" class="thumbnail"></span>{{color.textcolor}}</td>
         <td><span ng-style="{'background-color': '{{color.backcolor}}'}" class="thumbnail"></span>{{color.backcolor}}</td>
         <td>{{color.ELO_rating[index].rating | number: 0}}</td>
-        <td>{{color.numOfVotes}}</td>
-        <td>{{color.numOfTimesInTest}}</td>
+        <td>{{color.ELO_rating[index].numOfVotes | number: 0}}</td>
+        <td>{{color.ELO_rating[index].numOfTimesInTest | number: 0}}</td>
       </tr>
     </tbody>
   </table>
