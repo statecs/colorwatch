@@ -1,65 +1,43 @@
-.btn-group .btn-default 
-{
-    margin: 5px 5px;  
-}
 .form-top {
-    padding: 0px 50px 0px 50px;
+    padding:15px;
     background: #fafafa;
-    -moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px;
     text-align: left;
-    max-width:800px;
     width:100%;
     margin:0 auto;
 }
+.form-group.kon label{
+    font-size: 20px;
+    font-weight: 400;
+}
+.form-group.kon input{
+    margin: 0px 5px 0px 5px;
+    font-size: 20px;
+}
+.form-group{
+    padding: 6px 0px;
+}
+.input-group input{
+    padding:20px;
+    border-radius: 5000px !important;
+}
+.checkbox-inline {
+    padding-left:40px;
+    font-size: 20px;
+}
+input[type=checkbox], input[type=radio]{
+     zoom:200%;
+     margin:1px 0px;
+}
+/* StartTest btn */
+.btn-final {
+  margin:7px;
+  font-size: 1.3em;
+  line-height: 1;
+  padding: 15px;
+  border-radius: 5000px !important;
+}
 
-.form-top form textarea {
-    height: 100px;
-}
-.input-group{
-    margin: 10px 0 10px 0;
-}
-.form-group input{
-    margin: 0 5px 0 5px;
-}
-/*Sharing block*/
-.sharing-block{
-	margin: 5px;
-}
-
-/* Social media buttons*/
-.btn-twitter {
-    background: #00acee;
-    border-radius: 0;
-    color: #fff
-}
-.btn-twitter:link, .btn-twitter:visited {
-    color: #fff
-}
-.btn-twitter:active, .btn-twitter:hover {
-    background: #0087bd;
-    color: #fff
-}
-.btn-facebook {
-    background: #3b5998;
-    border-radius: 0;
-    color: #fff
-}
-.btn-facebook:link, .btn-facebook:visited {
-    color: #fff
-}
-.btn-facebook:active, .btn-facebook:hover {
-    background: #30477a;
-    color: #fff
-}
-.btn-googleplus {
-    background: #e93f2e;
-    border-radius: 0;
-    color: #fff
-}
-.btn-googleplus:link, .btn-googleplus:visited {
-    color: #fff
-}
-.btn-googleplus:active, .btn-googleplus:hover {
-    background: #ba3225;
-    color: #fff
+.btn-final:hover{
+  opacity: 0.7;
+  color:#ffffff;
 }

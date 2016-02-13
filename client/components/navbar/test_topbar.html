@@ -1,0 +1,16 @@
+<div class="corner-wrapper">
+<!-- TopWrapper -->
+    <div class="corners-top-wrapper fadeIn">
+      <!-- TopLeft -->
+          <div class="corners corner--t-l hidden-xs"><button type="button" class="btn" ng-click="prevPage()">Tillbaka</button></div>
+      <!-- TopMiddle -->
+      <div ng-if="currentQuestion" class="corners corner--t-m"> {{currentQuestion}} / {{totalQuestions}}</div>
+       <!-- TopRight -->
+      <div class="corners corner--t-r js-fade-this fadeIn">
+         <button type="button" ng-disabled="checkQuestion()" class="btn" ng-click="nextPage()"> Fortsätt </button></div>
+    </div>
+    <!-- BottomWrapper -->
+    <div class="corners-bottom-wrapper hidden-xs">
+        <div ng-include src="'components/navbar/navbar.html'"></div>
+    </div>
+</div>

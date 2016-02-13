@@ -36,17 +36,16 @@ exports.newpolls = function(req, res) {
     .exec(function(err, colors) {
        // `posts` will be of length 20
        if(err) { return handleError(res, err);}
-       console.log('colors', colors);
        var questions = [];
 
        for(var i = 0; i < 10; i++){
           var index1 = Math.floor((Math.random() * colors.length));
           do{
             var index2 = Math.floor((Math.random() * colors.length));
-          } 
+          }
           while(index1 == index2);
           questions.push({
-            img1: colors[index1].id, 
+            img1: colors[index1].id,
             img1_url: colors[index1].image_secureurl,
             img2: colors[index2].id,
             img2_url: colors[index2].image_secureurl,
@@ -55,22 +54,24 @@ exports.newpolls = function(req, res) {
           });
        }
 
-       var poll = new Poll({questions: questions});
+       var poll = new Poll({
+         questions: questions
+       });
        // Save poll to DB
       poll.save(function(err, doc) {
         if(err || !doc) {
           throw 'Error';
         } else {
           res.json(doc);
-        }   
+        }
       });
     });
 }
 // JSON API for list of polls
-// 
+//
 exports.list = function(req, res) {
-  // 
-  
+  //
+
   Poll.find({}, 'question', function(error, polls) {
     if(error){
       throw 'Error in list';
@@ -92,17 +93,17 @@ exports.create = function(req, res) {
       choices = reqBody.choices.filter(function(v) { return v.text !== ''; }),
       // Build up poll object to save
       pollObj = {question: reqBody.question, choices: choices};
-        
+
   // Create poll model from built up poll object
   var poll = new Poll(pollObj);
-  
+
   // Save poll to DB
   poll.save(function(err, doc) {
     if(err || !doc) {
       throw 'Error';
     } else {
       res.json(doc);
-    }   
+    }
   });
 };
 
@@ -123,7 +124,7 @@ exports.update = function(req, res) {
         polls.questions[questionNr-1].userHasVoted = true;
       }
       else{
-        polls.questions[questionNr-1].userHasVoted = false; 
+        polls.questions[questionNr-1].userHasVoted = false;
       }
     }
     else{
@@ -131,7 +132,7 @@ exports.update = function(req, res) {
       polls.disabilities = disabilities;
     }
     polls.save(function (err) {
-      if (err) { return handleError(res, err); }  
+      if (err) { return handleError(res, err); }
       return res.json(200, polls);
     });
   });
@@ -158,7 +159,7 @@ exports.poll = function(req, res) {
     Poll.findById(myTestId, function(err, poll) {
       if(err) { return handleError(res, err); }
       return res.json(poll.questions);
-      
+
     });
   }
   else{

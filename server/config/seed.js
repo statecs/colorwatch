@@ -14,18 +14,70 @@ var mongoose = require('mongoose');
 //Creating colorcombinations used in test
 ColorCombs.find({}).remove(function() {
   ColorCombs.create({
-    textcolor: '53f297',
-    backcolor: '000000',
-    image_secureurl: 'https://res.cloudinary.com/duff92/image/upload/v1439563172/colors/53f297_000000.png',
-    votes: []
-  },
-  {
-    textcolor: 'ffffff',
-    backcolor: '000000',
-    image_secureurl: 'https://res.cloudinary.com/duff92/image/upload/v1439564281/colors/ffffff_000000.png',
-    votes: []
-  }, function() {
-      console.log('finished populating colorcombs');
+      textcolor: '#c32020',
+      backcolor: '#000000',
+      image_secureurl: 'https://res.cloudinary.com/duff92/image/upload/v1442181524/colors/c32020_000000.png',
+      ELO_rating:[
+        {name: 'Total', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Afasi', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'ADHD, ADD, Damp', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Autism, autismspektrumtillstånd, asperger', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Dyslexi', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Dyskalkyli', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Utvecklingsstörning', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Diabetessynskada', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Grå starr, katarakt', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Grön starr, glaukom', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Gula fläcken', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Näthinneavlossning', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'RP, retinitis pigmentosa', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Depression', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Bipolär sjukdom', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Schizofreni', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Tvångssyndrom, OCD', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Lässvårigheter', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Skrivsvårigheter', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Synnedsättning', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Fokusering', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Minne', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Organisera och planera', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Problemlösning', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Tidshantering', rating:1400, numOfVotes: 0, numOfTimesInTest: 0}
+      ]
+    },
+    {
+      textcolor: '#ffffff',
+      backcolor: '#000000',
+      image_secureurl: 'https://res.cloudinary.com/duff92/image/upload/v1439564281/colors/ffffff_000000.png',
+      ELO_rating:[
+        {name: 'Total', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Afasi', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'ADHD, ADD, Damp', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Autism, autismspektrumtillstånd, asperger', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Dyslexi', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Dyskalkyli', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Utvecklingsstörning', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Diabetessynskada', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Grå starr, katarakt', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Grön starr, glaukom', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Gula fläcken', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Näthinneavlossning', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'RP, retinitis pigmentosa', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Depression', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Bipolär sjukdom', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Schizofreni', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Tvångssyndrom, OCD', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Lässvårigheter', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Skrivsvårigheter', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Synnedsättning', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Fokusering', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Minne', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Organisera och planera', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Problemlösning', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Tidshantering', rating:1400, numOfVotes: 0, numOfTimesInTest: 0}
+      ]
+    }, function() {
+      console.log('finished populating colorcombs2');
     }
   );
 });
@@ -33,52 +85,18 @@ ColorCombs.find({}).remove(function() {
 //Creating user for login possibility
 User.find({}).remove(function() {
   User.create({
-    provider: 'local',
-    name: 'Test',
-    email: 'test@test.com',
-    password: 'test'
-  }, {
-    provider: 'local',
-    role: 'admin',
-    name: 'Admin',
-    email: 'admin@admin.com',
-    password: 'admin'
-  }, function() {
+      provider: 'local',
+      name: 'Test',
+      email: 'test@test.com',
+      password: 'test'
+    }, {
+      provider: 'local',
+      role: 'admin',
+      name: 'Admin',
+      email: 'admin@admin.com',
+      password: 'admin'
+    }, function() {
       console.log('finished populating users');
     }
   );
 });
-
-//Creating polls used in test
-/*Poll.find({}).remove(function() {
-  Poll.create({
-    provider: 'local',
-    question: 'Svart/vit mot vit/svart',
-    choices: [{
-        text: 'svart/vit', 
-        image_url: 'https://s3.eu-central-1.amazonaws.com/colorwatch/color-images-test/color_blw.png', 
-        votes: []
-      },{
-          text: 'vit/svart', 
-          image_url: 'https://s3.eu-central-1.amazonaws.com/colorwatch/color-images-test/color_wbl.png',
-          votes: []
-      }
-    ]
-  },{
-    provider: 'local',
-    question: 'Svart/vit mot blå/vit',
-    choices: [{
-        text: 'svart/vit', 
-        image_url: 'https://s3.eu-central-1.amazonaws.com/colorwatch/color-images-test/color_blw.png', 
-        votes: []
-      },{
-          text: 'blå/vit', 
-          image_url: 'https://s3.eu-central-1.amazonaws.com/colorwatch/color-images-test/color_bw.png',
-          votes: []
-      }
-    ]  
-  }, function() {
-      console.log('finished populating polls - with urls');
-    }
-  );
-});*/

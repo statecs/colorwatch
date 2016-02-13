@@ -1,24 +1,30 @@
-<nav class="navbar navbar navbar-static-top" ng-controller="NavbarCtrl">
-  <div class="container">
-    <div class="navbar-header">
-      <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
+
+<nav class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
+
+  <div class="container ">
+    <div ng-hide="isLoggedIn()" class="row">
+  <progressbar class="progress-striped active" animate="true" max="100" value="progressValue" type="success"><span count-to="{{countTo}}" duration="1" count-from="{{countFrom}}"></progressbar>
+      <div class="btn-group btn-group-justified">
+      <div ng-repeat="item in menu" ui-sref-active-eq="active" ui-sref-active="active" ng-class="{active: isActive(item.link)}" class="navbar-progress">{{item.title}}<span ng-if="item.title == 'Test'"> {{currentQuestion}} / {{totalQuestions}}</span></div>
+
+<!--<div ng-class="{active: isActive('item.link')}" ng-controller="TestCtrl"><pagination  next-text="-" previous-text="-" items-per-page="itemsPerPage" total-items="totalQuestions" ng-model="currentQuestion" ng-change="questionChanged()"></pagination></div>-->
+
+      </div>
 
     </div>
-     <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-        <div class="btn-group btn-breadcrumb">
-        <a ng-repeat="item in menu"  ng-class="{active: isActive(item.link)}" ng-href="{{item.link}}" class="btn btn-default">{{item.title}}</a>
-        </div>
 
-         <ul class="nav navbar-nav navbar-right">
-         <li ng-show="isLoggedIn()" ng-class="{active: isActive('/dashboard')}"><a href="/dashboard">Admin Panel</a></li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a></li>
-      </ul>
+
+    <div ng-show="isLoggedIn()" class="row">
+      <div class="navbar-header">
+      </div>
+      <div id="navbar-main">
+        <ul class="nav navbar-nav navbar-right">
+          <li ng-class="{active: isActive('/dashboard')}"><a href="/dashboard"><span class="glyphicon glyphicon-dashboard"/> Adminpanel</a></li>
+          <li ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"/> Inställningar</a></li>
+          <li ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()"><span class="glyphicon glyphicon-log-out"/> Logga ut</a></li>
+        </ul>
+      </div>
+
     </div>
   </div>
 </nav>

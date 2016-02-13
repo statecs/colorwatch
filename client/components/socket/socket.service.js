@@ -7,10 +7,10 @@ angular.module('colorwatchApp')
       id: '@id'
     }, {
         // Use this method for getting a list of polls
-        newpolls: { 
-          method: 'GET', 
-          params: { 
-            id: 'newpolls' 
+        newpolls: {
+          method: 'GET',
+          params: {
+            id: 'newpolls'
           }},
         getPoll: {
           method: 'GET',
@@ -32,11 +32,14 @@ angular.module('colorwatchApp')
       });
   })
   .factory('ColorCombs', function($resource) {
-    return $resource('/api/colorcombs/:id', {}, {
+    return $resource('/api/colorcombs/:id', {id: '@id'}, {
         // Use this method for getting a list of polls
         getColorComb: {
           method: 'GET',
           isArray: true
+        },
+        deleteColor: {
+          method: 'DELETE'
         },
         create: {
           method: 'POST',
@@ -48,7 +51,6 @@ angular.module('colorwatchApp')
             backcolor: "@backcolor"
           }
         }
-//FORTSÄTT HÄR!!!!
       });
   })
   .factory('socket', function(socketFactory) {
@@ -56,7 +58,7 @@ angular.module('colorwatchApp')
     // MAYBE CHANGE THIS TO USE ROOTSCOPE INSTEAD OF SOCKETFACTORY
     //
     // socket.io now auto-configures its connection when we ommit a connection url
-    var ioSocket = io('localhost:9000', {
+    var ioSocket = io('', {
       // Send auth token on connection, you will need to DI the Auth service above
       // 'query': 'token=' + Auth.getToken()
       path: '/socket.io-client'
