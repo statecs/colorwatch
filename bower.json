@@ -29,6 +29,7 @@
     "angular-scenario": ">=1.2.*"
   },
   "resolutions": {
-    "spectrum": "1.8.0"
+    "spectrum": "1.7.1",
+    "angular": "1.4.9"
   }
 }
