@@ -9,6 +9,28 @@
 var Poll = require('./poll.model');
 var ColorCombs = require('../colorcombs/colorcombs.model');
 
+function objectFindKey(array, key, value) {
+  for (var i = 0; i < array.length; i++) {
+    if (array[i].name === value) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+function calculateELORating(ratingObjectA, ratingObjectB, scoreA, scoreB){
+  var kFactor = 32;
+
+  var expectedScoreA = 1 / (1 + Math.pow(10, (ratingObjectB.rating - ratingObjectA.rating) / 400));
+  var expectedScoreB = 1 / (1 + Math.pow(10, (ratingObjectA.rating - ratingObjectB.rating) / 400));
+
+  var newRatingA = ratingObjectA.rating + (kFactor * (scoreA - expectedScoreA));
+  var newRatingB = ratingObjectB.rating + (kFactor * (scoreB - expectedScoreB));
+
+  ratingObjectA.rating = newRatingA;
+  ratingObjectB.rating = newRatingB;
+}
+
 /**
  * Register the socket for polls
  * @param  {[type]} socket [description]
@@ -21,7 +43,7 @@ exports.register = function(socket) {
     Poll.findById(data.pollId, function(err, poll) {
       if(err) { return res.send(500, err); }
 
-      var expectedScoreA, expectedScoreB, newRatingA, colorA, colorB, newRatingB, scoreA, scoreB, kFactor = 32;
+      var colorA, colorB, scoreA, scoreB, indexELO, newELORating;
 
       //First find all colors in test
       ColorCombs.find(poll.questions, function(err, colors){
@@ -30,7 +52,7 @@ exports.register = function(socket) {
           scoreA = 0;
           scoreB = 0;
 
-          //Find which colors used in the question
+          //Find which colors used in the current question
           for(var j = 0; j < colors.length; j++){
             if(poll.questions[i].img1.equals(colors[j]._id)){
               colorA = colors[j];
@@ -42,20 +64,61 @@ exports.register = function(socket) {
           //Set score depending on user choice
           if(poll.questions[i].userVote == 'choice_alt1'){
             scoreA = 1;
-            colorA.numOfVotes++;
           }
           else{
             scoreB = 1;
-            colorB.numOfVotes++;
           }
-          expectedScoreA = 1 / (1 + Math.pow(10, (colorB.ELO_rating - colorA.ELO_rating) / 400));
-          expectedScoreB = 1 / (1 + Math.pow(10, (colorA.ELO_rating - colorB.ELO_rating) / 400));
 
-          newRatingA = colorA.ELO_rating + (kFactor * (scoreA - expectedScoreA));
-          newRatingB = colorB.ELO_rating + (kFactor * (scoreB - expectedScoreB));
+          var k;
+          //Updating ELO rating for the chosen disabilities
+          for(k = 0; k < poll.disabilities.length; k++){
+            indexELO = objectFindKey(colorA.ELO_rating, 'name', poll.disabilities[k]);
+            if(indexELO != -1){
+              newELORating = calculateELORating(colorA.ELO_rating[indexELO], colorB.ELO_rating[indexELO], scoreA, scoreB);
 
-          colorA.ELO_rating = newRatingA;
-          colorB.ELO_rating = newRatingB;
+              //Update number of votes for this ratinglist
+              if(scoreA == 1) colorA.ELO_rating[indexELO].numOfVotes++;
+              else colorB.ELO_rating[indexELO].numOfVotes++;
+
+              //Update number of times being shown in test for this ratinglist
+              colorA.ELO_rating[indexELO].numOfTimesInTest++;
+              colorB.ELO_rating[indexELO].numOfTimesInTest++;
+            }
+            else{
+              console.log("Couldn't update ELO rating for disabilities");
+            }
+          }
+
+          //Updating ELO rating for the chosen diagnoses
+          for(k = 0; k < poll.diagnoses.length; k++){
+            indexELO = objectFindKey(colorA.ELO_rating, 'name', poll.diagnoses[k]);
+            if(indexELO != -1){
+              newELORating = calculateELORating(colorA.ELO_rating[indexELO], colorB.ELO_rating[indexELO], scoreA, scoreB);
+
+              //Update number of votes for this ratinglist
+              if(scoreA == 1) colorA.ELO_rating[indexELO].numOfVotes++;
+              else colorB.ELO_rating[indexELO].numOfVotes++;
+
+              //Update number of times being shown in test for this ratinglist
+              colorA.ELO_rating[indexELO].numOfTimesInTest++;
+              colorB.ELO_rating[indexELO].numOfTimesInTest++;
+            }
+            else{
+              console.log("Couldn't update ELO rating for diagnoses");
+            }
+          }
+
+          //Update total rating, index 0 indicates total
+          calculateELORating(colorA.ELO_rating[0], colorB.ELO_rating[0], scoreA, scoreB);
+
+
+          //Update number of votes for total ratinglist
+          if(scoreA == 1) colorA.ELO_rating[0].numOfVotes++;
+          else colorB.ELO_rating[0].numOfVotes++;
+
+          //Update number of times being shown in test for total ratinglist
+          colorA.ELO_rating[0].numOfTimesInTest++;
+          colorB.ELO_rating[0].numOfTimesInTest++;
         }
         // Save ratings to DB
         colors.forEach(function(color, index, array){
@@ -73,6 +136,7 @@ exports.register = function(socket) {
             }
           });
         });
+
       });
     });
   });

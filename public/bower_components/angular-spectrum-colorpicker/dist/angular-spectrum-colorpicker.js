@@ -1,11 +1,11 @@
 /*!
- * angular-spectrum-colorpicker v1.4.1
+ * angular-spectrum-colorpicker v1.4.4
  * https://github.com/Jimdo/angular-spectrum-colorpicker
  *
  * Angular directive for a colorpicker, that bases on http://bgrins.github.io/spectrum/
  * Idea from http://jsfiddle.net/g/LAJCa/
  *
- * Copyright 2015, Jimdo GmbH
+ * Copyright 2016, Jimdo GmbH
  * Released under the MIT license
  */
 (function(angular, undefined) {
@@ -34,7 +34,7 @@
           onMove: '&?',
   
           onBeforeShow: '&?',
-  		
+  
   	    onChangeOptions: '=?',
   	    onShowOptions: '=?',
   	    onHideOptions: '=?',
@@ -74,7 +74,7 @@
           }
   
           var onChange = function(color) {
-            $scope.$apply(function() {
+            $scope.$evalAsync(function() {
               setViewValue(color);
             });
           };
@@ -117,7 +117,7 @@
               return $scope.onBeforeShow({color: formatColor(color)});
             };
           }
-  		
+  
   		if ($scope.palette) {
             localOpts.palette = $scope.palette;
           }
@@ -137,13 +137,13 @@
             $input.spectrum('set', options.color || '');
             setViewValue(options.color);
           }
-  		 
+  
   		$input.spectrum(options);
   
           $scope.$on('$destroy', function() {
             if ($scope.triggerId) {
               angular.element(document.body).off('click', '#' + $scope.triggerId, onToggle);
-            } 
+            }
           });
   		$element.on('$destroy', function(){
   			$input.spectrum('destroy');
@@ -155,11 +155,11 @@
   
           $scope.$watch('disabled', function (newDisabled) {
             $input.spectrum(newDisabled ? 'disable' : 'enable');
-          });		
+          });
   
   		$scope.$watch('palette', function (palette) {
   		  $input.spectrum('option', 'palette', palette);
-  		});
+  		}, true);
         }
       };
     });
