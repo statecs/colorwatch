@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-  .controller('FinalCtrl', function ($scope, $sessionStorage, $location, Poll, socket) {
+  .controller('FinalCtrl', function ($scope, $sessionStorage, $location, Poll, socket, $rootScope) {
 
     $scope.noDisabilities = false;
     $scope.noDiagnoses = false;
@@ -37,7 +37,7 @@ angular.module('colorwatchApp')
     ];
 
     $scope.submit = function(){
-      console.log("hej");
+      $rootScope.amt = 100;
       var choosedDisabilities = [];   //Disabilites choosed by the user
       var choosedDiagnoses = [];      //Diagnoses choosed by the user
 

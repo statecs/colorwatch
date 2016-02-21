@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-  .controller('OverviewCtrl', function ($scope, Poll, $location, $sessionStorage) {
+  .controller('OverviewCtrl', function ($scope, Poll, $location, $sessionStorage, $rootScope) {
     $scope.overviewDescText = 'Här av du möjlighet att ändra dina val, tryck sedan fortsätt.';
    	
     Poll.getPoll({id: $sessionStorage.myTest}).$promise.then(function(questions){
@@ -19,6 +19,7 @@ angular.module('colorwatchApp')
     }
 
     $scope.nextPage = function(){
+      $rootScope.amt = 75;
       $location.path('/final-form')
     }
 

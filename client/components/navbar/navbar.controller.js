@@ -4,15 +4,11 @@ angular.module('colorwatchApp')
   .controller('NavbarCtrl', function ($rootScope, $scope, $location, Auth, $timeout) {
   
 
-   var amt = 30;
-
-   console.log(amt);
-
-  $rootScope.countTo = amt;
+  $rootScope.countTo = $rootScope.amt;
   $rootScope.countFrom = 0;
   
   $timeout(function(){
-    $rootScope.progressValue = amt;
+    $rootScope.progressValue = $rootScope.amt;
   }, 200);
 
 

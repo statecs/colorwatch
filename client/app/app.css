@@ -377,3 +377,15 @@ button, .button, input[type="button"], input[type="submit"]{
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
 }
+
+/*Bugfix*/
+/*Z-INDEX */
+ .input-group .form-control, .form-group .btn-group, .form-group .input-group{
+    position:static!important;
+
+  }
+
+  .btn-group > .btn, .btn-group-vertical > .btn{
+    position:static!important;
+  }
+
