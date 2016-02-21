@@ -76,7 +76,7 @@ exports.create = function(req, res) {
 
   color.save(function(err, doc) {
     if(err) { return handleError(res, err); }
-    return res.json(201, doc);
+    return res.status(201).json(doc);
   });
 };
 
