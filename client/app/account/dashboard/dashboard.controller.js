@@ -44,7 +44,7 @@ angular.module('colorwatchApp')
       var totalVotes = 0;
 
       for(var i = 0; i < colors.length; i++) {
-        totalVotes += colors[i].numOfVotes;
+        totalVotes += colors[i].ELO_rating[0].numOfVotes;
       }
       $scope.numOfCompletedTests = totalVotes / 10;   //Divide by 10 (number of questions in test)
       console.log($scope.numOfCompletedTests);
