@@ -8,11 +8,11 @@ describe("E2E: Main view", function() {
 
   it('should have a working start button that starts test when clicked', function() {
      element(by.id('linkStartTest')).click();
-     expect(browser.getCurrentUrl()).toEqual('http://localhost:9000/test');
+     expect(browser.getCurrentUrl()).toEqual('http://localhost:9000/test/1');
   });
   it('should have working nav menu', function(){});
   it('changes active link and aplies .active class depending on route', function(){});
- 
+
 });
 
 /*it('should have a working nav menu directive apply it\'s logic to the page', function() {

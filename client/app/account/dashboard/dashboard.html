@@ -45,7 +45,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="color in colors | orderBy:'-ELO_rating[index].rating'">
+      <tr ng-repeat="color in colors | sortEloRating:index">
         <td>{{$index+1}}</td>
         <td><span ng-style="{'background-color': '{{color.textcolor}}'}" class="thumbnail"></span>{{color.textcolor}}</td>
         <td><span ng-style="{'background-color': '{{color.backcolor}}'}" class="thumbnail"></span>{{color.backcolor}}</td>
