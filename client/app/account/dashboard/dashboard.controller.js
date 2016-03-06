@@ -51,6 +51,18 @@ angular.module('colorwatchApp')
       console.log('from database',colors);
     });
 
+    $scope.exportPdf = function(){
+      $scope.$broadcast('export-pdf', {});
+    };
+    $scope.exportExcel = function(){
+      $scope.$broadcast('export-excel', {});
+    };
+    $scope.exportJSON = function(){
+      $scope.$broadcast('export-json', {});
+    };
+    $scope.exportCSV = function(){
+      $scope.$broadcast('export-csv', {});
+    };
 
 
   });
