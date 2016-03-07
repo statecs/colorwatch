@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    ColorCombs = require('../colorcombs/colorcombs.model');;
+    ColorCombs = require('../colorcombs/colorcombs.model');
 
 // Document schema for polls
 var PollSchema = new Schema({

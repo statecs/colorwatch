@@ -33,17 +33,17 @@ exports.newpolls = function(req, res) {
     .find()
     .sort({'__v': 1})
     .limit(5)
-    .exec(function(err, colors) {
+    .exec(function(err, colors, index1, index2) {
        // `posts` will be of length 20
        if(err) { return handleError(res, err);}
        var questions = [];
 
        for(var i = 0; i < 10; i++){
-          var index1 = Math.floor((Math.random() * colors.length));
+          index1 = Math.floor((Math.random() * colors.length));
           do{
-            var index2 = Math.floor((Math.random() * colors.length));
+            index2 = Math.floor((Math.random() * colors.length));
           }
-          while(index1 == index2);
+          while(index1 === index2);
           questions.push({
             img1: colors[index1].id,
             img1_url: colors[index1].image_secureurl,
@@ -118,7 +118,7 @@ exports.update = function(req, res) {
   Poll.findById(req.params.id, function (err, polls) {
     if (err) { return handleError(res, err); }
     if(!polls) { return res.send(404); }
-    if(userVote != "undefined"){
+    if(userVote !== "undefined"){
       polls.questions[questionNr-1].userVote = userVote;
       if(userVote){
         polls.questions[questionNr-1].userHasVoted = true;
