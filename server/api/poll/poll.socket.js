@@ -40,7 +40,7 @@ exports.register = function(socket) {
   console.log('register socket');
 
   socket.on('send:vote', function(data) {
-    Poll.findById(data.pollId, function(err, poll, res) {
+    Poll.findById(data.pollId, function(err, poll) {
       if(err) { return res.send(500, err); }
 
       var colorA, colorB, scoreA, scoreB, indexELO, newELORating;

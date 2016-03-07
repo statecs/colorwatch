@@ -33,15 +33,15 @@ exports.newpolls = function(req, res) {
     .find()
     .sort({'__v': 1})
     .limit(5)
-    .exec(function(err, colors, index1, index2) {
+    .exec(function(err, colors) {
        // `posts` will be of length 20
        if(err) { return handleError(res, err);}
        var questions = [];
 
        for(var i = 0; i < 10; i++){
-          index1 = Math.floor((Math.random() * colors.length));
+          var index1 = Math.floor((Math.random() * colors.length));
           do{
-            index2 = Math.floor((Math.random() * colors.length));
+            var index2 = Math.floor((Math.random() * colors.length));
           }
           while(index1 === index2);
           questions.push({
