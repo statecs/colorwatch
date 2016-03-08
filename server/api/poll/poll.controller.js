@@ -31,8 +31,8 @@ exports.show = function(req, res) {
 exports.newpolls = function(req, res) {
   ColorCombs
     .find()
-    .sort({'__v': 1})
-    .limit(5)
+    .sort({'ELO_rating.numOfTimesInTest': 1}) //Pick the color combs with least views
+    .limit(5)     //The number of colors used in the test
     .exec(function(err, colors) {
        // `posts` will be of length 20
        if(err) { return handleError(res, err);}
@@ -43,7 +43,7 @@ exports.newpolls = function(req, res) {
           do{
             var index2 = Math.floor((Math.random() * colors.length));
           }
-          while(index1 == index2);
+          while(index1 === index2);
           questions.push({
             img1: colors[index1].id,
             img1_url: colors[index1].image_secureurl,
@@ -118,7 +118,7 @@ exports.update = function(req, res) {
   Poll.findById(req.params.id, function (err, polls) {
     if (err) { return handleError(res, err); }
     if(!polls) { return res.send(404); }
-    if(userVote != "undefined"){
+    if(userVote !== "undefined"){
       polls.questions[questionNr-1].userVote = userVote;
       if(userVote){
         polls.questions[questionNr-1].userHasVoted = true;

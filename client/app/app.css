@@ -66,13 +66,13 @@ ul.no-bullet
 .navbar-right {
     float: right !important;
 }
-.progress { 
+.progress {
   margin-bottom: 0;
   height: 0.5em;
   i { line-height: 0.5em; }
 }
-.progress-bar { 
-  transition: width 1s ease-in-out; 
+.progress-bar {
+  transition: width 1s ease-in-out;
 }
 .progress-bar-success {
     background-color: #E27E2F;
@@ -377,3 +377,21 @@ button, .button, input[type="button"], input[type="submit"]{
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
 }
+
+/*Bugfix*/
+/*Z-INDEX */
+ .input-group .form-control, .form-group .btn-group, .form-group .input-group{
+    position:static!important;
+
+  }
+
+  .btn-group > .btn, .btn-group-vertical > .btn{
+    position:static!important;
+  }
+
+ /* Basic pointer hand for export functions*/
+span.pointer{
+  cursor: pointer;
+  padding: .5em .5em;
+}
+

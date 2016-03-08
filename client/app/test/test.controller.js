@@ -35,6 +35,9 @@ angular.module('colorwatchApp')
     $scope.vote = function(userChoice){
       $scope.poll.userVote = userChoice;
       $scope.poll.userHasVoted = true;
+
+      $rootScope.amt += 3;
+
       var nextQuestion = parseInt($routeParams.questionNr) + 1;
 
       Poll.update({id: $sessionStorage.myTest}, {questionNr: $routeParams.questionNr, userVote: userChoice});

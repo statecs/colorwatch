@@ -62,7 +62,7 @@ exports.register = function(socket) {
             }
           }
           //Set score depending on user choice
-          if(poll.questions[i].userVote == 'choice_alt1'){
+          if(poll.questions[i].userVote === 'choice_alt1'){
             scoreA = 1;
           }
           else{
@@ -73,11 +73,11 @@ exports.register = function(socket) {
           //Updating ELO rating for the chosen disabilities
           for(k = 0; k < poll.disabilities.length; k++){
             indexELO = objectFindKey(colorA.ELO_rating, 'name', poll.disabilities[k]);
-            if(indexELO != -1){
+            if(indexELO !== -1){
               newELORating = calculateELORating(colorA.ELO_rating[indexELO], colorB.ELO_rating[indexELO], scoreA, scoreB);
 
               //Update number of votes for this ratinglist
-              if(scoreA == 1) colorA.ELO_rating[indexELO].numOfVotes++;
+              if(scoreA === 1) colorA.ELO_rating[indexELO].numOfVotes++;
               else colorB.ELO_rating[indexELO].numOfVotes++;
 
               //Update number of times being shown in test for this ratinglist
@@ -92,11 +92,11 @@ exports.register = function(socket) {
           //Updating ELO rating for the chosen diagnoses
           for(k = 0; k < poll.diagnoses.length; k++){
             indexELO = objectFindKey(colorA.ELO_rating, 'name', poll.diagnoses[k]);
-            if(indexELO != -1){
+            if(indexELO !== -1){
               newELORating = calculateELORating(colorA.ELO_rating[indexELO], colorB.ELO_rating[indexELO], scoreA, scoreB);
 
               //Update number of votes for this ratinglist
-              if(scoreA == 1) colorA.ELO_rating[indexELO].numOfVotes++;
+              if(scoreA === 1) colorA.ELO_rating[indexELO].numOfVotes++;
               else colorB.ELO_rating[indexELO].numOfVotes++;
 
               //Update number of times being shown in test for this ratinglist
@@ -113,7 +113,7 @@ exports.register = function(socket) {
 
 
           //Update number of votes for total ratinglist
-          if(scoreA == 1) colorA.ELO_rating[0].numOfVotes++;
+          if(scoreA === 1) colorA.ELO_rating[0].numOfVotes++;
           else colorB.ELO_rating[0].numOfVotes++;
 
           //Update number of times being shown in test for total ratinglist

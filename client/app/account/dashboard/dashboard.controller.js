@@ -10,9 +10,9 @@ angular.module('colorwatchApp')
     $scope.colors = null;
     $scope.numOfCompletedTests = 0;     //Number of completed tests in total made by users
     $scope.selectedDisability = undefined;
-    $scope.disabilities = [{name:"Total"}];
+    $scope.disabilities = '[{name:"Total"}]';
     $scope.index = 0;
-    $scope.titleOfDashboard;
+    $scope.titleOfDashboard = 0;
     /**
      * Real-time update when new votes are received.
      */
@@ -44,13 +44,25 @@ angular.module('colorwatchApp')
       var totalVotes = 0;
 
       for(var i = 0; i < colors.length; i++) {
-        totalVotes += colors[i].numOfVotes;
+        totalVotes += colors[i].ELO_rating[0].numOfVotes;
       }
       $scope.numOfCompletedTests = totalVotes / 10;   //Divide by 10 (number of questions in test)
       console.log($scope.numOfCompletedTests);
       console.log('from database',colors);
     });
 
+    $scope.exportPdf = function(){
+      $scope.$broadcast('export-pdf', {});
+    };
+    $scope.exportExcel = function(){
+      $scope.$broadcast('export-excel', {});
+    };
+    $scope.exportJSON = function(){
+      $scope.$broadcast('export-json', {});
+    };
+    $scope.exportCSV = function(){
+      $scope.$broadcast('export-csv', {});
+    };
 
 
   });
