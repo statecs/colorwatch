@@ -8,6 +8,5 @@ deployment:
       appname: colorwatch
   staging:
     branch: staging
-    commands:
-      - grunt build
-      - grunt buildcontrol:heroku
+    heroku:
+      appname: colorwatch-staging
