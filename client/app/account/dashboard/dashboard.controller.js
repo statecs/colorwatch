@@ -10,9 +10,9 @@ angular.module('colorwatchApp')
     $scope.colors = null;
     $scope.numOfCompletedTests = 0;     //Number of completed tests in total made by users
     $scope.selectedDisability = undefined;
-    $scope.disabilities = [{name:"Total"}];
+    $scope.disabilities = '[{name:"Total"}]';
     $scope.index = 0;
-    $scope.titleOfDashboard;
+    $scope.titleOfDashboard = 0;
     /**
      * Real-time update when new votes are received.
      */
