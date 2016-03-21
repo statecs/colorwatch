@@ -97,17 +97,15 @@ angular.module('colorwatchApp')
         file: file,
       }).progress(function (evt) {
         $scope.file.progress = parseInt(100.0 * evt.loaded / evt.total);
-        console.log('Upload progress to cloudinary: ' + $scope.file.progress + '% ' + evt.config.file.name);
-        $scope.file.status = "Uploading... " + $scope.file.progress + "%";
-      }).success(function (data, status, headers, config) {
-        console.log('file ' + config.file.name + 'uploaded. Response: ', data);
+        $scope.file.status = "Laddar upp... ";
+      }).success(function (data) {
         $scope.file.result = data;
         ColorCombs.create({
           textcolor: $scope.textcolor,
           backcolor: $scope.backcolor,
           image_secureurl: data.secure_url
         });
-      }).error(function (data, status, headers, config) {
+      }).error(function (data, status) {
         $scope.file.errorStatus = {'error': 'error'};
         console.log('error status: ' + status, data);
       })
