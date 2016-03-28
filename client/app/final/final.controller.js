@@ -5,6 +5,8 @@ angular.module('colorwatchApp')
 
     $scope.noDisabilities = false;
     $scope.noDiagnoses = false;
+    $scope.otherDiagnose = null;
+    $scope.otherDisability = null;
 
     $scope.disabilitiesModel = [
       {name: 'Lässvårigheter', state: false},
@@ -36,11 +38,16 @@ angular.module('colorwatchApp')
       {name: 'Tvångssyndrom, OCD', state: false}
     ];
 
+    $scope.prevPage = function(){
+      window.history.back();
+    };
+
     $scope.submit = function(){
       $rootScope.amt = 100;
       var choosedDisabilities = [];   //Disabilites choosed by the user
       var choosedDiagnoses = [];      //Diagnoses choosed by the user
 
+      console.log('Other dis', $scope.otherDisability, 'Other dia', $scope.otherDiagnose);
       //Filter out all choosen disabilities and diagnoses
       $.each($scope.disabilitiesModel, function(index, disability){
         if(disability.state){
@@ -48,15 +55,22 @@ angular.module('colorwatchApp')
         }
       });
 
+      //If other disability is added
+      if($scope.otherDisability){
+        choosedDisabilities.push($scope.otherDisability);
+      }
+
       $.each($scope.diagnosesModel, function(index, diagnose){
         if(diagnose.state){
           choosedDiagnoses.push(diagnose.name);
         }
       });
 
-   $scope.prevPage = function(){
-       window.history.back();
-    };
+      //If other diagnose is added
+      if($scope.otherDiagnose){
+        choosedDiagnoses.push($scope.otherDiagnose);
+      }
+
       //Update choices in database
       Poll.update({id: $sessionStorage.myTest}, {diagnoses: choosedDiagnoses, disabilities: choosedDisabilities},function(){
 

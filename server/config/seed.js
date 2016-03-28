@@ -19,6 +19,8 @@ ColorCombs.find({}).remove(function() {
       image_secureurl: 'https://res.cloudinary.com/duff92/image/upload/v1442181524/colors/c32020_000000.png',
       ELO_rating:[
         {name: 'Total', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Övriga diagnoser', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Övriga svårigheter', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'Afasi', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'ADHD, ADD, Damp', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'Autism, autismspektrumtillstånd, asperger', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
@@ -51,6 +53,8 @@ ColorCombs.find({}).remove(function() {
       image_secureurl: 'https://res.cloudinary.com/duff92/image/upload/v1439564281/colors/ffffff_000000.png',
       ELO_rating:[
         {name: 'Total', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Övriga diagnoser', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Övriga svårigheter', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'Afasi', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'ADHD, ADD, Damp', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'Autism, autismspektrumtillstånd, asperger', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
@@ -83,6 +87,8 @@ ColorCombs.find({}).remove(function() {
       image_secureurl: 'http://res.cloudinary.com/duff92/image/upload/v1457380097/colors/ceff00_000000.png',
       ELO_rating:[
         {name: 'Total', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Övriga diagnoser', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Övriga svårigheter', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'Afasi', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'ADHD, ADD, Damp', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'Autism, autismspektrumtillstånd, asperger', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
@@ -115,6 +121,8 @@ ColorCombs.find({}).remove(function() {
       image_secureurl: 'http://res.cloudinary.com/duff92/image/upload/v1457375265/colors/001eff_ffffff.png',
       ELO_rating:[
         {name: 'Total', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Övriga diagnoser', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Övriga svårigheter', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'Afasi', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'ADHD, ADD, Damp', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'Autism, autismspektrumtillstånd, asperger', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
@@ -147,6 +155,8 @@ ColorCombs.find({}).remove(function() {
       image_secureurl: 'http://res.cloudinary.com/duff92/image/upload/v1456923338/colors/e11414_dfabab.png',
       ELO_rating:[
         {name: 'Total', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Övriga diagnoser', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Övriga svårigheter', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'Afasi', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'ADHD, ADD, Damp', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'Autism, autismspektrumtillstånd, asperger', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
@@ -179,6 +189,8 @@ ColorCombs.find({}).remove(function() {
       image_secureurl: 'http://res.cloudinary.com/duff92/image/upload/v1441296680/colors/000000_ffffff.png',
       ELO_rating:[
         {name: 'Total', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Övriga diagnoser', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Övriga svårigheter', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'Afasi', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'ADHD, ADD, Damp', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'Autism, autismspektrumtillstånd, asperger', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
@@ -211,6 +223,8 @@ ColorCombs.find({}).remove(function() {
       image_secureurl: 'http://res.cloudinary.com/duff92/image/upload/v1441230860/colors/ffffff_2e7917.png',
       ELO_rating:[
         {name: 'Total', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Övriga diagnoser', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Övriga svårigheter', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'Afasi', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'ADHD, ADD, Damp', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'Autism, autismspektrumtillstånd, asperger', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
@@ -243,6 +257,8 @@ ColorCombs.find({}).remove(function() {
       image_secureurl: 'http://res.cloudinary.com/duff92/image/upload/v1457374971/colors/0029ff_f0ff00.png',
       ELO_rating:[
         {name: 'Total', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Övriga diagnoser', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+        {name: 'Övriga svårigheter', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'Afasi', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'ADHD, ADD, Damp', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
         {name: 'Autism, autismspektrumtillstånd, asperger', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},

@@ -46,6 +46,8 @@ exports.create = function(req, res) {
     image_secureurl: req.body.image_secureurl,
     ELO_rating:[
       {name: 'Total', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+      {name: 'Övriga diagnoser', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+      {name: 'Övriga svårigheter', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
       {name: 'Afasi', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
       {name: 'ADHD, ADD, Damp', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
       {name: 'Autism, autismspektrumtillstånd, asperger', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},

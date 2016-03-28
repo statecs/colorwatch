@@ -14,7 +14,7 @@
 			        <label ng-repeat="disability in disabilitiesModel" class="btn btn-default btn-final" ng-model="disability.state" ng-disabled="noDisabilities" btn-checkbox aria-selected>{{disability.name}}</label>
 		    </div>
 		    <div class="form-group input-group col-xs-12 col-sm-12 col-md-12">
-	        	<input type="text" class="form-control" ng-disabled="noDisabilities" placeholder="Fyll i om du har någon annan funktionsnedsättning">
+	        	<input type="text" class="form-control" ng-model="otherDisability" ng-disabled="noDisabilities" placeholder="Fyll i om du har någon annan svårighet">
 	        </div>
 	        <label class="form-group checkbox-inline">
 	            <input type="checkbox" name="optionDisability" ng-model="noDisabilities" id="optDisability" value="false">Nej, jag har ingen funktionsnedsättning
@@ -28,7 +28,7 @@
 			        <label ng-repeat="diagnose in diagnosesModel" class="btn btn-default btn-final" ng-model="diagnose.state" ng-disabled="noDiagnoses" btn-checkbox>{{diagnose.name}}</label>
 		    </div>
 		    <div class="form-group input-group col-xs-12 col-sm-12 col-md-12">
-	        	<input type="text" class="form-control" ng-disabled="noDiagnoses" placeholder="Fyll i om du har någon annan diagnos">
+	        	<input type="text" class="form-control" ng-model="otherDiagnose" ng-disabled="noDiagnoses" placeholder="Fyll i om du har någon annan diagnos">
 	        </div>
 	        <label class="form-group checkbox-inline">
 	            <input type="checkbox" name="optionDiagnose" ng-model="noDiagnoses" id="optDiagnose" value="false">Nej, jag har ingen diagnos
