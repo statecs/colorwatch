@@ -269,7 +269,7 @@ ColorCombs.find({}).remove(function() {
         {name: 'Tidshantering', rating:1400, numOfVotes: 0, numOfTimesInTest: 0}
       ]
     }, function() {
-      console.log('finished populating colorcombs2');
+      console.log('finished populating colorcombs');
     }
   );
 });

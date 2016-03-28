@@ -41,11 +41,18 @@ function blobToFile(theBlob, fileName){
 }
 
 angular.module('colorwatchApp')
-  .controller('NewcolorCtrl', function ($scope, ColorCombs, Upload, $location) {
+  .controller('NewcolorCtrl', function ($scope, ColorCombs, Upload, $location, $window) {
     // Define an empty poll model object
     $scope.textcolor = "#ffffff";
     $scope.backcolor = "#000000";
     $scope.file = {};
+    $scope.alertSettings = {
+      show: false,
+      msg: ''
+    };
+    $scope.closeAlert = function() {
+      $scope.alertSettings.show = false;
+    };
 
     $scope.$watchCollection('[textcolor,backcolor]', function() {
       canvas = document.getElementById('myCanvas');
@@ -74,16 +81,34 @@ angular.module('colorwatchApp')
       // var image = canvas.toDataURL("image/png");
       // console.log(document.write('<img src="'+image+'"/>'));
 
-      if (canvas.toBlob) {
-        canvas.toBlob(
-          function (blob) {
-            // Saves blobfile to a real file and upload to cloudinairy
-            var theFile = blobToFile(blob, $scope.textcolor + $scope.backcolor + '.png');
-            $scope.upload(theFile);
-          },
-          'image/png'
-        );
-      }
+      ColorCombs.getColorComb({id: 'list'}).$promise.then(function(colorCombs){
+        var colorCombInTest = false;
+        colorCombs.forEach(function(colorComb){
+          if(colorComb.textcolor === $scope.textcolor && colorComb.backcolor === $scope.backcolor){
+            colorCombInTest = true;
+          }
+        });
+        if(colorCombInTest){
+          //Set alert message info when colorcomb is already in test
+          $scope.alertSettings = {
+            show: true,
+            msg: 'Färgkombinationen finns redan i testet!'
+          };
+          $window.scrollTo(0,0); //Scroll to top to show the alert message
+        }
+        else{
+          if (canvas.toBlob) {
+            canvas.toBlob(
+              function (blob) {
+                // Saves blobfile to a real file and upload to cloudinairy
+                var theFile = blobToFile(blob, $scope.textcolor + $scope.backcolor + '.png');
+                $scope.upload(theFile);
+              },
+              'image/png'
+            );
+          }
+        }
+      });
     };
     /**
      * Upload a image file to cloudinary

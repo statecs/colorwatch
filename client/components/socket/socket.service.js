@@ -6,12 +6,13 @@ angular.module('colorwatchApp')
       return $resource('/api/polls/:id', {
       id: '@id'
     }, {
-        // Use this method for getting a list of polls
+        // Use this method for creating new polls
         newpolls: {
           method: 'GET',
           params: {
             id: 'newpolls'
           }},
+        // Use this method for getting one single poll
         getPoll: {
           method: 'GET',
           params: {
@@ -33,7 +34,6 @@ angular.module('colorwatchApp')
   })
   .factory('ColorCombs', function($resource) {
     return $resource('/api/colorcombs/:id', {id: '@id'}, {
-        // Use this method for getting a list of polls
         getColorComb: {
           method: 'GET',
           isArray: true

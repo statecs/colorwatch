@@ -15,7 +15,10 @@
         <button type="button" class="btn btn-default btn-large" ng-click="prevPage()">Tillbaka</button>
       </div>
     </div>
-
+    <div id="alertMessage" class="alert alert-danger" ng-show="alertSettings.show">
+      <a href="#" class="close" ng-click="closeAlert()" data-dismiss="alert" aria-label="close">&times;</a>
+      {{alertSettings.msg}}
+    </div>
     <!-- To show when got successful results-->
     <div ng-show="file.result" class="text-center">
       <div class="row">
