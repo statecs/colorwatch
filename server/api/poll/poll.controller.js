@@ -29,6 +29,7 @@ exports.show = function(req, res) {
  * @return {[type]}     [description]
  */
 exports.newpolls = function(req, res) {
+  console.log(req);
   ColorCombs
     .find()
     .sort({'ELO_rating.numOfTimesInTest': 1}) //Pick the color combs with least views
@@ -53,6 +54,12 @@ exports.newpolls = function(req, res) {
             userHasVoted: false
           });
        }
+      req.session.question = questions;
+
+      req.session.save(function(err) {
+        // session saved
+        console.log('session saved', err);
+      });
 
        var poll = new Poll({
          questions: questions
