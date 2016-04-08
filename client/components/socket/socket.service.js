@@ -8,7 +8,7 @@ angular.module('colorwatchApp')
     }, {
         // Use this method for creating new polls
         newpolls: {
-          method: 'GET',
+          method: 'PUT',
           params: {
             id: 'newpolls'
           }},
@@ -16,7 +16,7 @@ angular.module('colorwatchApp')
         getPoll: {
           method: 'GET',
           params: {
-            id: '@id'
+            id: ''
           },
           isArray: true
         },

@@ -1,18 +1,17 @@
 'use strict';
 
 angular.module('colorwatchApp')
-.controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, Poll, ColorCombs, $sessionStorage) {
+.controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, $http) {
 
     $scope.loading = true;
     $scope.poll = {};
-    Poll.getPoll({id: $sessionStorage.myTest},{}).$promise.then(function(polls){
-
-       $scope.polls = polls;
+    $http.get('/api/polls/').then(function(res){
+       $scope.polls = res.data;
        /**
         * total questions in the test
         * @type {Number}
         */
-      $scope.totalQuestions = polls.length;
+      $scope.totalQuestions = res.data.length;
       /**
        * current question in the test, used also for activate current tab in pagination
        * @type {Number}
@@ -27,7 +26,7 @@ angular.module('colorwatchApp')
        * Two images to choose between at current question
        * @type {Object}
        */
-      $scope.poll = polls[$routeParams.questionNr-1 || 0];
+      $scope.poll = res.data[$routeParams.questionNr-1 || 0];
     }).finally(function(){
       $scope.loading = false;
     });
@@ -40,7 +39,8 @@ angular.module('colorwatchApp')
 
       var nextQuestion = parseInt($routeParams.questionNr) + 1;
 
-      Poll.update({id: $sessionStorage.myTest}, {questionNr: $routeParams.questionNr, userVote: userChoice});
+      $http.put('/api/polls/', {questionNr: $routeParams.questionNr, userVote: userChoice});
+      //Poll.update({}, {questionNr: $routeParams.questionNr, userVote: userChoice});
 
       if(nextQuestion > $scope.totalQuestions){
         $scope.nextPage();
@@ -81,7 +81,7 @@ angular.module('colorwatchApp')
               return true;
            //Need to add proper alert here to the user!
            console.log('Not answeared', questionsNotAns);
-            
+
             }
 
          };

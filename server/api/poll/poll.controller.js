@@ -5,23 +5,6 @@ var Poll = require('./poll.model');
 var ColorCombs = require('../colorcombs/colorcombs.model');
 var mongoose = require('mongoose');
 
-// Get list of polls
-exports.index = function(req, res) {
-  Poll.find(function (err, polls) {
-    if(err) { return handleError(res, err); }
-    return res.json(200, polls);
-  });
-};
-
-// Get a single poll
-exports.show = function(req, res) {
-  Poll.findById(req.params.id, function (err, poll) {
-    if(err) { return handleError(res, err); }
-    if(!poll) { return res.send(404); }
-    return res.json(poll);
-  });
-};
-
 /**
  * JSON API for creating new polls, stored on clientside in sessionStorage/cookieStorage
  * @param  {[type]} req [description]
@@ -29,7 +12,6 @@ exports.show = function(req, res) {
  * @return {[type]}     [description]
  */
 exports.newpolls = function(req, res) {
-  console.log(req);
   ColorCombs
     .find()
     .sort({'ELO_rating.numOfTimesInTest': 1}) //Pick the color combs with least views
@@ -54,22 +36,14 @@ exports.newpolls = function(req, res) {
             userHasVoted: false
           });
        }
-      req.session.question = questions;
+      req.session.questions = questions;
 
       req.session.save(function(err) {
-        // session saved
-        console.log('session saved', err);
-      });
-
-       var poll = new Poll({
-         questions: questions
-       });
-       // Save poll to DB
-      poll.save(function(err, doc) {
-        if(err || !doc) {
-          throw 'Error';
-        } else {
-          res.json(doc);
+        if(err){
+          throw 'Error in list';
+        }
+        else{
+          res.json(200, {});
         }
       });
     });
@@ -89,60 +63,26 @@ exports.list = function(req, res) {
   });
 };
 
-// Creates a new poll in the DB.
-exports.create = function(req, res) {
-  /*Poll.create(req.body, function(err, poll) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, poll);
-  });*/
-  var reqBody = req.body,
-      // Filter out choices with empty text
-      choices = reqBody.choices.filter(function(v) { return v.text !== ''; }),
-      // Build up poll object to save
-      pollObj = {question: reqBody.question, choices: choices};
-
-  // Create poll model from built up poll object
-  var poll = new Poll(pollObj);
-
-  // Save poll to DB
-  poll.save(function(err, doc) {
-    if(err || !doc) {
-      throw 'Error';
-    } else {
-      res.json(doc);
-    }
-  });
-};
-
 // Updates an existing poll in the DB.
 exports.update = function(req, res) {
   var userVote = String(req.body.userVote);
   var questionNr = parseInt(req.body.questionNr);
-  var diagnoses = req.body.diagnoses;
-  var disabilities = req.body.disabilities;
 
-  if(req.body._id) { delete req.body._id; }
-  Poll.findById(req.params.id, function (err, polls) {
-    if (err) { return handleError(res, err); }
-    if(!polls) { return res.send(404); }
+  if(req.session.questions){
     if(userVote !== "undefined"){
-      polls.questions[questionNr-1].userVote = userVote;
+      req.session.questions[questionNr-1].userVote = userVote;
       if(userVote){
-        polls.questions[questionNr-1].userHasVoted = true;
+        req.session.questions[questionNr-1].userHasVoted = true;
       }
       else{
-        polls.questions[questionNr-1].userHasVoted = false;
+        req.session.questions[questionNr-1].userHasVoted = false;
       }
+      res.send(200, req.session.questions);
     }
-    else{
-      polls.diagnoses = diagnoses;
-      polls.disabilities = disabilities;
-    }
-    polls.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.json(200, polls);
-    });
-  });
+  }
+  else{
+    res.send(500, 'error');
+  }
 };
 
 // Deletes a poll from the DB.
@@ -159,15 +99,8 @@ exports.destroy = function(req, res) {
 
 // JSON API for getting a single poll
 exports.poll = function(req, res) {
-  // Poll ID comes in the URL
-  if(req.params.id){
-    var myTestId = mongoose.Types.ObjectId(req.params.id.replace(/['"]+/g, ''));
-    // Find the test by its ID, and return all the questions
-    Poll.findById(myTestId, function(err, poll) {
-      if(err) { return handleError(res, err); }
-      return res.json(poll.questions);
-
-    });
+  if(req.session.questions){
+    res.json(200, req.session.questions);
   }
   else{
     res.send(500, 'error');

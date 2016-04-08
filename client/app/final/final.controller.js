@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-  .controller('FinalCtrl', function ($scope, $sessionStorage, $location, Poll, socket, $rootScope) {
+  .controller('FinalCtrl', function ($scope, $cookies, $location, $http, Poll, socket, $rootScope) {
 
     $scope.noDisabilities = false;
     $scope.noDiagnoses = false;
@@ -47,7 +47,6 @@ angular.module('colorwatchApp')
       var choosedDisabilities = [];   //Disabilites choosed by the user
       var choosedDiagnoses = [];      //Diagnoses choosed by the user
 
-      console.log('Other dis', $scope.otherDisability, 'Other dia', $scope.otherDiagnose);
       //Filter out all choosen disabilities and diagnoses
       $.each($scope.disabilitiesModel, function(index, disability){
         if(disability.state){
@@ -70,14 +69,17 @@ angular.module('colorwatchApp')
       if($scope.otherDiagnose){
         choosedDiagnoses.push($scope.otherDiagnose);
       }
-
+      $http.post('/api/results', {diagnoses: choosedDiagnoses, disabilities: choosedDisabilities}).then(function(res){
+        socket.emit('send:vote', {data: res.data});
+        $location.path('/final-result');
+      });
       //Update choices in database
-      Poll.update({id: $sessionStorage.myTest}, {diagnoses: choosedDiagnoses, disabilities: choosedDisabilities},function(){
+/*      Poll.update({id: $sessionStorage.myTest}, {diagnoses: choosedDiagnoses, disabilities: choosedDisabilities},function(){
 
         //Send vote
         socket.emit('send:vote', {pollId: $sessionStorage.myTest});
         $location.path('/final-result');
-      });
+      });*/
 
     };
   });

@@ -14,6 +14,7 @@ module.exports = function(app) {
   app.use('/api/colorcombs', require('./api/colorcombs'));
   app.use('/api/polls', require('./api/poll'));
   app.use('/api/users', require('./api/user'));
+  app.use('/api/results', require('./api/result'));
 
   app.use('/auth', require('./auth'));
 
