@@ -71,12 +71,14 @@ exports.register = function (socket) {
 
         //Find which colors used in the current question
         for (var j = 0; j < colors.length; j++) {
-          console.log(colors[j]._id);
+          console.log(mongoose.Types.ObjectId(sendVote.data.questions[i].img1), mongoose.Types.ObjectId(sendVote.data.questions[i].img2), colors[j]._id);
           if (mongoose.Types.ObjectId(sendVote.data.questions[i].img1).equals(colors[j]._id)) {
             colorA = colors[j];
+            console.log('color A equals');
           }
           else if (mongoose.Types.ObjectId(sendVote.data.questions[i].img2).equals(colors[j]._id)) {
             colorB = colors[j];
+            console.log('color B equals');
           }
         }
         //Set score depending on user choice
