@@ -40,7 +40,6 @@ angular.module('colorwatchApp')
       var nextQuestion = parseInt($routeParams.questionNr) + 1;
 
       $http.put('/api/polls/', {questionNr: $routeParams.questionNr, userVote: userChoice});
-      //Poll.update({}, {questionNr: $routeParams.questionNr, userVote: userChoice});
 
       if(nextQuestion > $scope.totalQuestions){
         $scope.nextPage();

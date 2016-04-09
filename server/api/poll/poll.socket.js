@@ -4,8 +4,6 @@
 
 'use strict';
 
-//GET IMAGE FROM MONGODB VIA ID (line 40-44), THEN UPDATE RATINGS IN DATABASE (line 46-55)!!!
-
 var ColorCombs = require('../colorcombs/colorcombs.model');
 var mongoose = require('mongoose');
 

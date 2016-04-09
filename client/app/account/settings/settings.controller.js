@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-  .controller('SettingsCtrl', function ($scope, ColorCombs, User, Auth) {
+  .controller('SettingsCtrl', function ($scope, $http, User, Auth) {
     $scope.errors = {};
 
     $scope.changePassword = function(form) {
@@ -19,14 +19,13 @@ angular.module('colorwatchApp')
       }
 		};
 
-    ColorCombs.getColorComb({id: 'list'}).$promise.then(function(colors){
+    $http.get('/api/colorcombs/list').then(function(res){
+      var colors = res.data;
       $scope.colors = colors;
-      console.log($scope.colors);
     });
 
     $scope.removeColor = function(colorId, index) {
-      ColorCombs.deleteColor({},{id: colorId}, function(){
-        console.log("color removed!");
+      $http.delete('/api/colorcombs/' + colorId).then(function(){
         $scope.colors.splice(index,1);
       });
     };

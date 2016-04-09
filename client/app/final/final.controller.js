@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-  .controller('FinalCtrl', function ($scope, $cookies, $location, $http, Poll, socket, $rootScope) {
+  .controller('FinalCtrl', function ($scope, $cookies, $location, $http, socket, $rootScope) {
 
     $scope.noDisabilities = false;
     $scope.noDiagnoses = false;
@@ -73,13 +73,6 @@ angular.module('colorwatchApp')
         socket.emit('send:vote', {data: res.data});
         $location.path('/final-result');
       });
-      //Update choices in database
-/*      Poll.update({id: $sessionStorage.myTest}, {diagnoses: choosedDiagnoses, disabilities: choosedDisabilities},function(){
-
-        //Send vote
-        socket.emit('send:vote', {pollId: $sessionStorage.myTest});
-        $location.path('/final-result');
-      });*/
 
     };
   });
