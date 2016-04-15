@@ -21,7 +21,7 @@ angular.module('colorwatchApp')
 
     $scope.diagnosesModel = [
       {name: 'Afasi', state: false},
-      {name: 'ADHD, ADD, Damp', state: false},
+      {name: 'ADHD, ADD', state: false},
       {name: 'Asperger', state: false},
       {name: 'Autism', state: false},
       {name: 'Dyslexi', state: false},
