@@ -22,21 +22,18 @@ angular.module('colorwatchApp')
     $scope.diagnosesModel = [
       {name: 'Afasi', state: false},
       {name: 'ADHD, ADD, Damp', state: false},
-      {name: 'Autism, autismspektrumtillstånd, asperger', state: false},
+      {name: 'Asperger', state: false},
+      {name: 'Autism', state: false},
       {name: 'Dyslexi', state: false},
-      {name: 'Dyskalkyli', state: false},
-      {name: 'Utvecklingsstörning', state: false},
-      {name: 'Diabetessynskada', state: false},
-      {name: 'Grå starr, katarakt', state: false},
+      {name: 'Färgblind', state: false},
+      {name: 'Grå starr', state: false},
       {name: 'Grön starr, glaukom', state: false},
       {name: 'Gula fläcken', state: false},
       {name: 'Näthinneavlossning', state: false},
+      {name: 'Psykisk ohälsa', state: false},
       {name: 'RP, retinitis pigmentosa', state: false},
-      {name: 'Depression', state: false},
-      {name: 'Bipolär sjukdom', state: false},
-      {name: 'Schizofreni', state: false},
-      {name: 'Tvångssyndrom, OCD', state: false}
-    ];
+      {name: 'Utvecklingsstörning', state: false}
+];
 
     $scope.prevPage = function(){
       window.history.back();
