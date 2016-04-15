@@ -31,11 +31,8 @@ function updateELOandVotes(ratingObjectA, ratingObjectB, scoreA, scoreB) {
   var expectedScoreA = 1 / (1 + Math.pow(10, (ratingObjectB.rating - ratingObjectA.rating) / 400));
   var expectedScoreB = 1 / (1 + Math.pow(10, (ratingObjectA.rating - ratingObjectB.rating) / 400));
 
-  var newRatingA = ratingObjectA.rating + (kFactor * (scoreA - expectedScoreA));
-  var newRatingB = ratingObjectB.rating + (kFactor * (scoreB - expectedScoreB));
-
-  ratingObjectA.rating = newRatingA;
-  ratingObjectB.rating = newRatingB;
+  ratingObjectA.rating += (kFactor * (scoreA - expectedScoreA));
+  ratingObjectB.rating += (kFactor * (scoreB - expectedScoreB));
 
   //Update number of votes for this ratingobject
   if (scoreA === 1) ratingObjectA.numOfVotes++;
@@ -44,6 +41,24 @@ function updateELOandVotes(ratingObjectA, ratingObjectB, scoreA, scoreB) {
   //Update number of times being shown in test for this raincoat
   ratingObjectA.numOfTimesInTest++;
   ratingObjectB.numOfTimesInTest++;
+}
+function updateTotalELOandVotes(colorA, colorB, scoreA, scoreB) {
+  //Calculate ELO rating
+  var kFactor = 32;
+
+  var expectedScoreA = 1 / (1 + Math.pow(10, (colorB.totalRating - colorA.totalRating) / 400));
+  var expectedScoreB = 1 / (1 + Math.pow(10, (colorA.totalRating - colorB.totalRating) / 400));
+
+  colorA.totalRating += (kFactor * (scoreA - expectedScoreA));
+  colorB.totalRating += (kFactor * (scoreB - expectedScoreB));
+
+  //Update number of votes for this ratingobject
+  if (scoreA === 1) colorA.totalNumOfVotes++;
+  else colorB.totalNumOfVotes++;
+
+  //Update number of times being shown in test for this raincoat
+  colorA.totalNumOfTimesInTest++;
+  colorB.totalNumOfTimesInTest++;
 }
 /**
  * Register the socket for polls
@@ -54,9 +69,8 @@ exports.register = function (socket) {
   console.log('register socket');
 
   socket.on('send:vote', function (sendVote) {
-    var totalRatingIndex = 0,
-      otherDiagnoseIndex = 1,
-      otherDisabilitiyIndex = 2;
+    var otherDiagnoseIndex = 0,
+      otherDisabilitiyIndex = 1;
 
     var colorA, colorB, scoreA, scoreB, indexELO;
 
@@ -106,6 +120,7 @@ exports.register = function (socket) {
         for (k = 0; k < sendVote.data.diagnoses.length; k++) {
           indexELO = objectFindKey(colorA.ELO_rating, 'name', sendVote.data.diagnoses[k]);
           if (indexELO !== -1) {
+            console.log('updateELO');
             updateELOandVotes(colorA.ELO_rating[indexELO], colorB.ELO_rating[indexELO], scoreA, scoreB);
           }
           else if (indexELO === -1 && sendVote.data.diagnoses[k].length !== 0) {
@@ -116,7 +131,7 @@ exports.register = function (socket) {
           }
         }
         //Update total rating, index 0 indicates total
-        updateELOandVotes(colorA.ELO_rating[totalRatingIndex], colorB.ELO_rating[totalRatingIndex], scoreA, scoreB);
+        updateTotalELOandVotes(colorA, colorB, scoreA, scoreB);
       }
       // Save ratings to DB
       colors.forEach(function (color, index, array) {

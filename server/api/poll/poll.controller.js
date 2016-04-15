@@ -14,10 +14,9 @@ var mongoose = require('mongoose');
 exports.newpolls = function(req, res) {
   ColorCombs
     .find()
-    .sort({'ELO_rating.numOfTimesInTest': 1}) //Pick the color combs with least views
+    .sort({'totalNumOfTimesInTest': 1}) //Pick the color combs with least views
     .limit(5)     //The number of colors used in the test
     .exec(function(err, colors) {
-       // `posts` will be of length 20
        if(err) { return handleError(res, err);}
        var questions = [];
 

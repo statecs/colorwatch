@@ -7,6 +7,9 @@ var ColorcombsSchema = new Schema({
   textcolor: String,
   backcolor: String,
   image_secureurl: String,
+  totalRating: Number,
+  totalNumOfVotes: Number,
+  totalNumOfTimesInTest: Number,
   ELO_rating: [{name: String, rating: Number, numOfVotes: Number, numOfTimesInTest: Number}]
 });
 

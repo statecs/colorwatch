@@ -44,8 +44,10 @@ exports.create = function(req, res) {
     textcolor: req.body.textcolor,
     backcolor: req.body.backcolor,
     image_secureurl: req.body.image_secureurl,
+    totalRating: 1400,
+    totalNumOfVotes: 0,
+    totalNumOfTimesInTest: 0,
     ELO_rating:[
-      {name: 'Total', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
       {name: 'Övriga diagnoser', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
       {name: 'Övriga svårigheter', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
       {name: 'Afasi', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
