@@ -117,8 +117,19 @@ button, .button, input[type="button"], input[type="submit"]{
     display: inline-block;
     width: 100%;
 }
+.row{
+  margin-left: 0;
+  margin-right: 0;
+}
+.row-margin{
+  margin-bottom:50px;
+}
+.newColor{
+  margin: 20px 30px;
+}
 .btn{
   padding: 1em 1.3em;
+  border: rgba(226, 126, 47, 1) 1px solid;
 }
 .btn:hover {
     background-color: #000;
