@@ -46,21 +46,19 @@
 
 
   <!-- Input for creating new color combination -->
-  <div class="row" ng-hide="file.result || file.progress || file.errorStatus" >
-    <div class="col-md-6 col-md-offset-2 col-xs-10 col-xs-offset-1">
+  <form role="form" ng-submit="createColor()" ng-hide="file.result || file.progress || file.errorStatus" >
+    <div class="newColor col-md-6 col-md-offset-2 col-xs-10 col-xs-offset-1">
       <canvas class="img-responsive" id="myCanvas" width="752px" height="751px"></canvas>
     </div>
-  </div>
 
-  <form role="form" ng-submit="createColor()" ng-hide="file.result || file.progress || file.errorStatus" >
     <div class="form-group col-md-offset-2 col-xs-offset-2">
       <label for="textColor">Textfärg</label><br>
-      <input type="text" ng-model="textcolor" size="7"/>
+      <input type="text" ng-model="textcolor" size="10"/>
       <input type="color" spectrum-colorpicker options="{preferredFormat: 'hex', showInput: true}" ng-model="textcolor" name="textColor" id="textColor"/>
     </div>
     <div class="form-group col-md-offset-2 col-xs-offset-2">
       <label for="backgroundColor">Bakgrundsfärg</label><br>
-      <input type="text" ng-model="backcolor" size="7"/>
+      <input type="text" ng-model="backcolor" size="10"/>
       <input type="color" spectrum-colorpicker options="{preferredFormat: 'hex', showInput: true}" ng-model="backcolor" name="backgroundColor" id="backgroundColor"/>
     </div>
     <button type="submit" class="btn btn-start top-margin">Skapa färgkombination</button>
