@@ -13,7 +13,12 @@ angular.module('colorwatchApp')
       })
       .when('/dashboard', {
         templateUrl: 'app/account/dashboard/dashboard.html',
-        controller: 'DashboardCtrl', 
+        controller: 'DashboardCtrl',
+        authenticate: true
+      })
+      .when('/viewdetails', {
+        templateUrl: 'app/account/viewdetails/viewdetails.html',
+        controller: 'ViewDetailsCtrl',
         authenticate: true
       })
       .when('/settings', {

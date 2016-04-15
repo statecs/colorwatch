@@ -1,0 +1,71 @@
+<div ng-include src="'components/navbar/main_topbar.html'"></div>
+<div class="container jumbotron-large">
+<div class="row">
+  <div class="col-lg-3 col-md-3 col-md-offset-3 col-xs-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <i class="fa fa-comments fa-3x"></i>
+          </div>
+          <!--Large box for presenting total votes in test-->
+          <div class="col-xs-9 text-right">
+            <div class="huge">{{numOfCompletedTests}}</div>
+            <div>Antal genomförda tester</div>
+          </div>
+        </div>
+      </div>
+      <!--Not used yet, could be used for more details of total votes-->
+      <a href="#">
+        <div class="panel-footer">
+          <span class="pull-left">Detaljvy</span>
+          <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+          <div class="clearfix"></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+  <div class="row text-right">
+    Ladda ned som:
+    </div>
+  <div class="row text-right">
+    <span class="pointer">Excel <i ng-click="exportExcel()" class="fa fa-file-excel-o fa-2x" style="color:green;"></i></span>
+    <span class="pointer">Pdf <i ng-click="exportPdf()" class="fa fa-file-pdf-o fa-2x" style="color:red"></i></span>
+    <span class="pointer" ng-click="exportJSON()">JSON</span>
+    <span class="pointer" ng-click="exportCSV()">CSV</span>
+  </div>
+
+  <div class="row">
+    <label for="searchDisability">Val av rankinglista</label>
+    <input id="searchDisability" type="search" class="form-control col-sm-2" placeholder="Sök efter funktionsnedsättning eller svårighet..." ng-model="selectedDisability" typeahead="disability as disability.name for disability in disabilities | filter:$viewValue | limitTo:8">
+  </div>
+<div class="row row-margin">
+  <h1>{{titleOfDashboard}}</h1>
+    <!--Table presenting the overall rating of the color combinations-->
+  <div class="table-responsive">
+    <table class="table table-striped export-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Textfärg</th>
+          <th>Backgrundsfärg</th>
+          <th>Ranking</th>
+          <th>Antal röster</th>
+          <th>Antal visningar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="color in colors | sortEloRating:index">
+          <td>{{$index+1}}</td>
+          <td><span ng-style="{'background-color': '{{color.textcolor}}'}" class="thumbnail"></span>{{color.textcolor}}</td>
+          <td><span ng-style="{'background-color': '{{color.backcolor}}'}" class="thumbnail"></span>{{color.backcolor}}</td>
+          <td>{{color.ELO_rating[index].rating | number: 0}}</td>
+          <td>{{color.ELO_rating[index].numOfVotes | number: 0}}</td>
+          <td>{{color.ELO_rating[index].numOfTimesInTest | number: 0}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
