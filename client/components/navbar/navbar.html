@@ -1,20 +1,9 @@
 
-<nav class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
+<nav ng-show="isLoggedIn()"  class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
 
   <div class="container ">
-    <div ng-hide="isLoggedIn()" class="row">
-  <progressbar class="progress-striped active" animate="true" max="100" value="progressValue" type="success"><span count-to="{{countTo}}" duration="1" count-from="{{countFrom}}"></progressbar>
-      <div class="btn-group btn-group-justified">
-      <div ng-repeat="item in menu" ui-sref-active-eq="active" ui-sref-active="active" ng-class="{active: isActive(item.link)}" class="navbar-progress">{{item.title}}<span ng-if="item.title == 'Test'"> {{currentQuestion}} / {{totalQuestions}}</span></div>
 
-<!--<div ng-class="{active: isActive('item.link')}" ng-controller="TestCtrl"><pagination  next-text="-" previous-text="-" items-per-page="itemsPerPage" total-items="totalQuestions" ng-model="currentQuestion" ng-change="questionChanged()"></pagination></div>-->
-
-      </div>
-
-    </div>
-
-
-    <div ng-show="isLoggedIn()" class="row">
+    <div class="row">
       <div class="navbar-header">
       </div>
       <div id="navbar-main">

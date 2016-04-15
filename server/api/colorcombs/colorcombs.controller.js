@@ -7,7 +7,7 @@ var Colorcombs = require('./colorcombs.model');
 exports.index = function(req, res) {
   Colorcombs.find(function (err, colorcombss) {
     if(err) { return handleError(res, err); }
-    return res.json(200, colorcombss);
+    return res.status(200).json(colorcombss);
   });
 };
 
@@ -22,7 +22,7 @@ exports.list = function(req, res) {
       throw 'Error in list';
     }
     else{
-      res.json(colors);
+      res.status(200).json(colors);
     }
   });
 };
@@ -33,7 +33,7 @@ exports.show = function(req, res) {
     if(err) { return handleError(res, err); }
     if(!colorcombs) { return res.send(404); }
     res.contentType(colorcombs.image_contentType);
-    return res.json(201, colorcombs.image_data);
+    return res.status(201).json(colorcombs.image_data);
   });
 };
 
@@ -46,6 +46,8 @@ exports.create = function(req, res) {
     image_secureurl: req.body.image_secureurl,
     ELO_rating:[
       {name: 'Total', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+      {name: 'Övriga diagnoser', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
+      {name: 'Övriga svårigheter', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
       {name: 'Afasi', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
       {name: 'ADHD, ADD, Damp', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
       {name: 'Autism, autismspektrumtillstånd, asperger', rating:1400, numOfVotes: 0, numOfTimesInTest: 0},
@@ -89,7 +91,7 @@ exports.update = function(req, res) {
     var updated = _.merge(colorcombs, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
-      return res.json(200, colorcombs);
+      return res.status(200).json(colorcombs);
     });
   });
 };
