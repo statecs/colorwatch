@@ -41,7 +41,7 @@ function blobToFile(theBlob, fileName){
 }
 
 angular.module('colorwatchApp')
-  .controller('NewcolorCtrl', function ($scope, ColorCombs, Upload, $location, $window) {
+  .controller('NewcolorCtrl', function ($scope, $http, Upload, $location, $window) {
     // Define an empty poll model object
     $scope.textcolor = "#ffffff";
     $scope.backcolor = "#000000";
@@ -80,8 +80,8 @@ angular.module('colorwatchApp')
     $scope.createColor = function(){
       // var image = canvas.toDataURL("image/png");
       // console.log(document.write('<img src="'+image+'"/>'));
-
-      ColorCombs.getColorComb({id: 'list'}).$promise.then(function(colorCombs){
+      $http.get('/api/colorcombs/list').then(function(res){
+        var colorCombs = res.data;
         var colorCombInTest = false;
         colorCombs.forEach(function(colorComb){
           if(colorComb.textcolor === $scope.textcolor && colorComb.backcolor === $scope.backcolor){
@@ -125,7 +125,7 @@ angular.module('colorwatchApp')
         $scope.file.status = "Laddar upp... ";
       }).success(function (data) {
         $scope.file.result = data;
-        ColorCombs.create({
+        $http.post('/api/colorcombs/create', {
           textcolor: $scope.textcolor,
           backcolor: $scope.backcolor,
           image_secureurl: data.secure_url

@@ -27,11 +27,11 @@
       </li>
     </ul>
   </div>
-  <div class="row">
-    <div class="col-sm-12">
+  <div class="row row-margin">
+    
       <h2>Byt lösenord</h2>
-    </div>
-    <div class="col-sm-12">
+  
+   
       <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
 
         <div class="form-group">
@@ -52,7 +52,7 @@
                  required/>
           <p class="help-block"
              ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
-            Lösenorden måste vara minst 3 tecken långt.
+            Lösenordet måste vara minst 3 tecken långt.
           </p>
         </div>
 
@@ -61,6 +61,6 @@
         <button class="btn btn-lg btn-primary" type="submit">Spara ändringar</button>
       </form>
     </div>
-  </div>
+
 
 </div>

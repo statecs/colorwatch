@@ -6,7 +6,7 @@
 
 
 angular.module('colorwatchApp')
-  .controller('DashboardCtrl', function ($scope, socket, ColorCombs) {
+  .controller('DashboardCtrl', function ($scope, socket, $http) {
     $scope.colors = null;
     $scope.numOfCompletedTests = 0;     //Number of completed tests in total made by users
     $scope.selectedDisability = undefined;
@@ -17,7 +17,6 @@ angular.module('colorwatchApp')
      * Real-time update when new votes are received.
      */
     socket.on('vote', function(data){
-      console.log('new vote', data);
       $scope.colors = data;
     });
 
@@ -37,18 +36,20 @@ angular.module('colorwatchApp')
     /**
      * Get all available color combinations from database.
      */
-    ColorCombs.getColorComb({id: 'list'}).$promise.then(function(colors){
-      $scope.colors = colors;
-      $scope.disabilities = colors[0].ELO_rating;
+    $http.get('/api/colorcombs/list').then(function(res){
+      var colorCombs = res.data;
+
+      $scope.colors = colorCombs;
+      $scope.disabilities = colorCombs[0].ELO_rating;
       $scope.titleOfDashboard = "Total";
       var totalVotes = 0;
 
-      for(var i = 0; i < colors.length; i++) {
-        totalVotes += colors[i].ELO_rating[0].numOfVotes;
+      for(var i = 0; i < colorCombs.length; i++) {
+        totalVotes += colorCombs[i].ELO_rating[0].numOfVotes;
       }
       $scope.numOfCompletedTests = totalVotes / 10;   //Divide by 10 (number of questions in test)
-      console.log($scope.numOfCompletedTests);
-      console.log('from database',colors);
+      //console.log($scope.numOfCompletedTests);
+      //console.log('from database',colors);
     });
 
     $scope.exportPdf = function(){
@@ -63,6 +64,4 @@ angular.module('colorwatchApp')
     $scope.exportCSV = function(){
       $scope.$broadcast('export-csv', {});
     };
-
-
   });
