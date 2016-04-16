@@ -409,3 +409,6 @@ span.pointer{
   padding: .5em .5em;
 }
 
+span#filterText{
+  font-size: 1.5em;
+}

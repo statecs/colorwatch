@@ -12,7 +12,6 @@ angular.module('colorwatchApp')
      * Real-time update when new votes are received.
      */
     socket.on('vote', function(data){
-      console.log(data);
       $scope.colorCombs = data;
       });
 
@@ -21,11 +20,6 @@ angular.module('colorwatchApp')
      */
     $http.get('/api/colorcombs/list').then(function(res){
       $scope.colorCombs = res.data;
-      var colorCombs = res.data;
-        $scope.colors = colorCombs;
-      $scope.disabilities = colorCombs[0].ELO_rating;
-      $scope.disabilitiesModel = $scope.disabilities;
-
     });
 
   });

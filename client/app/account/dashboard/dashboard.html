@@ -1,49 +1,24 @@
 <div ng-include src="'components/navbar/main_topbar.html'"></div>
 <div class="container jumbotron-large">
-  <h1>Dashboard</h1>
-  <div class="row row-margin">
-
-    <div class="row-padding"><h2>Total ranking</h2></div>
-      <img src="assets/images/sunburst.png">
-      <!--<dashboard-sunburst data="colorCombs"></dashboard-sunburst>-->
+  <h1>Översikt</h1>
+  <div class="row">
+     <!-- <img src="assets/images/sunburst.png">-->
+    <div class="col-md-5">
+      <h2 class="text-center">Total ranking</h2>
+      <dashboard-sunburst data="colorCombs" type="totalRating"></dashboard-sunburst>
+    </div>
+    <div class="col-md-6">
+      <h2 class="text-center">Totalt antal röster</h2>
+      <dashboard-sunburst data="colorCombs" type="totalNumOfVotes"></dashboard-sunburst>
+    </div>
   </div>
-<div class="row-padding"><h2>Antal personer med funktionsnedsättningar som svarat i testet</h2></div>
-<img src="assets/images/graph.png">
- 
-
-
-  <div  id="disabilities">
-              <label ng-repeat="disability in disabilitiesModel" class="btn btn-default btn-final" ng-model="disability.state" ng-disabled="noDisabilities" btn-checkbox aria-selected>({{disability.rating | number:0}}) {{disability.name}}</label>
-        </div>
-
-<div class="row-padding"><h2>Rankinglista</h2></div>
-
-<div class="table-responsive">
-    <table class="table table-striped export-table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Färg</th>
-          <th>Ranking</th>
-          <th>Antal röster</th>
-          <th>Antal visningar</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="color in colors">
-          <td>{{$index+1}}</td>
-          <td><img height="200px" src="{{color.image_secureurl}}"><br /><span>Textfärg: {{color.textcolor}}</span>
-        <span>Backgrundsfärg: {{color.backcolor}}</span></td>
-          <td>{{color.totalRating | number: 0}}</td>
-          <td>{{color.totalNumOfVotes | number: 0}}</td>
-          <td>{{color.totalNumOfTimesInTest | number: 0}}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="row-padding">
+    <h2>Vilka har gjort testet?</h2>
+    <img src="assets/images/graph.png">
   </div>
 
 </div>
 
 
- 
+
 

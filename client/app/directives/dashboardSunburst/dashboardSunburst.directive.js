@@ -6,30 +6,38 @@ angular.module('colorwatchApp')
             templateUrl: 'app/directives/dashboardSunburst/dashboardSunburst.html',
             restrict: 'EA',
             scope: {
-                data: '='
+                data: '=',
+                type: '@'
             },
-            link: function(scope) {
-
+            link: function(scope, element) {
+                if(!scope.type){
+                  scope.type = 'totalRating';
+                }
                 d3Service.d3().then(function(d3) {
 
                   // Dimensions of sunburst.
-                  var width = 750;
-                  var height = 600;
+                  var width = 400;
+                  var height = 300;
                   var radius = Math.min(width, height) / 2;
-                  // Breadcrumb dimensions: width, height, spacing, width of tip/tail.
-                  var b = {
-                    w: 75, h: 30, s: 3, t: 10
-                  };
+                  var explanationText = null;
+
+                  if(scope.type === 'totalNumOfVotes'){
+                    explanationText = 'röster';
+                  }
+                  else{
+                    explanationText = 'poäng';
+                  }
 
                   // Total size of all segments; we set this later, after loading the data.
                   var totalSize = 0;
 
-                  var vis = d3.select("#chart").append("svg:svg")
+                  var vis = d3.select(element[0]).append("svg:svg")
                     .attr("width", width)
                     .attr("height", height)
                     .append("svg:g")
-                    .attr("id", "container")
+                    .attr("id", "container" + scope.type)
                     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
 
                     // on window resize, re-render d3 canvas
                     window.onresize = function() {
@@ -60,7 +68,7 @@ angular.module('colorwatchApp')
                      // console.log('data', data);
                       for (var i = 0; i < data.length; i++) {
                         var sequence = data[i].backcolor + '-' + data[i].textcolor;
-                        var size = +data[i].totalRating;
+                        var size = +data[i][scope.type];
                         var parts = sequence.split("-");
                         var currentNode = root;
                         for (var j = 0; j < parts.length; j++) {
@@ -94,6 +102,14 @@ angular.module('colorwatchApp')
                     }
                     scope.render = function(data) {
                         vis.selectAll('*').remove();  //Clear svg on reload
+
+                      var explanation = d3.select(element[0]).append('div')
+                        .attr('class', 'explanation')
+                        .style('visibility', 'hidden');
+
+                      explanation.append('span')
+                        .attr('class', 'valueInfo');
+
                      //   console.log(data);
                       var partition = d3.layout.partition()
                         .size([2 * Math.PI, radius * radius])
@@ -129,27 +145,25 @@ angular.module('colorwatchApp')
                         .on("mouseover", mouseover);
 
                       // Add the mouseleave handler to the bounding circle.
-                      d3.select("#container").on("mouseleave", mouseleave);
+                      d3.select("#container" + scope.type).on("mouseleave", mouseleave);
 
                       // Get total size of the tree = value of root node from partition.
                       totalSize = path.node().__data__.value;
 
                       // Fade all but the current sequence, and show it in the breadcrumb trail.
                       function mouseover(d) {
-                        var rating = d.value.toPrecision(4);
-                        var ratingString = rating + " points";
+                        var rating = parseInt(d.value);
+                        var ratingString = rating + ' ' + explanationText;
 
-                        d3.select("#valueInfo")
-                          .text(ratingString);
+                        d3.select(element[0]).select('.explanation').style("visibility", "");
 
-                        d3.select("#explanation")
-                          .style("visibility", "");
+                        d3.select(element[0]).select('.valueInfo').text(ratingString);
 
                         var sequenceArray = getAncestors(d);
                         //updateBreadcrumbs(sequenceArray, percentageString);
 
                         // Fade all the segments.
-                        d3.selectAll("path")
+                        vis.selectAll("path")
                           .style("opacity", 0.3);
 
                         // Then highlight only those that are an ancestor of the current segment.
@@ -162,15 +176,11 @@ angular.module('colorwatchApp')
                       // Restore everything to full opacity when moving off the visualization.
                       function mouseleave(d) {
 
-                        // Hide the breadcrumb trail
-                        d3.select("#trail")
-                          .style("visibility", "hidden");
-
                         // Deactivate all segments during transition.
-                        d3.selectAll("path").on("mouseover", null);
+                        vis.selectAll("path").on("mouseover", null);
 
                         // Transition each segment to full opacity and then reactivate it.
-                        d3.selectAll("path")
+                        vis.selectAll("path")
                           .transition()
                           .duration(1000)
                           .style("opacity", 1)
@@ -178,11 +188,11 @@ angular.module('colorwatchApp')
                             d3.select(this).on("mouseover", mouseover);
                           });
 
-                        d3.select("#explanation")
+                        d3.select(element[0]).select('.explanation')
                           .style("visibility", "hidden");
                       }
                       // Given a node in a partition layout, return an array of all of its ancestor
-// nodes, highest first, but excluding the root.
+                      // nodes, highest first, but excluding the root.
                       function getAncestors(node) {
                         var path = [];
                         var current = node;
