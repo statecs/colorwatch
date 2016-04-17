@@ -10,7 +10,7 @@
 'use strict';
 
 var _ = require('lodash');
-var Result = require('./Result.model');
+var Result = require('./result.model');
 
 // Get list of Results
 exports.index = function(req, res) {
