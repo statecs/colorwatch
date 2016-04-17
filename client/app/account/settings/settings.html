@@ -1,0 +1,66 @@
+<div ng-include src="'components/navbar/main_topbar.html'"></div>
+<div class="container jumbotron-large">
+  <div class="row">
+    <div class="col-xs-5">
+      <a href="/newcolor" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Ny färg</a>
+    </div>
+    <div class="col-xs-7">
+      <input type="text" class="form-control" ng-model="query" placeholder="Sök efter en färgkod...">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12"><hr></div>
+  </div>
+  <div class="row" ng-switch on="colors.length">
+    <ul ng-switch-when="0">
+      <li>Inga färger i databasen. Vill du <a href="#/new">skapa en</a>?</li>
+    </ul>
+    <ul class="no-bullet" ng-switch-default>
+      <li ng-repeat="color in colors | filter: query">
+        <span class="pull-right button-group">
+                <button type="button" class="btn btn-danger" ng-click="removeColor(color._id, $index)" ng-confirm-click="Are you Sure?">Ta bort <span class="glyphicon glyphicon-trash"></span></button>
+        </span>
+        <img width="200px" ng-src="{{color.image_secureurl}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"/>
+        <span>Textfärg: {{color.textcolor}}</span>
+        <span>Backgrundsfärg: {{color.backcolor}}</span>
+        <hr/>
+      </li>
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>Byt lösenord</h2>
+    </div>
+    <div class="col-sm-12">
+      <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
+
+        <div class="form-group">
+          <label>Nuvarande lösenord</label>
+
+          <input type="password" name="password" class="form-control" ng-model="user.oldPassword"
+                 mongoose-error/>
+          <p class="help-block" ng-show="form.password.$error.mongoose">
+              {{ errors.other }}
+          </p>
+        </div>
+
+        <div class="form-group">
+          <label>Nytt lösenord</label>
+
+          <input type="password" name="newPassword" class="form-control" ng-model="user.newPassword"
+                 ng-minlength="3"
+                 required/>
+          <p class="help-block"
+             ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
+            Lösenorden måste vara minst 3 tecken långt.
+          </p>
+        </div>
+
+        <p class="help-block"> {{ message }} </p>
+
+        <button class="btn btn-lg btn-primary" type="submit">Spara ändringar</button>
+      </form>
+    </div>
+  </div>
+
+</div>

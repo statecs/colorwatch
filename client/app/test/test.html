@@ -1,0 +1,22 @@
+<div ng-include src="'components/navbar/test_topbar.html'"></div>
+<div class="container top">
+  <div class="page-header">
+    <h1 class="text-center">Välj den text som du kan läsa bäst!</h1>
+  </div>
+  <circle-spinner ng-show="loading"></circle-spinner>
+  <div ng-hide="loading">
+    <div class="row image-ctn fadeIn">
+        <div class="col-md-4 col-xs-6 col-md-offset-2">
+          <a><img ng-class="{true: 'op-selected'}[poll.userVote == 'choice_alt1']"  ng-src="{{poll.img1_url}}" alt="Vit text på svart bakgrund" ng-click="vote('choice_alt1')" ng-model="poll.userVote" class="img-responsive" /></a>
+          <button ng-if="poll.userVote == 'choice_alt1'" class="btn"  alt="Vald" ng-model="poll.userVote" ng-click="vote('choice_alt1')" btn-radio="'choice_alt1'">Vald</button>
+          <button ng-if="poll.userVote != 'choice_alt1'" class="btn" ng-model="poll.userVote" alt="Välj" ng-click="vote('choice_alt1')" btn-radio="'choice_alt1'">Välj</button>
+        </div>
+        <div  class="col-md-4 col-xs-6">
+          <a><img ng-class="{true: 'op-selected'}[poll.userVote == 'choice_alt2']" ng-src="{{poll.img2_url}}" alt="Röd text på svart bakgrund" ng-model="poll.userVote" ng-click="vote('choice_alt2')" class="img-responsive"/></a>
+           <button ng-if="poll.userVote == 'choice_alt2'" class="btn" ng-model="poll.userVote" btn-radio="'choice_alt2'">Vald</button>
+           <button ng-if="poll.userVote != 'choice_alt2'" class="btn" ng-model="poll.userVote" ng-click="vote('choice_alt2')" btn-radio="'choice_alt2'">Välj</button>
+        </div>
+    </div>
+    <hr/>
+  </div>
+</div>
