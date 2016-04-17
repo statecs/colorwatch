@@ -57,6 +57,7 @@ exports.newpolls = function(req, res) {
 //
 exports.list = function(req, res) {
   //console.log(req.session.questions);
+
   if(req.session.questions){
     res.status(200).json(req.session.questions);
   }
