@@ -3,7 +3,7 @@
 angular.module('colorwatchApp')
     .directive('dashboardSunburst', ['d3Service', function(d3Service) {
         return {
-            templateUrl: '/app/directives/dashboardSunburst/dashboardSunburst.html',
+            templateUrl: 'app/directives/dashboardSunburst/dashboardSunburst.html',
             restrict: 'EA',
             scope: {
                 data: '=',
