@@ -11,13 +11,13 @@ module.exports = {
   // Server port
   port:     process.env.OPENSHIFT_NODEJS_PORT ||
             process.env.PORT ||
-            8080,
+            9001,
 
   // MongoDB connection options
   mongo: {
     uri:    process.env.MONGOLAB_URI ||
             process.env.MONGOHQ_URL ||
             process.env.OPENSHIFT_MONGODB_DB_URL+process.env.OPENSHIFT_APP_NAME ||
-            'mongodb://localhost/colorwatch'
+            'mongodb://colorwatch:colorwatch@ds023088.mlab.com:23088/colorwatch-production'
   }
 };
