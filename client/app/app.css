@@ -124,6 +124,9 @@ button, .button, input[type="button"], input[type="submit"]{
 .row-margin{
   margin-bottom:50px;
 }
+.row-padding{
+  padding:30px;
+}
 .newColor{
   margin: 20px 30px;
 }
@@ -406,3 +409,6 @@ span.pointer{
   padding: .5em .5em;
 }
 
+span#filterText{
+  font-size: 1.5em;
+}

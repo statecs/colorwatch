@@ -1,0 +1,74 @@
+<div ng-include src="'components/navbar/main_topbar.html'"></div>
+<div class="container jumbotron-large">
+<h1>Detaljer</h1>
+  <div class="row text-right">
+    Ladda ned som:
+    </div>
+  <div class="row text-right">
+    <span class="pointer">Excel <i ng-click="exportExcel()" class="fa fa-file-excel-o fa-2x" style="color:green;"></i></span>
+    <span class="pointer">Pdf <i ng-click="exportPdf()" class="fa fa-file-pdf-o fa-2x" style="color:red"></i></span>
+    <span class="pointer" ng-click="exportJSON()">JSON</span>
+    <span class="pointer" ng-click="exportCSV()">CSV</span>
+  </div>
+<h2>Välj funktionsnedsättningar och/eller diagnoser</h2>
+  <div  id="disabilities">
+    <label ng-repeat="opt in optionsModel" class="btn btn-default btn-final" ng-model="opt.state" ng-click="filter(opt)" btn-checkbox aria-selected>{{opt.name}}</label>
+  </div>
+  <span id="filterText" ng-show="filteredOptions.length != 0">Valt filter: <span ng-repeat="opt in filteredOptions">| {{opt}} </span></span>
+  <div class="row-padding"><h2>Rankinglista</h2></div>
+  <div class="table-responsive" ng-show="showResult">
+    <table class="table table-striped export-table">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Färg</th>
+        <th>Ranking</th>
+        <th>Antal röster</th>
+        <th>Antal visningar</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="color in colors | orderBy:'totalRating':-1">
+        <td>{{$index+1}}</td>
+        <td><img height="200px" src="{{color.image_secureurl}}"><br /><span>Textfärg: {{color.textcolor}}</span>
+          <span>Backgrundsfärg: {{color.backcolor}}</span></td>
+        <td>{{color.totalRating | number: 0}}</td>
+        <td>{{color.totalNumOfVotes | number: 0}}</td>
+        <td>{{color.totalNumOfTimesInTest | number: 0}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<!--  <div class="row">
+    <label for="searchDisability">Val av rankinglista</label>
+    <input id="searchDisability" type="search" class="form-control col-sm-2" placeholder="Sök efter funktionsnedsättning eller svårighet..." ng-model="selectedDisability" typeahead="disability as disability.name for disability in disabilities | filter:$viewValue | limitTo:8">
+  </div>
+<div class="row row-margin">
+  <h1>{{titleOfDashboard}}</h1>
+    &lt;!&ndash;Table presenting the overall rating of the color combinations&ndash;&gt;
+  <div class="table-responsive">
+    <table class="table table-striped export-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Textfärg</th>
+          <th>Backgrundsfärg</th>
+          <th>Ranking</th>
+          <th>Antal röster</th>
+          <th>Antal visningar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="color in colors | sortEloRating:index">
+          <td>{{$index+1}}</td>
+          <td><span ng-style="{'background-color': '{{color.textcolor}}'}" class="thumbnail"></span>{{color.textcolor}}</td>
+          <td><span ng-style="{'background-color': '{{color.backcolor}}'}" class="thumbnail"></span>{{color.backcolor}}</td>
+          <td>{{color.ELO_rating[index].rating | number: 0}}</td>
+          <td>{{color.ELO_rating[index].numOfVotes | number: 0}}</td>
+          <td>{{color.ELO_rating[index].numOfTimesInTest | number: 0}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>-->
+</div>

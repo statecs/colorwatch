@@ -23,7 +23,8 @@
     "ng-file-upload": "~6.1.0",
     "ngstorage": "~0.3.7",
     "spectrum": "~1.7.1",
-    "tableExport.jquery.plugin": "^1.4.0"
+    "tableExport.jquery.plugin": "^1.4.0",
+    "d3": "^3.5.16"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",

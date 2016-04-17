@@ -12,7 +12,8 @@ angular.module('colorwatchApp', [
   'ngAria',
   'angularSpectrumColorpicker',
   'ngTouch',
-  'angular-spinkit'
+  'angular-spinkit',
+  'd3'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
