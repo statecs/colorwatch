@@ -32,6 +32,6 @@
   },
   "resolutions": {
     "spectrum": "1.7.1",
-    "angular": "1.4.9"
+    "angular": "~1.4.5"
   }
 }
