@@ -7,8 +7,17 @@
 
 angular.module('colorwatchApp')
   .controller('DashboardCtrl', function ($scope, socket, $http) {
-    $scope.colorCombs;
+    $scope.colorCombs = 0;
     $scope.totalNumOfTests = 0;
+
+    function getNumOfTests(data){
+      var sum = 0;
+      data.forEach(function(d){
+        sum += d.totalNumOfVotes;
+      });
+      return sum / 10;
+    }
+
     /**
      * Real-time update when new votes are received.
      */
@@ -25,11 +34,5 @@ angular.module('colorwatchApp')
       $scope.totalNumOfTests = getNumOfTests($scope.colorCombs);
     });
 
-    function getNumOfTests(data){
-      var sum = 0;
-      data.forEach(function(d){
-        sum += d.totalNumOfVotes;
-      });
-      return sum / 10;
-    }
+
   });
