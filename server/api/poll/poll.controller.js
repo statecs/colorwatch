@@ -17,24 +17,30 @@ exports.newpolls = function(req, res) {
     .sort({'totalNumOfTimesInTest': 1}) //Pick the color combs with least views
     .limit(5)     //The number of colors used in the test
     .exec(function(err, colors) {
-       if(err) { return handleError(res, err);}
-       var questions = [];
+      if(err) { return handleError(res, err);}
+      var questions = [];
+      var combinationsIndices = [];
 
-       for(var i = 0; i < 10; i++){
-          var index1 = Math.floor((Math.random() * colors.length));
-          do{
-            var index2 = Math.floor((Math.random() * colors.length));
-          }
-          while(index1 === index2);
-          questions.push({
-            img1: colors[index1].id,
-            img1_url: colors[index1].image_secureurl,
-            img2: colors[index2].id,
-            img2_url: colors[index2].image_secureurl,
-            userVote: null,
-            userHasVoted: false
-          });
-       }
+      //Generate all unique combinations of picking 2 out of 5 (total 10 combinations)
+      for(var i = 0; i < 5; i++){
+        for(var j = i + 1; j < 5; j++){
+          combinationsIndices.push([i,j]);
+        }
+      }
+      for(var i = 0; i < 10; i++){
+        var index = Math.floor((Math.random() * combinationsIndices.length)); //Randomize index from the array of combinations
+        var comb = combinationsIndices.splice(index,1); //Get (and remove) the randomized combination
+
+        //Add that combination as a new question
+        questions.push({
+          img1: colors[comb[0][0]].id,
+          img1_url: colors[comb[0][0]].image_secureurl,
+          img2: colors[comb[0][1]].id,
+          img2_url: colors[comb[0][1]].image_secureurl,
+          userVote: null,
+          userHasVoted: false
+        });
+      }
       req.session.questions = questions;
 
       req.session.save(function(err) {
@@ -50,16 +56,13 @@ exports.newpolls = function(req, res) {
 // JSON API for list of polls
 //
 exports.list = function(req, res) {
-  //
-
-  Poll.find({}, 'question', function(error, polls) {
-    if(error){
-      throw 'Error in list';
-    }
-    else{
-      res.json(polls);
-    }
-  });
+  //console.log(req.session.questions);
+  if(req.session.questions){
+    res.json(200, req.session.questions);
+  }
+  else{
+    res.send(500, 'error');
+  }
 };
 
 // Updates an existing poll in the DB.
@@ -94,17 +97,6 @@ exports.destroy = function(req, res) {
       return res.send(204);
     });
   });
-};
-
-// JSON API for getting a single poll
-exports.poll = function(req, res) {
-  if(req.session.questions){
-    res.json(200, req.session.questions);
-  }
-  else{
-    res.send(500, 'error');
-  }
-
 };
 
 function handleError(res, err) {

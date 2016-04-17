@@ -6,8 +6,7 @@ var controller = require('./poll.controller');
 var router = express.Router();
 
 router.put('/newpolls', controller.newpolls);
-router.get('/list', controller.list);
-router.get('/', controller.poll);
+router.get('/', controller.list);
 router.put('/', controller.update);
 router.delete('/', controller.destroy);
 
