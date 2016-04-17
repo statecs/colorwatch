@@ -48,7 +48,7 @@ exports.newpolls = function(req, res) {
           throw 'Error in list';
         }
         else{
-          res.json(200, {});
+          res.status(200).json();
         }
       });
     });
@@ -57,11 +57,12 @@ exports.newpolls = function(req, res) {
 //
 exports.list = function(req, res) {
   //console.log(req.session.questions);
+
   if(req.session.questions){
-    res.json(200, req.session.questions);
+    res.status(200).json(req.session.questions);
   }
   else{
-    res.send(500, 'error');
+     res.status(500).send('error');
   }
 };
 
@@ -79,7 +80,7 @@ exports.update = function(req, res) {
       else{
         req.session.questions[questionNr-1].userHasVoted = false;
       }
-      res.send(200, req.session.questions);
+      res.status(200).send(req.session.questions);
     }
   }
   else{

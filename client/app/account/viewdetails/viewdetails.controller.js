@@ -38,7 +38,7 @@ angular.module('colorwatchApp')
     ];
     $scope.filter = function(opt){
       var index = $scope.filteredOptions.indexOf(opt.name);
-      if(index == -1){
+      if(index === -1){
         //Push options to filtered items
         $scope.filteredOptions.push(opt.name);
         filterRankingList();

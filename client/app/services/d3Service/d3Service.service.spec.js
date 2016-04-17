@@ -11,8 +11,6 @@ describe('Service: d3Service', function () {
     d3Service = _d3Service_;
   }));
 
-  it('should do something', function () {
-    expect(!!d3Service).toBe(true);
-  });
+ 
 
 });

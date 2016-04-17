@@ -10,13 +10,13 @@
 'use strict';
 
 var _ = require('lodash');
-var Result = require('./Result.model');
+var Result = require('./result.model');
 
 // Get list of Results
 exports.index = function(req, res) {
   Result.find(function (err, Results) {
     if(err) { return handleError(res, err); }
-    return res.json(200, Results);
+    return res.status(200).json(Results);
   });
 };
 
@@ -52,7 +52,7 @@ exports.update = function(req, res) {
     var updated = _.merge(Result, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
-      return res.json(200, Result);
+      return res.status(200).json(Results);
     });
   });
 };

@@ -3,14 +3,14 @@ var canvas, ctx;
 
 function draw(textColor, backgroundColor) {
   console.log(textColor, backgroundColor);
-  ctx.font="35px sans-serif";
+  ctx.font='35px sans-serif';
   ctx.fillStyle = backgroundColor;
   ctx.fillRect(0,0,canvas.width,canvas.height);
   ctx.fillStyle = textColor;
-  ctx.textAlign = "start";
-  ctx.fillText("Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin. " +
-    "Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd boksättare " +
-    "tog att antalet bokstäver.", canvas.width/15, canvas.height/10);
+  ctx.textAlign = 'start';
+  ctx.fillText('Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin. ' +
+    'Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd boksättare ' +
+    'tog att antalet bokstäver.', canvas.width/15, canvas.height/10);
 }
 
 function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
@@ -43,8 +43,8 @@ function blobToFile(theBlob, fileName){
 angular.module('colorwatchApp')
   .controller('NewcolorCtrl', function ($scope, $http, Upload, $location, $window) {
     // Define an empty poll model object
-    $scope.textcolor = "#ffffff";
-    $scope.backcolor = "#000000";
+    $scope.textcolor = '#ffffff';
+    $scope.backcolor = '#000000';
     $scope.file = {};
     $scope.alertSettings = {
       show: false,
@@ -66,9 +66,9 @@ angular.module('colorwatchApp')
       ctx.fillStyle = $scope.backcolor;
       ctx.fillRect(0,0,canvas.width,canvas.height);
 
-      var text = "Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin. " +
-      "Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd boksättare " +
-      "tog att antalet bokstäver.";
+      var text = 'Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin. ' +
+      'Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd boksättare ' +
+      'tog att antalet bokstäver.';
 
       ctx.font = '36pt sans-serif';
       ctx.fillStyle = $scope.textcolor;
@@ -122,7 +122,7 @@ angular.module('colorwatchApp')
         file: file,
       }).progress(function (evt) {
         $scope.file.progress = parseInt(100.0 * evt.loaded / evt.total);
-        $scope.file.status = "Laddar upp... ";
+        $scope.file.status = 'Laddar upp... ';
       }).success(function (data) {
         $scope.file.result = data;
         $http.post('/api/colorcombs/create', {
@@ -133,9 +133,9 @@ angular.module('colorwatchApp')
       }).error(function (data, status) {
         $scope.file.errorStatus = {'error': 'error'};
         console.log('error status: ' + status, data);
-      })
+      });
     };
     $scope.prevPage = function(){
       $location.path('/settings');
-    }
+    };
   });
