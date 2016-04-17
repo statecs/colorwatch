@@ -8,7 +8,7 @@
 angular.module('colorwatchApp')
   .controller('ViewDetailsCtrl', function ($scope, socket, $http) {
 
-    $scope.colors = null;
+    $scope.colors = [];
     var resultData = null;
     $scope.filteredOptions = [];
     $scope.showResult = true;

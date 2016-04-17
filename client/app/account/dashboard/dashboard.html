@@ -2,7 +2,9 @@
 <div class="container jumbotron-large">
   <h1>Översikt</h1>
   <div class="row">
-     <!-- <img src="assets/images/sunburst.png">-->
+    <h2>Antal genomförda tester: {{totalNumOfTests}}</h2>
+  </div>
+  <div class="row">
     <div class="col-md-5">
       <h2 class="text-center">Total ranking</h2>
       <dashboard-sunburst data="colorCombs" type="totalRating"></dashboard-sunburst>
@@ -14,7 +16,7 @@
   </div>
   <div class="row-padding">
     <h2>Vilka har gjort testet?</h2>
-    <img src="assets/images/graph.png">
+    <img class="img-responsive" src="assets/images/graph.png">
   </div>
 
 </div>

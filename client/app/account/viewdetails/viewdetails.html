@@ -28,7 +28,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr ng-repeat="color in colors">
+      <tr ng-repeat="color in colors | orderBy:'totalRating':-1">
         <td>{{$index+1}}</td>
         <td><img height="200px" src="{{color.image_secureurl}}"><br /><span>Textfärg: {{color.textcolor}}</span>
           <span>Backgrundsfärg: {{color.backcolor}}</span></td>
