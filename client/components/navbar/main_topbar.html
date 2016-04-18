@@ -1,3 +1,38 @@
+  <div id="cookiewarning"><!-- cookie warning --></div>
+  <div ng-hide="showme" class="alert alert-info top-alert cookie-alert" role="dialog" style="display: block;">
+  <div class="container">
+      <div class="row">
+         <div class="col-xs-12">
+            <h3><i class="icon-info"></i> Vi använder kakor</h3>
+         </div>
+      </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-md-9">
+        <p>
+          Ditt besök på Funkas webbplats blir bättre med hjälp av kakor (cookies). Genom att fortsätta använda webbplatsen godkänner du att vi använder dem.
+        </p>
+            <p class="normal">
+               <a href="#Kakor">Om cookies och personuppgifter</a>
+            </p>
+      </div>
+      <div class="col-xs-12 col-sm-3 col-md-2 col-sm-offset-1 ">
+        <a ng-click="showme=true" class="btn btn-sm btn-block" href="#">JAG FÖRSTÅR</a>  
+      </div>
+    </div>
+  </div>
+
+<style>
+  .top-alert.cookie-alert {
+    background-color: #ffffff;
+  }
+  .alert-info{
+    border-color:#ffffff;
+  }
+  .cookie-alert {
+    display: none;
+  }
+</style>
+</div>
 <div class="corner-wrapper fadeIn">
 <!-- TopWrapper -->
 	<div class="corners-top-wrapper fadeIn">
