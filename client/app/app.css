@@ -53,6 +53,9 @@ ul.no-bullet
   text-align: center;
   vertical-align: middle;
 }
+.navbar {
+   min-height: 0px;
+}
 .navbar-progress{
     display: table-cell;
     float: none;
@@ -66,16 +69,19 @@ ul.no-bullet
 .navbar-right {
     float: right !important;
 }
+.navbar-items{
+  position: ;
+}
 .progress {
   margin-bottom: 0;
-  height: 0.5em;
+  border-radius: 0px; 
   i { line-height: 0.5em; }
 }
 .progress-bar {
   transition: width 1s ease-in-out;
 }
 .progress-bar-success {
-    background-color: #E27E2F;
+    background-color: #D3D3D3;
 }
 
 /* QUICKFIX padding/margin bug */
@@ -132,7 +138,7 @@ button, .button, input[type="button"], input[type="submit"]{
 }
 .btn{
   padding: 1em 1.3em;
-  border: rgba(226, 126, 47, 1) 1px solid;
+  border: #f5d1b5 1px solid;
 }
 .btn:hover {
     background-color: #000;
