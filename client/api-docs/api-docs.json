@@ -1,0 +1,353 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Colorwatch",
+    "description": "API-documentation",
+    "termsOfService": "http://swagger.io/terms/"
+  },
+  "basePath": "/",
+  "tags" : [
+    {"name": "Tag1", 
+    "description": "colorcombs"
+    },
+    {"name": "Tag2", 
+    "description": "poll"
+    },
+    {"name": "Tag3", 
+    "description": "result"
+    },
+    {"name": "Tag3", 
+    "description": "user"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/colorcombs/list": {
+       "get": {
+          "tags": ["Tag1"],
+          "description": "Returns all color combinations",
+          "operationId": "for the URL",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+              {
+                "name": "Parameters",
+                "in": "body",
+                "description": "Get all",
+                "required": true,
+              "schema": {
+                "$ref": "#/definitions/create"
+                }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Response",
+              "schema": {
+                 "$ref": "#/definitions/response"
+              }
+            }
+          }
+        }
+    },
+    "/api/colorcombs/:id": {
+        "get":{
+          "tags":["Tag1"],
+          "description":"Get specific colorcombination",
+          "operationId":"get",
+          "produces": [
+            "application/json"
+          ],
+          "parameters":[
+              {
+                "name": "id",
+                "in": "path",
+                "description": "ID to list",
+                "required": true,
+                "type": "string"
+              }
+            ],
+          "responses": {
+            "200": {
+              "description": "delete response",
+              "schema":{
+                "$ref":"#/definitions/deleteRes"
+              }
+            }
+          }
+        },
+      "get":{
+          "tags": [ "Tag1"],
+          "description": "Returns the specific colorcombination",
+          "operationId": "findById",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+              {
+                "name": "ID",
+                "in": "path",
+                "description": "ID to fetch",
+                "required": true,
+                "type": "string"
+              }
+            ],
+        "responses": {
+            "200": {
+              "description": "response",
+              "schema": {
+                "$ref": "#/definitions/response"
+              }
+            }
+          }
+        }
+      },
+
+      "/api/colorcombs/create/:id": {
+       "post": {
+          "tags": ["Tag1"],
+          "description": "Create new color combinations",
+          "operationId": "for the URL",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+              {
+                "name": "Parameters",
+                "in": "body",
+                "description": "Get all",
+                "required": true,
+              "schema": {
+                "$ref": "#/definitions/create"
+                }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Response",
+              "schema": {
+                 "$ref": "#/definitions/response2"
+              }
+            }
+          }
+        }
+        },
+        "/api/colorcombs/:id": {
+       "update": {
+          "tags": ["Tag1"],
+          "description": "Update colorcombination",
+          "operationId": "for the URL",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+              {
+                "name": "Parameters",
+                "in": "body",
+                "description": "Get all",
+                "required": true,
+              "schema": {
+                "$ref": "#/definitions/create"
+                }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Response",
+              "schema": {
+                 "$ref": "#/definitions/response2"
+              }
+            }
+          }
+          }
+        }
+
+  },
+  "definitions": {
+    "create": {
+      "properties": {
+        "eventId": {
+          "required":true,
+          "type": "string",
+          "example": "mathmaticial"
+        },
+        "numberRequired": {
+          "required":true,
+          "type":"integer",
+          "format": "int64",
+          "example": 500
+        } 
+      }
+    },
+    "response": {
+        "properties": {
+            "_id": {
+              "required": true,
+              "type" : "string",
+              "example" : "5714adf6dba74ced689e5b2a"
+            },
+            "textcolor": {
+              "required": true,
+              "type" : "string",
+              "example" : "#0029ff"
+            },
+            "backcolor": {
+              "required": true,
+              "type" : "string",
+              "example" : "#f0ff00"
+            },
+            "image_secureurl": {
+              "required": true,
+              "type" : "string",
+              "example" : "http://res.cloudinary.com/duff92/image/upload/v1457374971/colors/0029ff_f0ff00.png"
+            },
+            "totalRating": {
+              "required": true,
+              "type" : "string",
+              "example" : "1460.4951654602755"
+            },
+            "totalNumOfVotes": {
+              "required": true,
+              "type" : "string",
+              "example" : "12"
+            },
+            "totalNumOfTimesInTest": {
+              "required": true,
+              "type" : "string",
+              "example" : "20"
+            },
+        
+              "ELO_rating": {
+                "type":"object",
+                "properties":{
+                  "name": {
+                    "required": true,
+                    "type" : "string",
+                    "example" : "Afasi"
+                  },
+                  "rating": {
+                    "required": true,
+                    "type" : "string",
+                    "example" : "1400"
+                  },
+                  "numOfVotes": {
+                    "required": true,
+                    "type" : "string",
+                    "example" : "0"
+                  },
+                  "numOfTImesInTest": {
+                    "required": true,
+                    "type" : "string",
+                    "example" : "0"
+                  }
+
+                }
+              }
+
+           
+        },
+         "response1": {
+        "properties": {
+          "id": {
+            "required":true,
+            "type": "string",
+            "example": "5714adf6dba74ced689e5b2a"
+          },
+          "textcolor": {
+            "required":true,
+            "type": "string",
+            "example": "#0029ff"
+          },
+          "backcolor": {
+            "required":true,
+            "type": "string",
+            "example": "#f0ff00"
+          },
+          "backcolor": {
+            "required":true,
+            "type": "string",
+            "example": "#f0ff00"
+          },
+          "image_secureurl": {
+            "required":true,
+            "type": "string",
+            "example": "http://res.cloudinary.com/duff92/image/upload/v1457374971/colors/0029ff_f0ff00.png"
+          },
+          "totalRating": {
+            "required":true,
+            "type": "string",
+            "example": "1460.4951654602755"
+          },
+          "totalNumOfVotes": {
+            "required":true,
+            "type": "string",
+            "example": "12"
+          },
+          "totalNumOfTimesInTest": {
+            "required":true,
+            "type": "string",
+            "example": "20"
+          },
+          
+              "ELO_rating": {
+                "type":"object",
+                "properties":{
+                  "name": {
+                    "required": true,
+                    "type" : "string",
+                    "example" : "Afasi"
+                  },
+                  "rating": {
+                    "required": true,
+                    "type" : "string",
+                    "example" : "1400"
+                  },
+                  "numOfVotes": {
+                    "required": true,
+                    "type" : "string",
+                    "example" : "0"
+                  },
+                  "numOfTImesInTest": {
+                    "required": true,
+                    "type" : "string",
+                    "example" : "0"
+                  }
+                }
+          }
+      }
+    }
+    },
+    "delete": {
+        "properties": {
+            "jobID": {
+              "required": true,
+              "type" : "string",
+              "example" : "234344234234"
+            },
+            "status" : {
+              "required": true,
+              "type": "string",
+              "example": "deleted"
+            }
+        }
+    },
+    "400error" : {
+       "properties": {
+        "message": {
+          "type": "string",
+          "example" : "400 Bad Request"
+        }
+      }
+    }
+  }
+}
