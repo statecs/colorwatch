@@ -21,6 +21,7 @@
     "passport-local": "~1.0.0",
     "passport-facebook": "latest",
     "passport-google-oauth": "latest",
+    "passport-twitter": "latest",
     "composable-middleware": "^0.3.0",
     "connect-mongo": "^1.1.0",
     "socket.io": "^1.0.6",
