@@ -1,7 +1,7 @@
 /* Image container */
 .image-ctn img{
-	-moz-border-radius: 10px; 
-	-webkit-border-radius: 10px; 
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
 	border-radius: 10px;
 	transition: all .2s;
 	-webkit-backface-visibility: hidden;
@@ -35,6 +35,9 @@
     margin: 0 auto;
     max-width: 300px;
 	}
+  .image-ctn button{
+    margin-top: 5px;
+  }
 .image-ctn .col-md-4{
     width:100%;
     padding-bottom: 20px;

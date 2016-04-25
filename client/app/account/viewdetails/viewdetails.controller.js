@@ -11,6 +11,7 @@ angular.module('colorwatchApp')
     $scope.colors = [];
     var resultData = null;
     $scope.filteredOptions = [];
+    $scope.numOfCompletedTests = 0;
     $scope.showResult = true;
 
     $scope.optionsModel = [
@@ -66,7 +67,7 @@ angular.module('colorwatchApp')
     });
     $http.get('/api/results/').then(function(res){
       resultData = res.data;
-      console.log(resultData);
+      $scope.numOfCompletedTests = resultData.length;
     });
 
     function filterRankingList(){
