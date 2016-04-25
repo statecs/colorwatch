@@ -35,6 +35,7 @@
     "grunt-asset-injector": "^0.1.0",
     "grunt-autoprefixer": "~3.0.3",
     "grunt-build-control": "DaftMonk/grunt-build-control",
+    "grunt-cli": "^1.2.0",
     "grunt-concurrent": "~2.1.0",
     "grunt-contrib-clean": "~0.7.0",
     "grunt-contrib-concat": "~0.5.1",
