@@ -15,7 +15,7 @@ angular.module('colorwatchApp')
         })
         .then( function() {
           // Logged in, redirect to home
-          $location.path('/dashboard');
+          $location.path('/viewdetails');
         })
         .catch( function(err) {
           $scope.errors.other = err.message;

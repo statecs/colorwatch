@@ -1,14 +1,16 @@
 <div ng-include src="'components/navbar/main_topbar.html'"></div>
 <div class="container jumbotron-large">
 <h1>Detaljer</h1>
-  <div class="row text-right">
-    Ladda ned som:
+  <div class="row">
+    <div class="col-sm-7">
+      <h2>Genomförda test: {{numOfCompletedTests}}</h2>
     </div>
-  <div class="row text-right">
-    <span class="pointer">Excel <i ng-click="exportExcel()" class="fa fa-file-excel-o fa-2x" style="color:green;"></i></span>
-    <span class="pointer">Pdf <i ng-click="exportPdf()" class="fa fa-file-pdf-o fa-2x" style="color:red"></i></span>
-    <span class="pointer" ng-click="exportJSON()">JSON</span>
-    <span class="pointer" ng-click="exportCSV()">CSV</span>
+    <div class="col-sm-5 text-right">
+      <span class="pointer">Excel <i ng-click="exportExcel()" class="fa fa-file-excel-o fa-2x" style="color:green;"></i></span>
+      <span class="pointer">Pdf <i ng-click="exportPdf()" class="fa fa-file-pdf-o fa-2x" style="color:red"></i></span>
+      <span class="pointer" ng-click="exportJSON()">JSON</span>
+      <span class="pointer" ng-click="exportCSV()">CSV</span>
+    </div>
   </div>
 <h2>Välj funktionsnedsättningar och/eller diagnoser</h2>
   <div  id="disabilities">

@@ -78,19 +78,6 @@ ul.no-bullet
     background-color: #E27E2F;
 }
 
-/* QUICKFIX padding/margin bug */
-.top,.top-margin{
-  padding-top:12%;
-}
-.top-margin{
-  margin-top:10px;
-}
-@media (max-width: 640px) {
-  .top,.top-margin{
-    padding-top:10%;
-  }
-}
-
 a,
 button {
   cursor: pointer;

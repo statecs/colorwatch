@@ -12,6 +12,8 @@ angular.module('colorwatchApp')
     var resultData = null;
     $scope.filteredOptions = [];
     $scope.showResult = true;
+    $scope.numOfCompletedTests = 0;
+
 
     $scope.optionsModel = [
       {name: 'Lässvårigheter', state: false},
@@ -66,7 +68,7 @@ angular.module('colorwatchApp')
     });
     $http.get('/api/results/').then(function(res){
       resultData = res.data;
-      console.log(resultData);
+      $scope.numOfCompletedTests = resultData.length;
     });
 
     function filterRankingList(){
