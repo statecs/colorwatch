@@ -28,7 +28,7 @@
     "tag": "v1.20150507.2",
     "commit": "b7cf622909258086bc63ad764d08fcaed780ab42"
   },
-  "_source": "https://github.com/Teleborder/FileSaver.js.git",
+  "_source": "git://github.com/Teleborder/FileSaver.js.git",
   "_target": "*",
   "_originalSource": "file-saver.js"
 }

@@ -40,5 +40,6 @@
   },
   "_source": "git://github.com/hhurz/tableExport.jquery.plugin.git",
   "_target": "^1.4.0",
-  "_originalSource": "tableExport.jquery.plugin"
+  "_originalSource": "tableExport.jquery.plugin",
+  "_direct": true
 }

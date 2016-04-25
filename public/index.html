@@ -46,7 +46,19 @@
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="stylesheet" href="app/99e2277b.vendor.css">
-    <link rel="stylesheet" href="app/dfc41ebe.app.css">
+    <!-- build:css({.tmp,client}) app/app.css -->
+    <link rel="stylesheet" href="app/49af6c2f.app.css">
+      <!-- injector:css -->
+      <link rel="stylesheet" href="app/account/login/login.css">
+      <link rel="stylesheet" href="app/admin/admin.css">
+      <link rel="stylesheet" href="app/49af6c2f.app.css">
+      <link rel="stylesheet" href="app/final/final.css">
+      <link rel="stylesheet" href="app/main/main.css">
+      <link rel="stylesheet" href="app/overview/overview.css">
+      <link rel="stylesheet" href="app/test/test.css">
+      <link rel="stylesheet" href="components/modal/modal.css">
+      <!-- endinjector -->
+    <!-- endbuild -->
   </head>
   <body ng-app="colorwatchApp">
     <!--[if lt IE 7]>
@@ -73,9 +85,41 @@
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
-    <script src="app/ff586a0f.vendor.js"></script>
+    <script src="app/55040fec.vendor.js"></script>
 
-        <script src="app/75428f36.app.js"></script>
+        <!-- build:js({.tmp,client}) app/app.js -->
+        <script src="app/040d250d.app.js"></script>
+          <!-- injector:js -->
+          <script src="app/account/account.js"></script>
+          <script src="app/account/login/login.controller.js"></script>
+          <script src="app/account/newcolor/newcolor.controller.js"></script>
+          <script src="app/account/settings/settings.controller.js"></script>
+          <script src="app/account/signup/signup.controller.js"></script>
+          <script src="app/account/viewdetails/viewdetails.controller.js"></script>
+          <script src="app/admin/admin.controller.js"></script>
+          <script src="app/admin/admin.js"></script>
+          <script src="app/directives/exportTable/exportTable.directive.js"></script>
+          <script src="app/final/final.controller.js"></script>
+          <script src="app/final/final.js"></script>
+          <script src="app/main/main.controller.js"></script>
+          <script src="app/main/main.js"></script>
+          <script src="app/overview/overview.controller.js"></script>
+          <script src="app/overview/overview.js"></script>
+          <script src="app/test/test.controller.js"></script>
+          <script src="app/test/test.js"></script>
+          <script src="components/auth/auth.service.js"></script>
+          <script src="components/auth/user.service.js"></script>
+          <script src="components/modal/modal.service.js"></script>
+          <script src="components/mongoose-error/mongoose-error.directive.js"></script>
+          <script src="components/navbar/navbar.controller.js"></script>
+          <script src="components/socket/socket.service.js"></script>
+          <!-- endinjector -->
+
+          <!-- Removed - used in old solution with cookies - eventually used later on
+          <script src="components/rating/eloRating.service.js"></script>
+          <script src="components/rating/images.service.js"></script>
+          <script src="components/rating/testRating.service.js"></script> -->
+        <!-- endbuild -->
 
         <div id="fb-root"></div>
         <script>(function(d, s, id) {

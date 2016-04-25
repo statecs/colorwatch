@@ -1,5 +1,5 @@
 /*!
- * angular-spectrum-colorpicker v1.4.3
+ * angular-spectrum-colorpicker v1.4.4
  * https://github.com/Jimdo/angular-spectrum-colorpicker
  *
  * Angular directive for a colorpicker, that bases on http://bgrins.github.io/spectrum/
