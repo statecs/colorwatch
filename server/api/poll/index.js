@@ -5,11 +5,9 @@ var controller = require('./poll.controller');
 
 var router = express.Router();
 
-router.get('/newpolls', controller.newpolls);
-router.get('/', controller.index);
-router.get('/list', controller.list);
-router.get('/:id', controller.poll);
-router.put('/:id', controller.update);
-router.post('/create', controller.create);
+router.put('/newpolls', controller.newpolls);
+router.get('/', controller.list);
+router.put('/', controller.update);
+router.delete('/', controller.destroy);
 
 module.exports = router;

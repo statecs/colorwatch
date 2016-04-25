@@ -11,9 +11,9 @@ angular.module('colorwatchApp')
         templateUrl: 'app/account/signup/signup.html',
         controller: 'SignupCtrl'
       })
-      .when('/dashboard', {
-        templateUrl: 'app/account/dashboard/dashboard.html',
-        controller: 'DashboardCtrl', 
+      .when('/viewdetails', {
+        templateUrl: 'app/account/viewdetails/viewdetails.html',
+        controller: 'ViewDetailsCtrl',
         authenticate: true
       })
       .when('/settings', {

@@ -1,10 +1,12 @@
 'use strict';
 
 angular.module('colorwatchApp')
-  .controller('FinalCtrl', function ($scope, $sessionStorage, $location, Poll, socket, $rootScope) {
+  .controller('FinalCtrl', function ($scope, $cookies, $location, $http, socket, $rootScope) {
 
     $scope.noDisabilities = false;
     $scope.noDiagnoses = false;
+    $scope.otherDiagnose = null;
+    $scope.otherDisability = null;
 
     $scope.disabilitiesModel = [
       {name: 'Lässvårigheter', state: false},
@@ -19,22 +21,23 @@ angular.module('colorwatchApp')
 
     $scope.diagnosesModel = [
       {name: 'Afasi', state: false},
-      {name: 'ADHD, ADD, Damp', state: false},
-      {name: 'Autism, autismspektrumtillstånd, asperger', state: false},
+      {name: 'ADHD, ADD', state: false},
+      {name: 'Asperger', state: false},
+      {name: 'Autism', state: false},
       {name: 'Dyslexi', state: false},
-      {name: 'Dyskalkyli', state: false},
-      {name: 'Utvecklingsstörning', state: false},
-      {name: 'Diabetessynskada', state: false},
-      {name: 'Grå starr, katarakt', state: false},
+      {name: 'Färgblind', state: false},
+      {name: 'Grå starr', state: false},
       {name: 'Grön starr, glaukom', state: false},
       {name: 'Gula fläcken', state: false},
       {name: 'Näthinneavlossning', state: false},
+      {name: 'Psykisk ohälsa', state: false},
       {name: 'RP, retinitis pigmentosa', state: false},
-      {name: 'Depression', state: false},
-      {name: 'Bipolär sjukdom', state: false},
-      {name: 'Schizofreni', state: false},
-      {name: 'Tvångssyndrom, OCD', state: false}
-    ];
+      {name: 'Utvecklingsstörning', state: false}
+];
+
+    $scope.prevPage = function(){
+      window.history.back();
+    };
 
     $scope.submit = function(){
       $rootScope.amt = 100;
@@ -48,20 +51,23 @@ angular.module('colorwatchApp')
         }
       });
 
+      //If other disability is added
+      if($scope.otherDisability){
+        choosedDisabilities.push($scope.otherDisability);
+      }
+
       $.each($scope.diagnosesModel, function(index, diagnose){
         if(diagnose.state){
           choosedDiagnoses.push(diagnose.name);
         }
       });
 
-   $scope.prevPage = function(){
-       window.history.back();
-    };
-      //Update choices in database
-      Poll.update({id: $sessionStorage.myTest}, {diagnoses: choosedDiagnoses, disabilities: choosedDisabilities},function(){
-
-        //Send vote
-        socket.emit('send:vote', {pollId: $sessionStorage.myTest});
+      //If other diagnose is added
+      if($scope.otherDiagnose){
+        choosedDiagnoses.push($scope.otherDiagnose);
+      }
+      $http.post('/api/results', {diagnoses: choosedDiagnoses, disabilities: choosedDisabilities}).then(function(res){
+        socket.emit('send:vote', {data: res.data});
         $location.path('/final-result');
       });
 
