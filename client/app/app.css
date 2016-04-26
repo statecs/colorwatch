@@ -38,7 +38,7 @@ body {
 body {
   font-family: "AvantGardeGothic Semi","Myriad Pro",Helvetica,Arial,sans-serif;
   color: #697377;
-  background-color: #efeeed;
+  background-color: #f7f6f5;
 }
 
 ul.no-bullet
@@ -104,7 +104,7 @@ ul.no-bullet
   transition: width 1s ease-in-out;
 }
 .progress-bar-success {
-    background-color: #E27E2F;
+    background-color: #E37712;
 }
 
 @media (max-width: 640px) {
@@ -125,12 +125,12 @@ button {
 }
 
 a{
-  outline-color: #E27E2F;
-  color:#E27E2F;
+  outline-color: #E37712;
+  color:#E37712;
 }
 
 .pagination>li.active>a {
-  background: #E27E2F;
+  background: #E37712;
   color: #fff;
   border: none;
 }
@@ -168,10 +168,12 @@ button, .button, input[type="button"], input[type="submit"]{
     color: #fff !important;
 }
 .btn:active, .btn.active{
-  background-color: #E27E2F;
+  background-color: #E37712;
   color:#fff;
 }
-
+legend{
+  color:#000;
+}
 .jumbotron{
     background-color: #fafafa !important;
     max-width: 800px;

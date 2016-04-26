@@ -7,12 +7,12 @@
   <div ng-hide="loading">
     <div class="row image-ctn fadeIn">
         <div class="col-md-4 col-xs-6 col-md-offset-2">
-          <a><img ng-class="{true: 'op-selected'}[poll.userVote == 'choice_alt1']"  ng-src="{{poll.img1_url}}" alt="Alternativ 1" ng-click="vote('choice_alt1')" ng-model="poll.userVote" class="img-responsive" /></a>
+          <a href="#"><img ng-class="{true: 'op-selected'}[poll.userVote == 'choice_alt1']"  ng-src="{{poll.img1_url}}" alt="Alternativ 1" ng-click="vote('choice_alt1')" ng-model="poll.userVote" class="img-responsive" /></a>
           <button ng-if="poll.userVote == 'choice_alt1'" class="btn" alt="Alternativ 1 Vald" ng-model="poll.userVote" ng-click="vote('choice_alt1')" btn-radio="'choice_alt1'">Vald</button>
           <button ng-if="poll.userVote != 'choice_alt1'" class="btn" ng-model="poll.userVote" alt="Välj" ng-click="vote('choice_alt1')" btn-radio="'choice_alt1'">Välj</button>
         </div>
         <div  class="col-md-4 col-xs-6">
-          <a><img ng-class="{true: 'op-selected'}[poll.userVote == 'choice_alt2']" ng-src="{{poll.img2_url}}" alt="Alternativ 2" ng-model="poll.userVote" ng-click="vote('choice_alt2')" class="img-responsive"/></a>
+          <a href="#"><img ng-class="{true: 'op-selected'}[poll.userVote == 'choice_alt2']" ng-src="{{poll.img2_url}}" alt="Alternativ 2" ng-model="poll.userVote" ng-click="vote('choice_alt2')" class="img-responsive"/></a>
            <button ng-if="poll.userVote == 'choice_alt2'"  alt="Alternativ 2 Vald" class="btn" ng-model="poll.userVote" btn-radio="'choice_alt2'">Vald</button>
            <button ng-if="poll.userVote != 'choice_alt2'" class="btn" ng-model="poll.userVote" ng-click="vote('choice_alt2')" btn-radio="'choice_alt2'">Välj</button>
         </div>
