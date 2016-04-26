@@ -4,6 +4,7 @@
   <div class="container ">
     <div class="row">
   <progressbar class="progress-striped active" animate="true" max="100" value="progressValue" type="success"><span count-to="{{countTo}}" duration="1" count-from="{{countFrom}}"></progressbar>
+
       <div class="btn-group btn-group-justified">
       <div ng-repeat="item in menu" ui-sref-active-eq="active" ui-sref-active="active" ng-class="{active: isActive(item.link)}" class="navbar-progress">{{item.title}}<!--<span ng-if="item.title == 'Test'"> {{currentQuestion}} / {{totalQuestions}}</span>--></div>
 

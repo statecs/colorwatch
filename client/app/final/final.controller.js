@@ -39,6 +39,11 @@ angular.module('colorwatchApp')
       window.history.back();
     };
 
+    $scope.myFunc = function(){
+      disabilitiesModel.state();
+    };
+
+    $rootScope.amt = 78;
     $scope.submit = function(){
       $rootScope.amt = 100;
       var choosedDisabilities = [];   //Disabilites choosed by the user

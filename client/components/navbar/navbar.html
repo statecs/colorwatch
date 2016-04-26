@@ -1,16 +1,16 @@
 
-<nav ng-show="isLoggedIn()"  class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
+<nav ng-show="isLoggedIn()"  class="navbar navbar-default" ng-controller="NavbarCtrl">
 
   <div class="container ">
 
     <div class="row">
-      <div class="navbar-header">
-      </div>
+     <div class="navbar-heawder">
+          </div>
       <div id="navbar-main">
         <ul class="nav navbar-nav navbar-right">
-           <li ng-class="{active: isActive('/viewdetails')}"><a href="/viewdetails"><span class="glyphicon glyphicon-dashboard"/> Start</a></li>
-          <li ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"/> Inställningar</a></li>
-          <li ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()"><span class="glyphicon glyphicon-log-out"/> Logga ut</a></li>
+           <li ng-class="{active: isActive('/viewdetails')}"><a href="/viewdetails"><i class="glyphicon glyphicon-dashboard"></i> Start</a></li>
+          <li ng-class="{active: isActive('/settings')}"><a href="/settings"><i class="glyphicon glyphicon-cog"></i> Inställningar</a></li>
+          <li ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()"><i class="glyphicon glyphicon-log-out"></i> Logga ut</a></li>
         </ul>
       </div>
 

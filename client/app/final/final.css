@@ -30,7 +30,7 @@ input[type=checkbox], input[type=radio]{
 /* StartTest btn */
 .btn-final {
   margin:7px;
-  font-size: 1.3em;
+  font-size: 1.1em;
   line-height: 1;
   padding: 15px;
   border-radius: 5000px !important;
