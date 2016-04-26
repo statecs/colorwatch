@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-  .controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, $http) {
+  .controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, $http, $window) {
 
     $scope.loading = true;
     $scope.poll = {};
@@ -58,6 +58,7 @@ angular.module('colorwatchApp')
             return;
           }
         });
+        $window.scrollTo(0,0); //Scroll to top to show the alert message
         $location.path('/oversikt');
       });
     }

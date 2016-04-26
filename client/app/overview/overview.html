@@ -15,15 +15,15 @@
 				<legend>Fråga {{$index + 1}}</legend>
 				<div class="row image-ctn">
 					<div class="col col-md-4 col-xs-6 col-md-offset-2">
-						<img ng-class="{true: 'op-selected'}[question.userVote == 'choice_alt1']" ng-src="{{question.img1_url}}" ng-model="question.userVote" ng-click="vote('choice_alt1', $index+1)" class="img-responsive" alt="Vit text på svart bakgrund"></img>
+						<img ng-class="{true: 'op-selected'}[question.userVote == 'choice_alt1']" ng-src="{{question.img1_url}}" ng-model="question.userVote" ng-click="vote('choice_alt1', $index+1)" class="img-responsive" alt="Alternativ 1"></img>
 				   		 <button ng-if="question.userVote == 'choice_alt1'" class="btn" ng-model="question.userVote"  alt="Vald" btn-radio="'choice_alt1'">Vald</button>
-          				<button ng-if="question.userVote != 'choice_alt1'" class="btn" ng-model="question.userVote" alt="Välj" ng-click="vote('choice_alt1', $index+1)" btn-radio="'choice_alt1'">Välj</button>
+          				<button ng-if="question.userVote != 'choice_alt1'" class="btn" ng-model="question.userVote" alt="Välj alternativ 1" ng-click="vote('choice_alt1', $index+1)" btn-radio="'choice_alt1'">Välj</button>
 			   		</div>
 			   		<div class="col col-md-4 col-xs-6">
-			   			<img ng-class="{true: 'op-selected'}[question.userVote == 'choice_alt2']" ng-src="{{question.img2_url}}" ng-model="question.userVote" ng-click="vote('choice_alt2', $index+1)" class="img-responsive" alt="Röd text på svart bakgrund"></img>
+			   			<img ng-class="{true: 'op-selected'}[question.userVote == 'choice_alt2']" ng-src="{{question.img2_url}}" ng-model="question.userVote" ng-click="vote('choice_alt2', $index+1)" class="img-responsive" alt="Alternativ 2"></img>
 
 						<button ng-if="question.userVote == 'choice_alt2'" class="btn" ng-model="question.userVote" btn-radio="'choice_alt2'">Vald</button>
-           				<button ng-if="question.userVote != 'choice_alt2'" class="btn" ng-model="question.userVote" ng-click="vote('choice_alt2', $index+1)" btn-radio="'choice_alt2'">Välj</button>
+           				<button alt="Välj alternativ 2" ng-if="question.userVote != 'choice_alt2'" class="btn" ng-model="question.userVote" ng-click="vote('choice_alt2', $index+1)" btn-radio="'choice_alt2'">Välj</button>
 			   		</div>
 		   		</div>
 			</fieldset>
