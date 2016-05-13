@@ -6,6 +6,7 @@
     "angular-aria": "~1.4.5",
     "angular-bootstrap": "~0.11.0",
     "angular-cookies": ">=1.2.*",
+    "angular-consent": ">=1.0.*",
     "angular-resource": ">=1.2.*",
     "angular-route": ">=1.2.*",
     "angular-sanitize": ">=1.2.*",
