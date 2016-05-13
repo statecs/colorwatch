@@ -4,6 +4,7 @@ angular.module('colorwatchApp', [
   'ngFileUpload',
   'ngStorage',
   'ngCookies',
+  'angularConsent',
   'ngResource',
   'ngSanitize',
   'ngRoute',
