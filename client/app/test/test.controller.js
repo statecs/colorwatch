@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-  .controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, $http) {
+  .controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, $http, $window) {
 
     $scope.loading = true;
     $scope.poll = {};
@@ -35,8 +35,6 @@ angular.module('colorwatchApp')
       $scope.poll.userVote = userChoice;
       $scope.poll.userHasVoted = true;
 
-      $rootScope.amt += 3;
-
       var nextQuestion = parseInt($routeParams.questionNr) + 1;
 
       $http.put('/api/polls/', {questionNr: $routeParams.questionNr, userVote: userChoice}).then(function(){
@@ -51,6 +49,7 @@ angular.module('colorwatchApp')
     };
 
     $scope.nextPage = function(){
+      $rootScope.progressValue = $scope.currentQuestion;
       $http.get('/api/polls/').then(function(res){
         res.data.forEach(function(element){
           if(!element.userHasVoted){
@@ -58,6 +57,7 @@ angular.module('colorwatchApp')
             return;
           }
         });
+        $window.scrollTo(0,0); //Scroll to top to show the alert message
         $location.path('/oversikt');
       });
     }

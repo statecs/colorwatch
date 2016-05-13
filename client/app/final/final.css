@@ -19,9 +19,10 @@
     padding:20px;
     border-radius: 5000px !important;
 }
-.checkbox-inline {
-    padding-left:40px;
-    font-size: 20px;
+.check-box span{
+ padding-left:10px;
+  font-size: 20px;
+  font-weight: 400;
 }
 input[type=checkbox], input[type=radio]{
      zoom:200%;
@@ -30,9 +31,9 @@ input[type=checkbox], input[type=radio]{
 /* StartTest btn */
 .btn-final {
   margin:7px;
-  font-size: 1.3em;
-  line-height: 1;
+  font-size: 1.1em;
   padding: 15px;
+  letter-spacing: 0.5px;
   border-radius: 5000px !important;
 }
 

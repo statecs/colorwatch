@@ -2,11 +2,12 @@
 /* StartTest btn */
 .btn-start {
   color: #ffffff !important;
-  background: #f18d30;
-  font-size: 1.3em;
+  background: #E37712;
+  font-size: 2em;
   line-height: 1;
   padding: 17px;
   border-radius: 5000px !important;
+  font-weight: 700;
 }
 
 .btn-start:hover{
@@ -27,4 +28,7 @@
     font-size:120% !important;
     line-height: 1.5em;
 }
+/* StartTest btn */
+.btn-start {
+  font-size: 1.5em;
 }
