@@ -37,9 +37,11 @@ body {
 }
 body {
   font-family: "AvantGardeGothic Semi","Myriad Pro",Helvetica,Arial,sans-serif;
-  color: #697377;
+  color: #333;
   background-color: #efeeed;
 }
+
+
 
 ul.no-bullet
 {
@@ -80,8 +82,6 @@ ul.no-bullet
     .navbar-toggle {
         display: none;
     }
-
-
     .navbar-nav {
         float: left;
         margin: 0;
@@ -95,21 +95,42 @@ ul.no-bullet
     }
    
 }
-.progress {
-  margin-bottom: 0;
-  height: 0.5em;
-  i { line-height: 0.5em; }
+
+.progress{
+  height: 40px;
 }
 .progress-bar {
+  padding-top:13px;
+  font-size: 15px;
   transition: width 1s ease-in-out;
 }
 .progress-bar-success {
-    background-color: #E27E2F;
+  color:#000;
+    background-color: #fff;
 }
-
+p.small {
+  font-size: 1.1em;
+  font-weight: 600;
+}
 @media (max-width: 640px) {
   .top-margin{
     padding-top:12%;
+  }
+  .progress-bar {
+  font-size: 12px;
+  }
+  .jumbotron{
+    padding:20px;
+  }
+  .btn-final{
+    font-size: 1em !important;
+  }
+  .btn-group button {
+    margin: 0px 10px; 
+  }
+  .thanks{
+   margin-top:100px; 
+   padding:20px;
   }
 }
 @media (min-width: 2000px) {
@@ -127,6 +148,12 @@ button {
 a{
   outline-color: #E27E2F;
   color:#E27E2F;
+}
+:focus {
+    outline:2px solid #000000;
+}
+.btn-default:focus, .btn-default:active{
+  border:1px solid #000000;
 }
 
 .pagination>li.active>a {
@@ -161,7 +188,7 @@ button, .button, input[type="button"], input[type="submit"]{
   padding: 1em 1.3em;
   border: rgba(226, 126, 47, 1) 1px solid;
   font-weight: 600;
-  color: #697377;
+  color: #383737;
 }
 .btn:hover {
     background-color: #000;

@@ -3,7 +3,7 @@
 .btn-start {
   color: #ffffff !important;
   background: #E37712;
-  font-size: 1.5em;
+  font-size: 2em;
   line-height: 1;
   padding: 17px;
   border-radius: 5000px !important;
@@ -28,4 +28,7 @@
     font-size:120% !important;
     line-height: 1.5em;
 }
+/* StartTest btn */
+.btn-start {
+  font-size: 1.5em;
 }

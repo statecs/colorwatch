@@ -3,16 +3,11 @@
 angular.module('colorwatchApp')
   .controller('NavbarCtrl', function ($rootScope, $scope, $location, Auth, $timeout) {
   
-
-  $rootScope.countTo = $rootScope.amt;
   $rootScope.countFrom = 0;
   
   $timeout(function(){
-    $rootScope.progressValue = $rootScope.amt;
+    $rootScope.progressValue = $scope.currentQuestion;
   }, 200);
-
-
-
 
     $scope.menu = [{
       'title': 'Start',

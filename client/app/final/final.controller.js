@@ -43,9 +43,8 @@ angular.module('colorwatchApp')
       disabilitiesModel.state();
     };
 
-    $rootScope.amt = 78;
+
     $scope.submit = function(){
-      $rootScope.amt = 100;
       var choosedDisabilities = [];   //Disabilites choosed by the user
       var choosedDiagnoses = [];      //Diagnoses choosed by the user
 
@@ -78,3 +77,24 @@ angular.module('colorwatchApp')
 
     };
   });
+
+    // Adding as directive.
+angular.module('colorwatchApp')
+.directive('input', ['$interval', function($interval) {
+    return {
+      restrict: 'E', // It restricts that the directive will only be a HTML element (tag name), not an attribute.
+      link: function(scope, elm, attr) {
+        if (attr.type === 'checkbox') {
+          elm.on('keypress', function(event) {
+            var keyCode = (event.keyCode ? event.keyCode : event.which);
+            if (keyCode === 13) {
+              event.preventDefault(); // only when enter key is pressed.
+              elm.trigger('click');
+              scope.$apply();
+            }
+          });
+        }
+      }
+    };
+  }
+]);
