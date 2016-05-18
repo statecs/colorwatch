@@ -112,6 +112,9 @@ p.small {
   font-size: 1.1em;
   font-weight: 600;
 }
+.jumbotron p{
+  margin-bottom: 5px;
+}
 @media (max-width: 640px) {
   .top-margin{
     padding-top:12%;
@@ -150,10 +153,10 @@ a{
   color:#E27E2F;
 }
 :focus {
-    outline:2px solid #000000;
+    outline:3px solid #000000;
 }
 .btn-default:focus, .btn-default:active{
-  border:1px solid #000000;
+  border:1px solid #000000 !important;
 }
 
 .pagination>li.active>a {
