@@ -1,13 +1,14 @@
 
 /* StartTest btn */
 .btn-start {
-  color: #ffffff !important;
-  background: #E37712;
-  font-size: 2em;
+  color: #333333;
+  background: #efefee;
+  font-size: 1.6em;
   line-height: 1;
   padding: 17px;
   border-radius: 5000px !important;
   font-weight: 700;
+  border: solid 1px rgba(0,0,0,0.05); !important;
 }
 .btn-div{
   padding: 20px 20px 0px 20px;
