@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-  .controller('TestCtrl', function ($scope, $rootScope, $routeParams, $location, $http, $window) {
+  .controller('TestCtrl', function ($scope, $routeParams, $location, $http, $window) {
 
     $scope.loading = true;
     $scope.poll = {};
@@ -16,7 +16,9 @@ angular.module('colorwatchApp')
        * current question in the test, used also for activate current tab in pagination
        * @type {Number}
        */
-      $scope.currentQuestion = $routeParams.questionNr || 1;
+      $scope.currentQuestion = $scope.progressValue = $routeParams.questionNr || 1;
+      
+      $scope.countFrom = 0;
       /**
        * number of pages per page, always set to 1 in this project
        * @type {Number}
@@ -49,7 +51,7 @@ angular.module('colorwatchApp')
     };
 
     $scope.nextPage = function(){
-      $rootScope.progressValue = $scope.currentQuestion;
+      $scope.currentQuestion = $scope.progressValue;
       $http.get('/api/polls/').then(function(res){
         res.data.forEach(function(element){
           if(!element.userHasVoted){

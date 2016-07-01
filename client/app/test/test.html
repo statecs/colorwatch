@@ -1,4 +1,7 @@
-<div ng-include src="'components/navbar/test_topbar.html'"></div>
+<!--<div ng-include src="'components/navbar/progressbar.html'"></div>-->
+
+  <progressbar class="progress active" animate="true" max="10" value="progressValue" type="success"><span count-to="{{currentQuestion}}" duration="1" count-from="{{countFrom}}"></span> Fråga {{currentQuestion}} av {{totalQuestions}}</progressbar>
+
 <div class="container top">
   <div class="page-header">
     <h1 class="text-center">Vilken text är lättast att läsa?</h1>
