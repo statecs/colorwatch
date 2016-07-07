@@ -1,42 +1,49 @@
 <div class="container jumbotron">
 			<div class="form-top row final-form">
 
-	<form role="form">
+	<form name="finalForm" novalidate >
 
 	<h2>Vi behöver veta lite mer om dig för att kunna få ett så bra resultat som möjligt</h2>
     <hr aria-hiden="true" />
    
-		<div class="form-group">
+		<div class="form-group" >
 			<label for="disabilities">
 				<p>Har du problem med något av nedanstående? - Med problem menar vi att det skapar svårigheter för dig i din vardag</p>
 			</label>
 			
-			<div class="form-group btn-group" id="disabilities">
-		    	<button type="checkbox" ng-repeat="disability in disabilitiesModel" ng-disabled="noDisabilities" class="btn-default btn-final" ng-model="disability.state" aria-checked="false" btn-checkbox>{{disability.name}}</button>
+			<div class="form-group btn-group" id="disabilities" >
+		    	<label class="btn-default btn-final" ng-repeat="disability in disabilitiesModel"><input type="checkbox" ng-disabled="noDisabilities" ng-change="disabilityCheck(disability)" ng-model="disability.state">{{disability.name}}</label>
+
 		  	</div>
 		    <div class="form-group input-group col-xs-12 col-sm-12 col-md-12"><label for="otherDisability"><p class="small">Fyll i om du har någon annan svårighet:</p></label>
-	        	<input type="text" class="form-control" ng-model="otherDisability" ng-disabled="noDisabilities">
+	        	<input ng-change="disabilityCheck(otherDisability)" type="text" class="form-control" ng-model="otherDisability" ng-disabled="noDisabilities">
 	        </div>
 	        <label class="form-group check-box">
-	            <input type="checkbox" name="optionDisability" ng-model="noDisabilities" id="optDisability"><span>Nej, jag har ingen speciell svårighet</span>
+	            <input type="checkbox" name="optionDisability" ng-change="disabilityCheck(noDisabilities)"  ng-model="noDisabilities" id="optDisability"><span>Nej, jag har ingen speciell svårighet</span>
 	        </label>
+
+	        	  <p class="error text-danger" ng-show="disabilityCount==0">Välj minst en svårighet </p>
+
 		</div>
 		<div class="form-group">
 			<label for="diagnoses">
 				<h3>Har du någon diagnos?</h3>
 			</label>
 			<div class="form-group btn-group" id="diagnoses">
-			         <button type="checkbox" ng-repeat="diagnose in diagnosesModel" class="btn-default btn-final" ng-click ng-model="diagnose.state" ng-disabled="noDiagnoses" aria-checked="false"  btn-checkbox>{{diagnose.name}}</button>
+			         <label type="checkbox" ng-repeat="diagnose in diagnosesModel" class="btn-default btn-final"><input type="checkbox" ng-model="diagnose.state" ng-change="diagnosesCheck(diagnose)" ng-disabled="noDiagnoses">{{diagnose.name}}</label>
 		    </div>
 		    <div class="form-group input-group col-xs-12 col-sm-12 col-md-12"><label for="otherDiagnose"><p class="small">Fyll i om du har någon annan diagnos</p></label>
-	        	<input type="text" class="form-control" ng-model="otherDiagnose" ng-disabled="noDiagnoses">
+	        	<input type="text" class="form-control" ng-change="diagnosesCheck(otherDiagnose)" ng-model="otherDiagnose" ng-disabled="noDiagnoses">
 	        </div>
 	        <label class="form-group check-box">
-	            <input type="checkbox" name="optionDiagnose" ng-model="noDiagnoses" id="optDiagnose"><span>Nej, jag har ingen diagnos</span>
+	            <input type="checkbox" name="optionDiagnose" ng-change="diagnosesCheck(noDiagnoses)" ng-model="noDiagnoses" id="optDiagnose"><span>Nej, jag har ingen diagnos</span>
 	        </label>
+
+	        <p class="error text-danger" ng-show="diagnosesCount==0">Välj minst en diagnos </p>
+	        
 		</div>
 		<div class="form-group">
-		<button type="submit" ng-click="submit()" class="btn btn-start">Skicka in</button>
+		<button type="submit" class="btn btn-start" ng-click="submit()">Skicka in</button>
 
 		  </div>
 	</form></div>

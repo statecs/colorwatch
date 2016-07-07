@@ -43,37 +43,63 @@ angular.module('colorwatchApp')
       disabilitiesModel.state();
     };
 
+    $scope.disabilityCount = 0;
+    $scope.disabilityCheck = function(disability, noDisabilities, otherDisability){
+      if(disability.state || $scope.noDisabilities == true) {
+        $scope.disabilityCount--;//opposite
+      } else if ($scope.otherDisability){
+          $scope.disabilityCount = 1;
+        } else{
+        $scope.disabilityCount++;
+      }
+    };
+
+    $scope.diagnosesCount = 0;
+    $scope.diagnosesCheck = function(diagnose, noDiagnoses, otherDiagnose){
+      if(diagnose.state || $scope.noDiagnoses == true) {
+        $scope.diagnosesCount--;//opposite
+      } else if ($scope.otherDisability){
+          $scope.diagnosesCount = 1;
+        } else{
+        $scope.diagnosesCount++;
+      }
+    };
 
     $scope.submit = function(){
-      var choosedDisabilities = [];   //Disabilites choosed by the user
-      var choosedDiagnoses = [];      //Diagnoses choosed by the user
 
-      //Filter out all choosen disabilities and diagnoses
-      $.each($scope.disabilitiesModel, function(index, disability){
-        if(disability.state){
-          choosedDisabilities.push(disability.name);
+      if ($scope.disabilityCount != 0 && $scope.diagnosesCount != 0) {
+        
+        var choosedDisabilities = [];   //Disabilites choosed by the user
+        var choosedDiagnoses = [];      //Diagnoses choosed by the user
+
+        //Filter out all choosen disabilities and diagnoses
+        $.each($scope.disabilitiesModel, function(index, disability){
+          if(disability.state){
+            choosedDisabilities.push(disability.name);
+          }
+        });
+
+        //If other disability is added
+        if($scope.otherDisability){
+          choosedDisabilities.push($scope.otherDisability);
         }
-      });
 
-      //If other disability is added
-      if($scope.otherDisability){
-        choosedDisabilities.push($scope.otherDisability);
-      }
+        $.each($scope.diagnosesModel, function(index, diagnose){
+          if(diagnose.state){
+            choosedDiagnoses.push(diagnose.name);
+          }
+        });
 
-      $.each($scope.diagnosesModel, function(index, diagnose){
-        if(diagnose.state){
-          choosedDiagnoses.push(diagnose.name);
+        //If other diagnose is added
+        if($scope.otherDiagnose){
+          choosedDiagnoses.push($scope.otherDiagnose);
         }
-      });
-
-      //If other diagnose is added
-      if($scope.otherDiagnose){
-        choosedDiagnoses.push($scope.otherDiagnose);
+        $http.post('/api/results', {diagnoses: choosedDiagnoses, disabilities: choosedDisabilities}).then(function(res){
+          socket.emit('send:vote', {data: res.data});
+          $location.path('/final-result');
+        });
       }
-      $http.post('/api/results', {diagnoses: choosedDiagnoses, disabilities: choosedDisabilities}).then(function(res){
-        socket.emit('send:vote', {data: res.data});
-        $location.path('/final-result');
-      });
+      
 
     };
   });
