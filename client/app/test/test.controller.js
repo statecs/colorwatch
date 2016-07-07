@@ -5,6 +5,12 @@ angular.module('colorwatchApp')
 
     $scope.loading = true;
     $scope.poll = {};
+
+    $scope.totalQuestions = 10;
+    $scope.currentQuestion = 0;
+    $scope.value = 0;
+    var valueProgress = 0.2;
+    $scope.maxval = 1.2;
     $http.get('/api/polls/').then(function(res){
       $scope.polls = res.data;
       /**
@@ -16,9 +22,8 @@ angular.module('colorwatchApp')
        * current question in the test, used also for activate current tab in pagination
        * @type {Number}
        */
-      $scope.currentQuestion = $scope.progressValue = $routeParams.questionNr || 1;
-      
-      $scope.countFrom = 0;
+      $scope.currentQuestion = $routeParams.questionNr || 1;
+      $scope.value = valueProgress + $scope.currentQuestion / $scope.totalQuestions;
       /**
        * number of pages per page, always set to 1 in this project
        * @type {Number}
