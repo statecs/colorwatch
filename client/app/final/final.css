@@ -39,8 +39,9 @@ input[type=checkbox], input[type=radio]{
   -ms-user-select: none;
 }
 
-.btn-final:focus{
+.btn-default:focus{
   outline:none;
+
 }
 .btn-final.active{
   background-color: #000;
