@@ -1,12 +1,15 @@
 'use strict';
 
 angular.module('colorwatchApp')
-  .controller('FinalCtrl', function ($scope, $cookies, $location, $http, socket, $rootScope) {
+  .controller('FinalCtrl', function ($scope, $cookies, $location, $http, socket) {
 
-    $scope.noDisabilities = false;
-    $scope.noDiagnoses = false;
-    $scope.otherDiagnose = null;
+    $scope.noDisabilities  = false;
+    $scope.noDiagnoses     = false;
+    $scope.otherDiagnose   = null;
     $scope.otherDisability = null;
+
+    $scope.disabilitiesSelected = false;
+    $scope.diagnosesSelected = false;
 
     $scope.disabilitiesModel = [
       {name: 'Lässvårigheter', state: false},
@@ -33,85 +36,99 @@ angular.module('colorwatchApp')
       {name: 'Psykisk ohälsa', state: false},
       {name: 'RP, retinitis pigmentosa', state: false},
       {name: 'Utvecklingsstörning', state: false}
-];
+    ];
 
-    $scope.prevPage = function(){
+    $scope.prevPage = function () {
       window.history.back();
     };
 
-    $scope.myFunc = function(){
-      disabilitiesModel.state();
-    };
-
-    $scope.disabilityCount = 0;
-    $scope.disabilityCheck = function(disability, noDisabilities, otherDisability){
-      if(disability.state || $scope.noDisabilities == true) {
-        $scope.disabilityCount--;//opposite
-      } else if ($scope.otherDisability){
-          $scope.disabilityCount = 1;
-        } else{
-        $scope.disabilityCount++;
-      }
-    };
-
-    $scope.diagnosesCount = 0;
-    $scope.diagnosesCheck = function(diagnose, noDiagnoses, otherDiagnose){
-      if(diagnose.state || $scope.noDiagnoses == true) {
-        $scope.diagnosesCount--;//opposite
-      } else if ($scope.otherDisability){
-          $scope.diagnosesCount = 1;
-        } else{
-        $scope.diagnosesCount++;
-      }
-    };
-
-    $scope.submit = function(){
-
-      if ($scope.disabilityCount != 0 && $scope.diagnosesCount != 0) {
-        
-        var choosedDisabilities = [];   //Disabilites choosed by the user
-        var choosedDiagnoses = [];      //Diagnoses choosed by the user
-
-        //Filter out all choosen disabilities and diagnoses
-        $.each($scope.disabilitiesModel, function(index, disability){
-          if(disability.state){
-            choosedDisabilities.push(disability.name);
-          }
+    $scope.checkDisabilities = function () {
+      if ($scope.noDisabilities) {
+        $scope.disabilitiesModel.forEach(function (item) {
+          item.state = false;
         });
-
-        //If other disability is added
-        if($scope.otherDisability){
-          choosedDisabilities.push($scope.otherDisability);
+        $scope.otherDisability = null;
+        $scope.disabilitiesSelected = true;
+      }
+      if ($scope.otherDisability) {
+        $scope.disabilitiesSelected = true;
+      }
+      $scope.disabilitiesModel.forEach(function (disability) {
+        if (disability.state) {
+          $scope.disabilitiesSelected = true;
         }
+      });
 
-        $.each($scope.diagnosesModel, function(index, diagnose){
-          if(diagnose.state){
+    };
+
+    $scope.checkDiagnoses = function () {
+      $scope.diagnosesSelected = false;
+
+      if ($scope.noDiagnoses) {
+        $scope.diagnosesModel.forEach(function (item) {
+          item.state = false;
+        });
+        $scope.otherDiagnose = null;
+        $scope.diagnosesSelected = true;
+      }
+      if ($scope.otherDiagnose) {
+        $scope.diagnosesSelected = true;
+      }
+      $scope.diagnosesModel.forEach(function (diagnose) {
+        if (diagnose.state) {
+          $scope.diagnosesSelected = true;
+        }
+      });
+    };
+
+    $scope.submit = function () {
+      console.log('submit');
+      var choosedDisabilities = [];   //Disabilites choosed by the user
+      var choosedDiagnoses = [];      //Diagnoses choosed by the user
+
+      if ($scope.disabilitiesSelected && $scope.diagnosesSelected) {
+        if ($scope.otherDiagnose) {
+          choosedDiagnoses.push($scope.otherDiagnose);
+        }
+        $scope.diagnosesModel.forEach(function (diagnose) {
+          if (diagnose.state) {
             choosedDiagnoses.push(diagnose.name);
           }
         });
 
-        //If other diagnose is added
-        if($scope.otherDiagnose){
-          choosedDiagnoses.push($scope.otherDiagnose);
+        if ($scope.otherDisability) {
+          choosedDisabilities.push($scope.otherDisability);
         }
-        $http.post('/api/results', {diagnoses: choosedDiagnoses, disabilities: choosedDisabilities}).then(function(res){
+        $scope.disabilitiesModel.forEach(function (disability) {
+          if (disability.state) {
+            choosedDisabilities.push(disability.name);
+          }
+        });
+
+        console.log(choosedDiagnoses, choosedDisabilities);
+        $http.post('/api/results', {
+          diagnoses: choosedDiagnoses,
+          disabilities: choosedDisabilities
+        }).then(function successCallback(res) {
           socket.emit('send:vote', {data: res.data});
           $location.path('/final-result');
+        }, function errorCallback(err) {
+          console.log(err);
         });
       }
-      
+
 
     };
   });
 
-    // Adding as directive.
+// Adding as directive.
 angular.module('colorwatchApp')
-.directive('input', ['$interval', function($interval) {
+  .directive('input', ['$interval', function () {
     return {
       restrict: 'E', // It restricts that the directive will only be a HTML element (tag name), not an attribute.
-      link: function(scope, elm, attr) {
+      link: function (scope, elm, attr) {
         if (attr.type === 'checkbox') {
-          elm.on('keypress', function(event) {
+          elm.on('keypress', function (event) {
             var keyCode = (event.keyCode ? event.keyCode : event.which);
             if (keyCode === 13) {
               event.preventDefault(); // only when enter key is pressed.
@@ -123,4 +140,4 @@ angular.module('colorwatchApp')
       }
     };
   }
-]);
+  ]);
