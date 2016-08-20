@@ -2,9 +2,7 @@
 
 angular.module('colorwatchApp')
   .controller('MainCtrl', function ($scope, $q, $http, $location, $rootScope) {
-    $scope.descriptionText = 'Här följer tio enkla frågor på hur du uppfattar texter och färgers läsbarhet på webben. Detta för att kunna underlätta för Funka att samla in relevant data kring färgkontraster. Du väljer den du tycker är bäst genom att klicka på respektive bild i formuläret. Uppskattad tid ca 10 min.';
-
-   $rootScope.amt = 0;
+    $scope.descriptionText = 'Du kommer få svara på 10 frågor om vilka textfärger som är lättast för dig att läsa. Detta hjälper oss på Funka avgöra vilka färger som borde användas på webbplatser. Det tar runt 5 minuter. Tack för att du hjälper till!';
 
     /**
      * initialize images to rate in test

@@ -1,0 +1,29 @@
+
+<div ng-controller="NavbarCtrl">
+
+  <!--<progressbar class="progress active" animate="true" max="10" value="progressValue" type="success"><span count-to="{{currentQuestion}}" duration="1" count-from="{{countFrom}}"></span> Fråga {{currentQuestion}} av {{totalQuestions}}</progressbar>
+-->
+
+  <uib-progressbar max="max" value="dynamic">
+    <span style="color:white; white-space:nowrap;">{{dynamic}} / {{max}}</span>
+  </uib-progressbar>
+
+<div class="corner-wrapper">
+<!-- TopWrapper -->
+    <!--<div class="corners-top-wrapper fadeIn">-->
+      <!-- TopLeft -->
+          <!--<div class="corners corner--t-l hidden-xs"><button type="button" class="btn" ng-click="prevPage()">Tillbaka</button></div>-->
+      <!-- TopMiddle -->
+
+       <!-- TopRight -->
+     <div ng-show="checkQuestion()" class="corners corner--t-r js-fade-this fadeIn">
+         <button type="button"  class="btn" ng-click="nextPage()"> Fortsätt </button></div>
+    </div>
+    <!-- BottomWrapper -->
+
+    <div ng-show="isLoggedIn()"  class="corners-bottom-wrapper hidden-xs">
+        <div ng-include src="'components/navbar/navbar.html'"></div>
+    </div>
+
+
+</div></div>
