@@ -1,4 +1,3 @@
-<div ng-include src="'components/navbar/main_topbar.html'"></div>
 <div class="container jumbotron">
   <div class="row">
     <div class="col-xs-5">
@@ -9,7 +8,9 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12"><hr></div>
+    <div class="col-xs-12">
+      <hr>
+    </div>
   </div>
   <div class="row" ng-switch on="colors.length">
     <ul ng-switch-when="0" class="no-bullet">
@@ -18,9 +19,11 @@
     <div ng-switch-default>
       <div ng-repeat="color in colors | filter: query">
         <span class="pull-right button-group">
-                <button type="button" class="btn btn-danger" ng-click="removeColor(color._id, $index)">Ta bort <span class="glyphicon glyphicon-trash"></span></button>
+                <button type="button" class="btn btn-danger" ng-click="removeColor(color._id, $index)">Ta bort <span
+                  class="glyphicon glyphicon-trash"></span></button>
         </span>
-        <img width="200px" ng-src="{{color.image_secureurl}}" class="img-responsive" style="border:1px solid black" alt="Placeholder image"/>
+        <img width="200px" ng-src="{{color.image_secureurl}}" class="img-responsive" style="border:1px solid black"
+             alt="Placeholder image"/>
         <span>Textfärg: {{color.textcolor}}</span>
         <span>Backgrundsfärg: {{color.backcolor}}</span>
         <hr/>
@@ -28,42 +31,45 @@
     </div>
   </div>
   <div class="row">
-    <button type="button" ng-click="removeTest()" class="btn btn-danger">Rensa testet <span class="glyphicon glyphicon-trash"></span></button>
+    <button type="button" ng-click="removeTest()" class="btn btn-danger">Rensa testet <span
+      class="glyphicon glyphicon-trash"></span></button>
   </div>
   <div class="row row-margin">
 
-      <h2>Byt lösenord</h2>
+    <h2>Byt lösenord</h2>
 
 
-      <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
+    <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
 
-        <div class="form-group">
-          <label>Nuvarande lösenord</label>
+      <div class="form-group">
+        <label>Nuvarande lösenord</label>
 
-          <input type="password" name="password" class="form-control" ng-model="user.oldPassword"
-                 mongoose-error/>
-          <p class="help-block" ng-show="form.password.$error.mongoose">
-              {{ errors.other }}
-          </p>
-        </div>
+        <input type="password" name="password" class="form-control" ng-model="user.oldPassword"
+               mongoose-error/>
+        <p class="help-block" ng-show="form.password.$error.mongoose">
+          {{ errors.other }}
+        </p>
+      </div>
 
-        <div class="form-group">
-          <label>Nytt lösenord</label>
+      <div class="form-group">
+        <label>Nytt lösenord</label>
 
-          <input type="password" name="newPassword" class="form-control" ng-model="user.newPassword"
-                 ng-minlength="3"
-                 required/>
-          <p class="help-block"
-             ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
-            Lösenordet måste vara minst 3 tecken långt.
-          </p>
-        </div>
+        <input type="password" name="newPassword" class="form-control" ng-model="user.newPassword"
+               ng-minlength="3"
+               required/>
+        <p class="help-block"
+           ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
+          Lösenordet måste vara minst 3 tecken långt.
+        </p>
+      </div>
 
-        <p class="help-block"> {{ message }} </p>
-        <button class="btn btn-lg btn-primary" type="submit">Spara ändringar</button>
-      </form>
+      <p class="help-block"> {{ message }} </p>
+      <button class="btn btn-lg btn-primary" type="submit">Spara ändringar</button>
+    </form>
 
-    </div>
+  </div>
 
-
+</div>
+<div class="corners-bottom-wrapper">
+  <div ng-include src="'components/navbar/navbar_bottom.html'"></div>
 </div>
