@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('colorwatchApp')
-  .controller('OverviewCtrl', function ($scope, $location, $http, $rootScope) {
+  .controller('OverviewCtrl', function ($scope, $location, $http, $rootScope, $window) {
     $scope.overviewDescText = 'Här av du möjlighet att ändra dina val, tryck sedan fortsätt.';
 
     $http.get('/api/polls').then(function(res){
@@ -17,8 +17,10 @@ angular.module('colorwatchApp')
     	$location.path('/test/1');
     };
 
+     $rootScope.amt = 55;
     $scope.nextPage = function(){
       $rootScope.amt = 75;
+      $window.scrollTo(0,0); //Scroll to top to show the alert message
       $location.path('/final-form')
     };
 

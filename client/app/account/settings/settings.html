@@ -1,5 +1,5 @@
 <div ng-include src="'components/navbar/main_topbar.html'"></div>
-<div class="container jumbotron-large">
+<div class="container jumbotron">
   <div class="row">
     <div class="col-xs-5">
       <a href="/newcolor" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Ny färg</a>
@@ -15,8 +15,8 @@
     <ul ng-switch-when="0">
       <li>Inga färger i databasen. Vill du <a href="#/new">skapa en</a>?</li>
     </ul>
-    <ul class="no-bullet" ng-switch-default>
-      <li ng-repeat="color in colors | filter: query">
+    <div ng-switch-default>
+      <div ng-repeat="color in colors | filter: query">
         <span class="pull-right button-group">
                 <button type="button" class="btn btn-danger" ng-click="removeColor(color._id, $index)" ng-confirm-click="Are you Sure?">Ta bort <span class="glyphicon glyphicon-trash"></span></button>
         </span>
@@ -24,8 +24,8 @@
         <span>Textfärg: {{color.textcolor}}</span>
         <span>Backgrundsfärg: {{color.backcolor}}</span>
         <hr/>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
   <div class="row row-margin">
     
