@@ -22,7 +22,7 @@
           <input type="checkbox" name="optionDisability" ng-change="checkDisabilities()" ng-model="noDisabilities"
                  id="optDisability"><span>Nej, jag har ingen speciell svårighet</span>
         </label>
-
+        <div class="alert alert-danger" ng-show="errorDisability" ng-bind="errorDisability"></div>
        <!-- <p class="error text-danger" ng-show="!disabilitiesSelected">Välj minst en svårighet </p>-->
       </fieldset>
       <fieldset class="form-group" ng-disabled="!disabilitiesSelected">
@@ -44,11 +44,11 @@
 
         </div>
 
-        <!--<p class="error text-danger" ng-show="!diagnosesSelected">Välj minst en diagnos </p> -->
+        <div class="alert alert-danger" ng-show="errorDiagnose" ng-bind="errorDiagnose"></div>
 
       </fieldset>
         <div class="form-group">
-        <button type="submit" class="btn btn-start" ng-click="submit()" ng-disabled="!disabilitiesSelected || !diagnosesSelected">Skicka in</button>
+        <button type="submit" class="btn btn-start" ng-click="submit()">Skicka in</button>
       </div>
 
     </form>

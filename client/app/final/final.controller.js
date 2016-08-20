@@ -43,19 +43,27 @@ angular.module('colorwatchApp')
     };
 
     $scope.checkDisabilities = function () {
+      $scope.disabilitiesSelected = false;
+
       if ($scope.noDisabilities) {
         $scope.disabilitiesModel.forEach(function (item) {
           item.state = false;
         });
         $scope.otherDisability = null;
         $scope.disabilitiesSelected = true;
+        $scope.errorDisability = "";
+      }
+      else{
+
       }
       if ($scope.otherDisability) {
         $scope.disabilitiesSelected = true;
+        $scope.errorDisability = "";
       }
       $scope.disabilitiesModel.forEach(function (disability) {
         if (disability.state) {
           $scope.disabilitiesSelected = true;
+          $scope.errorDisability = "";
         }
       });
 
@@ -70,15 +78,19 @@ angular.module('colorwatchApp')
         });
         $scope.otherDiagnose = null;
         $scope.diagnosesSelected = true;
+        $scope.errorDiagnose = "";
       }
       if ($scope.otherDiagnose) {
         $scope.diagnosesSelected = true;
+        $scope.errorDiagnose = "";
       }
       $scope.diagnosesModel.forEach(function (diagnose) {
         if (diagnose.state) {
           $scope.diagnosesSelected = true;
+          $scope.errorDiagnose = "";
         }
       });
+      console.log($scope.diagnosesSelected);
     };
 
     $scope.submit = function () {
@@ -115,6 +127,12 @@ angular.module('colorwatchApp')
         }, function errorCallback(err) {
           console.log(err);
         });
+      }
+      else if($scope.disabilitiesSelected && !$scope.diagnosesSelected) {
+        $scope.errorDiagnose = "Fyll i diagnos";
+      }
+      else {
+        $scope.errorDisability = "Fyll i svårighet";
       }
 
 
