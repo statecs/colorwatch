@@ -42,3 +42,9 @@
     padding-bottom: 20px;
 }
 }
+
+.progress-bar {
+  background-color: white !important;
+  color: black !important;
+  border-right: 2px solid rgba(226, 126, 47, 0.4);
+}

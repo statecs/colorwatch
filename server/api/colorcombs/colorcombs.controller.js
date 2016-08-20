@@ -94,6 +94,18 @@ exports.update = function(req, res) {
   });
 };
 
+
+exports.destroyAll = function(req, res) {
+  Colorcombs.remove({ }, function(err, result){
+    if(!err) {
+      return res.status(200).json(result);
+    }
+    else{
+      return res.status(500).json(err);
+    }
+  });
+};
+
 // Deletes a colorcombs from the DB.
 exports.destroy = function(req, res) {
   Colorcombs.findById(req.params.id, function (err, colorcombs) {

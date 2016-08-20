@@ -17,17 +17,18 @@ exports.newpolls = function(req, res) {
     .sort({'totalNumOfTimesInTest': 1}) //Pick the color combs with least views
     .limit(5)     //The number of colors used in the test
     .exec(function(err, colors) {
-      if(err) { return handleError(res, err);}
+      if(err || colors.length < 5) { return handleError(res, err);}
       var questions = [];
       var combinationsIndices = [];
+      var i = 0;
 
       //Generate all unique combinations of picking 2 out of 5 (total 10 combinations)
-      for(var i = 0; i < 5; i++){
+      for(i = 0; i < 5; i++){
         for(var j = i + 1; j < 5; j++){
           combinationsIndices.push([i,j]);
         }
       }
-      for(var i = 0; i < 10; i++){
+      for(i = 0; i < 10; i++){
         var index = Math.floor((Math.random() * combinationsIndices.length)); //Randomize index from the array of combinations
         var comb = combinationsIndices.splice(index,1); //Get (and remove) the randomized combination
 

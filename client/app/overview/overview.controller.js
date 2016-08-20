@@ -21,7 +21,7 @@ angular.module('colorwatchApp')
     $scope.nextPage = function(){
       $rootScope.amt = 75;
       $window.scrollTo(0,0); //Scroll to top to show the alert message
-      $location.path('/final-form')
+      $location.path('/final-form');
     };
 
 

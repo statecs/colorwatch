@@ -67,6 +67,6 @@ angular.module('colorwatchApp')
         $window.scrollTo(0,0); //Scroll to top to show the alert message
         $location.path('/oversikt');
       });
-    }
+    };
 
   });
