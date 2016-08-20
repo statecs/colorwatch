@@ -57,6 +57,17 @@ exports.update = function(req, res) {
   });
 };
 
+exports.destroyAll = function(req, res) {
+  Result.remove({ }, function(err, result){
+    if(!err) {
+      return res.status(200).json(result);
+    }
+    else{
+      return res.status(500).json(err);
+    }
+  });
+};
+
 // Deletes a Result from the DB.
 exports.destroy = function(req, res) {
   Result.findById(req.params.id, function (err, Result) {

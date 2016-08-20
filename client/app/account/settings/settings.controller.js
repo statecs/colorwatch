@@ -24,6 +24,20 @@ angular.module('colorwatchApp')
       $scope.colors = colors;
     });
 
+    $scope.removeTest = function() {
+      console.log('trying to remove test');
+      $http.delete('/api/results/').then(function(res){
+        console.log('Test removed', res);
+      }, function(err) {
+        console.log(err);
+      });
+      $http.delete('/api/colorcombs/').then(function(res) {
+        console.log('colorcombs removed', res);
+      }, function(err) {
+        console.log(err);
+      });
+      location.reload();
+    };
     $scope.removeColor = function(colorId, index) {
       $http.delete('/api/colorcombs/' + colorId).then(function(){
         $scope.colors.splice(index,1);

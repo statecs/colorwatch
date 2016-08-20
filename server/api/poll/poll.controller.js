@@ -17,7 +17,7 @@ exports.newpolls = function(req, res) {
     .sort({'totalNumOfTimesInTest': 1}) //Pick the color combs with least views
     .limit(5)     //The number of colors used in the test
     .exec(function(err, colors) {
-      if(err) { return handleError(res, err);}
+      if(err || colors.length < 5) { return handleError(res, err);}
       var questions = [];
       var combinationsIndices = [];
 
