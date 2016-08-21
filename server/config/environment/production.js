@@ -15,9 +15,6 @@ module.exports = {
 
   // MongoDB connection options
   mongo: {
-    uri:    process.env.MONGOLAB_URI ||
-            process.env.MONGOHQ_URL ||
-            process.env.OPENSHIFT_MONGODB_DB_URL+process.env.OPENSHIFT_APP_NAME ||
-            'mongodb://colorwatch:colorwatch@ds023088.mlab.com:23088/colorwatch-production'
+    uri:    process.env.MONGODB_URI
   }
 };
