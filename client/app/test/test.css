@@ -14,7 +14,7 @@
 }
 /* box-shadow if selected  */
 .op-selected {
-	border: rgba(226, 126, 47, 1) 5px solid;
+	border: rgba(0,0,0,1) 5px solid;
 	border-radius: 10px;
 	background-image: none;
 	-moz-box-shadow: 0 8px 6px -6px rgba(226, 126, 47, .5);
@@ -43,8 +43,3 @@
 }
 }
 
-.progress-bar {
-  background-color: white !important;
-  color: black !important;
-  border-right: 2px solid rgba(226, 126, 47, 0.4);
-}

@@ -9,7 +9,7 @@ angular.module('colorwatchApp')
     $scope.totalQuestions = 10;
     $scope.currentQuestion = 0;
     $scope.value = 0;
-    var valueProgress = 0.2;
+    var valueProgress = 0.25;
     $scope.maxval = 1.2;
     $http.get('/api/polls/').then(function(res){
       $scope.polls = res.data;

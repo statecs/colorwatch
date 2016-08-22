@@ -41,14 +41,14 @@ body {
   background-color: #efeeed;
 }
 
-
-
-ul.no-bullet
-{
+ul.no-bullet {
     list-style-type: none;
 }
-.top-margin{   
-  padding-top:12%;    
+h2{
+  margin-bottom:30px;
+}
+legend{
+  padding-bottom:20px;
 }
 .top{   
   padding-top:5%;    
@@ -95,19 +95,27 @@ ul.no-bullet
     }
    
 }
-
+.alert{
+  margin-top:20px;
+}
 .progress{
   height: 60px;
 }
 .progress-bar {
   padding-top:13px;
   font-size: 15px;
-  transition: width 1s ease-in-out;
   line-height: 2.3em;
+  -webkit-box-shadow: inset 0 0px 0 rgba(0, 0, 0, 0);
+  box-shadow: inset 0 0px 0 rgba(0, 0, 0, 0);
+  background-color: white !important;
+  color: black !important;
+  border: rgba(226, 126, 47, 0.5) 1px solid;
+  border-radius: 0 5000px 5000px 0;
 }
+
 .progress-bar-success {
   color:#000;
-    background-color: #fff;
+  background-color: #fff;
 }
 p.small {
   font-size: 1.1em;
@@ -116,32 +124,7 @@ p.small {
 .jumbotron p{
   margin-bottom: 5px;
 }
-@media (max-width: 640px) {
-  .top-margin{
-    padding-top:12%;
-  }
-  .progress-bar {
-  font-size: 12px;
-  }
-  .jumbotron{
-    padding:20px;
-  }
-  .btn-final{
-    font-size: 1em !important;
-  }
-  .btn-group button {
-    margin: 0px 10px; 
-  }
-  .thanks{
-   margin-top:100px; 
-   padding:20px;
-  }
-}
-@media (min-width: 2000px) {
-  .top,.top-margin{
-    padding-top:12%;
-  }
-}
+
 
 a,
 button {
@@ -154,10 +137,10 @@ a{
   color:#E27E2F;
 }
 :focus {
-    outline:3px solid #000000;
+    outline:5px solid rgba(0,0,0,1);
 }
-.btn-default:focus, .btn-default:active{
-  border:1px solid #000000 !important;
+.btn:focus, .btn:active{
+  outline:5px solid rgba(0,0,0,1);
 }
 
 .pagination>li.active>a {
@@ -190,22 +173,29 @@ button, .button, input[type="button"], input[type="submit"]{
 }
 .btn{
   padding: 1em 1.3em;
-  border: rgba(226, 126, 47, 1) 1px solid;
+  border: rgba(226, 126, 47, 0.5) 2px solid;
   font-weight: 600;
   border-radius: 5000px !important;
   color: #383737;
 }
 .btn:hover {
-   border: rgba(0,0,0,0, 1) 1px solid;
     background-color: #000;
     color: #ffffff;
 }
 .btn.active{
   background-color: #000;
-  opacity: 0.8;
   color:#fff;
 }
-
+.btn.vald{
+  background-color: #000;
+  color:#fff;
+}
+.margin-top{
+  margin-top:20px;
+}
+.container-top{
+    padding-top:10%;
+}
 .jumbotron{
     background-color: #fafafa !important;
     max-width: 800px;
@@ -224,7 +214,7 @@ button, .button, input[type="button"], input[type="submit"]{
 ----------------------------------------- */
 .corners {
   position: fixed;
-  z-index: 1030;
+  z-index: 99999;
   text-transform: uppercase;
   font-weight: 700;
   font-size: 14px;
@@ -477,7 +467,24 @@ span.pointer{
   cursor: pointer;
   padding: .5em .5em;
 }
-
+.form-group{
+  margin-bottom: 30px;
+}
 span#filterText{
   font-size: 1.5em;
 }
+
+@media (max-width: 640px) {
+
+  .container-top{
+    padding-top:20%;
+}
+  .btn-group button {
+    margin: 0px 10px; 
+  }
+  .thanks{
+   margin-top:100px; 
+   padding:20px;
+  }
+}
+
