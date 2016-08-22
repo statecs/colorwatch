@@ -278,15 +278,9 @@ ColorCombs.find({}).remove(function() {
 User.find({}).remove(function() {
   User.create({
       provider: 'local',
-      name: 'Test',
-      email: 'test@test.com',
-      password: 'test'
-    }, {
-      provider: 'local',
-      role: 'admin',
-      name: 'Admin',
-      email: 'admin@admin.com',
-      password: 'admin'
+      name: 'admin',
+      email: 'admin@funka.com',
+      password: 'Color!2016Watch'
     }, function() {
       console.log('finished populating users');
     }

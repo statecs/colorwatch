@@ -1,18 +1,6 @@
 'use strict';
 var canvas, ctx;
 
-function draw(textColor, backgroundColor) {
-  console.log(textColor, backgroundColor);
-  ctx.font='35px sans-serif';
-  ctx.fillStyle = backgroundColor;
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle = textColor;
-  ctx.textAlign = 'start';
-  ctx.fillText('Lorem Ipsum är en utfyllnadstext från tryck- och förlagsindustrin. ' +
-    'Lorem ipsum har varit standard ända sedan 1500-talet, när en okänd boksättare ' +
-    'tog att antalet bokstäver.', canvas.width/15, canvas.height/10);
-}
-
 function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
   var words = text.split(' ');
   var line = '';
@@ -74,7 +62,6 @@ angular.module('colorwatchApp')
       ctx.fillStyle = $scope.textcolor;
 
       wrapText(ctx, text, x, y, maxWidth, lineHeight);
-      //draw(val[0], val[1]);
     });
 
     $scope.createColor = function(){
