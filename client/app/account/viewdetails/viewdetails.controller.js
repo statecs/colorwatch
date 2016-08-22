@@ -135,12 +135,10 @@ angular.module('colorwatchApp')
         //Push options to filtered items
         $scope.filteredOptions.push(opt.name);
         filterRankingList();
-        console.log($scope.colors);
       }
       else{
         $scope.filteredOptions.splice(index,1);
         filterRankingList();
-        console.log($scope.colors);
       }
       if($scope.filteredOptions.length === 0){
         //Get total rating list when no filtered options is choosed

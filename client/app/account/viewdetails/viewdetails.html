@@ -12,10 +12,13 @@
       <span class="pointer" ng-click="exportCSV()">CSV</span>
     </div>
   </div>
-  <h4>Välj funktionsnedsättningar och/eller diagnoser</h4>
-  <div class="btn-group" id="disabilities">
-    <button type="checkbox" ng-repeat="opt in optionsModel" class="btn btn-default btn-final" ng-model="opt.state" ng-click="filter(opt)" btn-checkbox>{{opt.name}}</label>
+  <h4>Välj svårigheter och/eller diagnoser</h4>
+  <div class="form-group btn-group" id="disabilities">
+    <label class="btn-default btn-final" ng-repeat="opt in optionsModel">
+      <input type="checkbox" ng-disabled="noDisabilities" ng-click="filter(opt)" ng-model="opt.state"><span>{{opt.name}}</span>
+    </label>
   </div>
+
   <span id="filterText" ng-show="filteredOptions.length != 0">Valt filter: <span ng-repeat="opt in filteredOptions">| {{opt}} </span></span>
   <div class="row-padding"><h2>Rankinglista</h2></div>
   <div class="table-responsive" ng-show="showResult">
