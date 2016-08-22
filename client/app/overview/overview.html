@@ -1,40 +1,33 @@
 <div class="container jumbotron">
 
-	<div class="row text-center">
-		<h1>Översikt</h1>
+  <div class="row text-center">
+    <h1>Översikt</h1>
 
-	    <p class="lead">{{overviewDescText}}</p>
-	  
-			        
-		   
-	</div>	
-	<button type="button" ng-disabled="checkQuestion()" class="btn margin-top" ng-click="nextPage()"> Fortsätt </button>
-		<div class="questionBlock" ng-repeat="question in questions">
-			<fieldset>
-				<legend>Fråga {{$index + 1}}</legend>
-				<div class="row image-ctn">
-					<div class="col col-md-4 col-xs-6 col-md-offset-2">
-						<img ng-class="{true: 'op-selected'}[question.userVote == 'choice_alt1']" ng-src="{{question.img1_url}}" ng-model="question.userVote" ng-click="vote('choice_alt1', $index+1)" class="img-responsive" alt="Färgkombination 1"></img>
-						<button tabindex="-1" ng-if="question.userVote == 'choice_alt1'" class="btn vald" alt="Färgkombination 1 vald" ng-model="question.userVote" ng-click="vote('choice_alt1')" btn-radio="'choice_alt1'">Vald</button>
-          				<button tabindex="-1" aria-label="Välj färgkombination 1" ng-if="question.userVote != 'choice_alt1'" class="btn" ng-model="question.userVote" alt="Välj" ng-click="vote('choice_alt1')" btn-radio="'choice_alt1'">Välj</button>
+    <p class="lead">{{overviewDescText}}</p>
 
-			   		</div>
-			   		<div class="col col-md-4 col-xs-6">
-			   			<img ng-class="{true: 'op-selected'}[question.userVote == 'choice_alt2']" ng-src="{{question.img2_url}}" ng-model="question.userVote" ng-click="vote('choice_alt2', $index+1)" class="img-responsive" alt="Färgkombination 2"></img>
 
-						<button tabindex="-1" ng-if="question.userVote == 'choice_alt2'" alt="Färgkombination 2 vald" class="btn vald" ng-model="question.userVote" btn-radio="'choice_alt2'">Vald</button>
-           				<button tabindex="-1" aria-label="Välj färgkombination 2" ng-if="question.userVote != 'choice_alt2'" class="btn" ng-model="question.userVote" ng-click="vote('choice_alt2')" btn-radio="'choice_alt2'">Välj</button>
-			   		</div>
-		   		</div>
-			</fieldset>
-		</div>
-		<button type="button" ng-disabled="checkQuestion()" class="btn margin-top" ng-click="nextPage()"> Fortsätt </button>
-		<!--<div class="row">
-			<div class="col-md-3 col-xs-3 col-md-offset-1">
-				<button type="submit" class="btn btn-default" ng-click="prevPage()">Tillbaka</button>
-			</div>
-			<div class="col-md-3 col-xs-3 col-md-offset-4 col-xs-offset-6 text-right">
-				<input type="submit" class="btn btn-default" ng-click="nextPage()" value="Fortsätt" />
-			</div>-->
-		</div>
+
+  </div>
+  <button type="button" ng-disabled="checkQuestion()" class="btn margin-top" ng-click="nextPage()"> Fortsätt </button>
+  <div class="questionBlock" ng-repeat="question in questions">
+    <fieldset>
+      <legend>Fråga {{$index + 1}}</legend>
+      <div class="row image-ctn">
+        <div class="col col-md-4 col-xs-6 col-md-offset-2">
+          <img ng-class="{true: 'op-selected'}[question.userVote == 'choice_alt1']" ng-src="{{question.img1_url}}" ng-model="question.userVote" ng-click="vote('choice_alt1', $index+1)" class="img-responsive" alt="Färgkombination 1"></img>
+          <button tabindex="-1" ng-if="question.userVote == 'choice_alt1'" class="btn vald" alt="Färgkombination 1 vald" ng-model="question.userVote" btn-radio="'choice_alt1'">Vald</button>
+          <button tabindex="-1" aria-label="Välj färgkombination 1" ng-if="question.userVote != 'choice_alt1'" class="btn" ng-model="question.userVote" alt="Välj" ng-click="vote('choice_alt1', $index+1)" btn-radio="'choice_alt1'">Välj</button>
+
+        </div>
+        <div class="col col-md-4 col-xs-6">
+          <img ng-class="{true: 'op-selected'}[question.userVote == 'choice_alt2']" ng-src="{{question.img2_url}}" ng-model="question.userVote" ng-click="vote('choice_alt2', $index+1)" class="img-responsive" alt="Färgkombination 2"></img>
+
+          <button tabindex="-1" ng-if="question.userVote == 'choice_alt2'" alt="Färgkombination 2 vald" class="btn vald" ng-model="question.userVote" btn-radio="'choice_alt2'">Vald</button>
+          <button tabindex="-1" aria-label="Välj färgkombination 2" ng-if="question.userVote != 'choice_alt2'" class="btn" ng-model="question.userVote" ng-click="vote('choice_alt2', $index+1)" btn-radio="'choice_alt2'">Välj</button>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <button type="button" ng-disabled="checkQuestion()" class="btn margin-top" ng-click="nextPage()"> Fortsätt </button>
+</div>
 </div>
