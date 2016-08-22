@@ -12,31 +12,36 @@
     margin: 0px 5px 0px 5px;
     font-size: 20px;
 }
-.form-group{
-    padding: 6px 0px;
-}
-.input-group input{
-    padding:20px;
-    border-radius: 5000px !important;
-}
+
+
 .check-box span{
  padding-left:10px;
   font-size: 20px;
   font-weight: 400;
 }
 input[type=checkbox], input[type=radio]{
-     zoom:200%;
-     margin:1px 0px;
+     margin:1px 6px;
+}
+.btn-default:hover{
+  background: 0;
+}
+
+.form-group input[type=text]{
+    border-radius: 5000px !important;
+    font-size:16px;
+    height:50px;
 }
 .btn-final{
   padding: 1em 1.3em;
-  border: rgba(226, 126, 47, 1) 1px solid;
+  border: rgba(226, 126, 47, 0.5) 2px solid;
   font-weight: 600;
   border-radius: 5000px !important;
   color: #383737;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  margin:0.3em;
+  font-size:1.2em;
 }
 
 .btn-default:focus{
@@ -47,6 +52,13 @@ input[type=checkbox], input[type=radio]{
   background-color: #000;
   opacity: 0.8;
   color:#fff;
+}
+
+@media (max-width: 640px) {
+  .form-group input{
+    padding:10px;
+    border-radius: 5000px !important;
+}
 }
 
 

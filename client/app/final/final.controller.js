@@ -90,11 +90,9 @@ angular.module('colorwatchApp')
           $scope.errorDiagnose = '';
         }
       });
-      console.log($scope.diagnosesSelected);
     };
 
     $scope.submit = function () {
-      console.log('submit');
       var choosedDisabilities = [];   //Disabilites choosed by the user
       var choosedDiagnoses = [];      //Diagnoses choosed by the user
 
@@ -117,7 +115,6 @@ angular.module('colorwatchApp')
           }
         });
 
-        console.log(choosedDiagnoses, choosedDisabilities);
         $http.post('/api/results', {
           diagnoses: choosedDiagnoses,
           disabilities: choosedDisabilities
@@ -129,10 +126,10 @@ angular.module('colorwatchApp')
         });
       }
       else if($scope.disabilitiesSelected && !$scope.diagnosesSelected) {
-        $scope.errorDiagnose = 'Fyll i diagnos';
+        $scope.errorDiagnose = 'Var god välj minst en diagnos';
       }
       else {
-        $scope.errorDisability = 'Fyll i svårighet';
+        $scope.errorDisability = 'Var god välj minst en svårighet';
       }
 
 

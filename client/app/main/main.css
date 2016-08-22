@@ -1,19 +1,17 @@
 
 /* StartTest btn */
 .btn-start {
-  color: #333333;
   font-size: 1.6em;
   line-height: 1;
   padding: 17px;
   border-radius: 5000px !important;
   font-weight: 700;
-  border: rgba(226, 126, 47, 1) 1px solid !important;
+  border: rgba(226, 126, 47, 0.5) 2px solid !important;
 }
 .btn-div{
   padding: 20px 20px 0px 20px;
 }
 .btn-start:hover{
-  opacity: 0.7;
   color:#ffffff;
 }
 
