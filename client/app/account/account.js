@@ -7,6 +7,10 @@ angular.module('colorwatchApp')
         templateUrl: 'app/account/login/login.html',
         controller: 'LoginCtrl'
       })
+      .when('/signup-2016-!funka', {
+        templateUrl: 'app/account/signup/signup.html',
+        controller: 'SignupCtrl'
+      })
       .when('/viewdetails', {
         templateUrl: 'app/account/viewdetails/viewdetails.html',
         controller: 'ViewDetailsCtrl',
