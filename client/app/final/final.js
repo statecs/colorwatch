@@ -12,5 +12,11 @@ angular.module('colorwatchApp')
         templateUrl: 'app/final/final.html',
         controller: 'FinalCtrl',
         label: 'Final Result'
+      })
+       .when('/view-results', {
+        templateUrl: 'app/final/view-results.html',
+        controller: 'ViewDetailsCtrl',
+        label: 'View Details Result'
       });
+      
   });
