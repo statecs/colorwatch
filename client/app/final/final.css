@@ -22,9 +22,7 @@
 input[type=checkbox], input[type=radio]{
      margin:1px 6px;
 }
-.btn-default:hover{
-  background: 0;
-}
+
 
 .form-group input[type=text]{
     border-radius: 5000px !important;

@@ -1,19 +1,19 @@
-<div class="container">
+<div class="container jumbotron">
   <div class="row">
     <div class="col-sm-12">
-      <h1>Sign up</h1>
+      <h1>Registrera konto</h1>
     </div>
     <div class="col-sm-12">
       <form class="form" name="form" ng-submit="register(form)" novalidate>
 
         <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
                                             'has-error': form.name.$invalid && submitted }">
-          <label>Name</label>
+          <label>Namn</label>
 
-          <input type="text" name="name" class="form-control" ng-model="user.name"
+          <input type="name" name="name" class="form-control" ng-model="user.name"
                  required/>
           <p class="help-block" ng-show="form.name.$error.required && submitted">
-            A name is required
+            Namn är obligatoriskt. 
           </p>
         </div>
 
@@ -25,10 +25,10 @@
                  required
                  mongoose-error/>
           <p class="help-block" ng-show="form.email.$error.email && submitted">
-            Doesn't look like a valid email.
+            E-mailadressen ser inte ut att vara korrekt ifylld.
           </p>
           <p class="help-block" ng-show="form.email.$error.required && submitted">
-            What's your email address?
+            Vad är din e-mailadress?
           </p>
           <p class="help-block" ng-show="form.email.$error.mongoose">
             {{ errors.email }}
@@ -37,7 +37,7 @@
 
         <div class="form-group" ng-class="{ 'has-success': form.password.$valid && submitted,
                                             'has-error': form.password.$invalid && submitted }">
-          <label>Password</label>
+          <label>Lösenord</label>
 
           <input type="password" name="password" class="form-control" ng-model="user.password"
                  ng-minlength="3"
@@ -45,7 +45,7 @@
                  mongoose-error/>
           <p class="help-block"
              ng-show="(form.password.$error.minlength || form.password.$error.required) && submitted">
-            Password must be at least 3 characters.
+            Lösenordet måste innehålla minst 3 tecken.
           </p>
           <p class="help-block" ng-show="form.password.$error.mongoose">
             {{ errors.password }}
@@ -54,11 +54,8 @@
 
         <div>
           <button class="btn btn-inverse btn-lg btn-login" type="submit">
-            Sign up
+            Registrera
           </button>
-          <a class="btn btn-default btn-lg btn-register" href="/login">
-            Login
-          </a>
         </div>
       </form>
     </div>

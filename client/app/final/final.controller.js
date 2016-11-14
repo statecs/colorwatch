@@ -126,10 +126,10 @@ angular.module('colorwatchApp')
         });
       }
       else if($scope.disabilitiesSelected && !$scope.diagnosesSelected) {
-        $scope.errorDiagnose = 'Var god välj minst en diagnos';
+        $scope.errorDiagnose = 'Ange minst en svårighet eller sätt kryss i rutan att du inte har någon diagnos.';
       }
       else {
-        $scope.errorDisability = 'Var god välj minst en svårighet';
+        $scope.errorDisability = 'Ange minst en svårighet eller sätt kryss i rutan att du inte har några speciella svårigheter.';
       }
 
 
