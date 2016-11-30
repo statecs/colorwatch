@@ -1,0 +1,38 @@
+{
+   "config": {
+      "target": "http://localhost:9000",
+      "phases": [
+         { "duration": 60, "arrivalRate": 5 }
+      ]
+   },
+   "scenarios": [
+      {
+        "flow": [
+          {
+            "post": {
+            "url": "/api/results/",
+            "json": {
+              "disabilities": ["Organisera och planera"],
+              "diagnoses": ["Asperger"],
+              "questions":[
+                {"userHasVoted":true,"userVote":"choice_alt1","img2_url":"http://res.cloudinary.com/duff92/image/upload/v1457375265/colors/001eff_ffffff.png","img2":"583f5e2200fd5c2c4c96ad76","img1_url":"https://res.cloudinary.com/duff92/image/upload/v1442181524/colors/c32020_000000.png","img1":"583f5e2200fd5c2c4c96ad31"},{"userHasVoted":true,"userVote":"choice_alt2","img2_url":"http://res.cloudinary.com/duff92/image/upload/v1457380097/colors/ceff00_000000.png","img2":"583f5e2200fd5c2c4c96ad5f","img1_url":"https://res.cloudinary.com/duff92/image/upload/v1442181524/colors/c32020_000000.png","img1":"583f5e2200fd5c2c4c96ad31"},{"userHasVoted":true,"userVote":"choice_alt1","img2_url":"http://res.cloudinary.com/duff92/image/upload/v1456923338/colors/e11414_dfabab.png","img2":"583f5e2200fd5c2c4c96ad8d","img1_url":"https://res.cloudinary.com/duff92/image/upload/v1439564281/colors/ffffff_000000.png","img1":"583f5e2200fd5c2c4c96ad48"},{"userHasVoted":true,"userVote":"choice_alt1","img2_url":"http://res.cloudinary.com/duff92/image/upload/v1457375265/colors/001eff_ffffff.png","img2":"583f5e2200fd5c2c4c96ad76","img1_url":"http://res.cloudinary.com/duff92/image/upload/v1457380097/colors/ceff00_000000.png","img1":"583f5e2200fd5c2c4c96ad5f"},{"userHasVoted":true,"userVote":"choice_alt1","img2_url":"http://res.cloudinary.com/duff92/image/upload/v1456923338/colors/e11414_dfabab.png","img2":"583f5e2200fd5c2c4c96ad8d","img1_url":"http://res.cloudinary.com/duff92/image/upload/v1457375265/colors/001eff_ffffff.png","img1":"583f5e2200fd5c2c4c96ad76"},{"userHasVoted":true,"userVote":"choice_alt1","img2_url":"http://res.cloudinary.com/duff92/image/upload/v1457375265/colors/001eff_ffffff.png","img2":"583f5e2200fd5c2c4c96ad76","img1_url":"https://res.cloudinary.com/duff92/image/upload/v1439564281/colors/ffffff_000000.png","img1":"583f5e2200fd5c2c4c96ad48"},{"userHasVoted":true,"userVote":"choice_alt1","img2_url":"http://res.cloudinary.com/duff92/image/upload/v1457380097/colors/ceff00_000000.png","img2":"583f5e2200fd5c2c4c96ad5f","img1_url":"https://res.cloudinary.com/duff92/image/upload/v1439564281/colors/ffffff_000000.png","img1":"583f5e2200fd5c2c4c96ad48"},{"userHasVoted":true,"userVote":"choice_alt1","img2_url":"https://res.cloudinary.com/duff92/image/upload/v1439564281/colors/ffffff_000000.png","img2":"583f5e2200fd5c2c4c96ad48","img1_url":"https://res.cloudinary.com/duff92/image/upload/v1442181524/colors/c32020_000000.png","img1":"583f5e2200fd5c2c4c96ad31"},{"userHasVoted":true,"userVote":"choice_alt1","img2_url":"http://res.cloudinary.com/duff92/image/upload/v1456923338/colors/e11414_dfabab.png","img2":"583f5e2200fd5c2c4c96ad8d","img1_url":"https://res.cloudinary.com/duff92/image/upload/v1442181524/colors/c32020_000000.png","img1":"583f5e2200fd5c2c4c96ad31"},{"userHasVoted":true,"userVote":"choice_alt1","img2_url":"http://res.cloudinary.com/duff92/image/upload/v1456923338/colors/e11414_dfabab.png","img2":"583f5e2200fd5c2c4c96ad8d","img1_url":"http://res.cloudinary.com/duff92/image/upload/v1457380097/colors/ceff00_000000.png","img1":"583f5e2200fd5c2c4c96ad5f"}]
+              }
+            }
+          },
+          {
+            "put": {
+              "url": "/api/colorcombs/",
+              "json": {
+                "disabilities": ["Organisera och planera"],
+                "diagnoses": ["Asperger"],
+                "questions":[
+                  {"userHasVoted":true,"userVote":"choice_alt1","img2_url":"http://res.cloudinary.com/duff92/image/upload/v1457375265/colors/001eff_ffffff.png","img2":"583f5e2200fd5c2c4c96ad76","img1_url":"https://res.cloudinary.com/duff92/image/upload/v1442181524/colors/c32020_000000.png","img1":"583f5e2200fd5c2c4c96ad31"},{"userHasVoted":true,"userVote":"choice_alt2","img2_url":"http://res.cloudinary.com/duff92/image/upload/v1457380097/colors/ceff00_000000.png","img2":"583f5e2200fd5c2c4c96ad5f","img1_url":"https://res.cloudinary.com/duff92/image/upload/v1442181524/colors/c32020_000000.png","img1":"583f5e2200fd5c2c4c96ad31"},{"userHasVoted":true,"userVote":"choice_alt1","img2_url":"http://res.cloudinary.com/duff92/image/upload/v1456923338/colors/e11414_dfabab.png","img2":"583f5e2200fd5c2c4c96ad8d","img1_url":"https://res.cloudinary.com/duff92/image/upload/v1439564281/colors/ffffff_000000.png","img1":"583f5e2200fd5c2c4c96ad48"},{"userHasVoted":true,"userVote":"choice_alt1","img2_url":"http://res.cloudinary.com/duff92/image/upload/v1457375265/colors/001eff_ffffff.png","img2":"583f5e2200fd5c2c4c96ad76","img1_url":"http://res.cloudinary.com/duff92/image/upload/v1457380097/colors/ceff00_000000.png","img1":"583f5e2200fd5c2c4c96ad5f"},{"userHasVoted":true,"userVote":"choice_alt1","img2_url":"http://res.cloudinary.com/duff92/image/upload/v1456923338/colors/e11414_dfabab.png","img2":"583f5e2200fd5c2c4c96ad8d","img1_url":"http://res.cloudinary.com/duff92/image/upload/v1457375265/colors/001eff_ffffff.png","img1":"583f5e2200fd5c2c4c96ad76"},{"userHasVoted":true,"userVote":"choice_alt1","img2_url":"http://res.cloudinary.com/duff92/image/upload/v1457375265/colors/001eff_ffffff.png","img2":"583f5e2200fd5c2c4c96ad76","img1_url":"https://res.cloudinary.com/duff92/image/upload/v1439564281/colors/ffffff_000000.png","img1":"583f5e2200fd5c2c4c96ad48"},{"userHasVoted":true,"userVote":"choice_alt1","img2_url":"http://res.cloudinary.com/duff92/image/upload/v1457380097/colors/ceff00_000000.png","img2":"583f5e2200fd5c2c4c96ad5f","img1_url":"https://res.cloudinary.com/duff92/image/upload/v1439564281/colors/ffffff_000000.png","img1":"583f5e2200fd5c2c4c96ad48"},{"userHasVoted":true,"userVote":"choice_alt1","img2_url":"https://res.cloudinary.com/duff92/image/upload/v1439564281/colors/ffffff_000000.png","img2":"583f5e2200fd5c2c4c96ad48","img1_url":"https://res.cloudinary.com/duff92/image/upload/v1442181524/colors/c32020_000000.png","img1":"583f5e2200fd5c2c4c96ad31"},{"userHasVoted":true,"userVote":"choice_alt1","img2_url":"http://res.cloudinary.com/duff92/image/upload/v1456923338/colors/e11414_dfabab.png","img2":"583f5e2200fd5c2c4c96ad8d","img1_url":"https://res.cloudinary.com/duff92/image/upload/v1442181524/colors/c32020_000000.png","img1":"583f5e2200fd5c2c4c96ad31"},{"userHasVoted":true,"userVote":"choice_alt1","img2_url":"http://res.cloudinary.com/duff92/image/upload/v1456923338/colors/e11414_dfabab.png","img2":"583f5e2200fd5c2c4c96ad8d","img1_url":"http://res.cloudinary.com/duff92/image/upload/v1457380097/colors/ceff00_000000.png","img1":"583f5e2200fd5c2c4c96ad5f"}]
+              }
+            }
+          }
+        ]
+      }
+   ]
+}
+
+

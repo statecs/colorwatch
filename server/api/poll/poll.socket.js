@@ -83,14 +83,14 @@ exports.register = function (socket) {
 
         //Find which colors used in the current question
         for (var j = 0; j < colors.length; j++) {
-          console.log(mongoose.Types.ObjectId(sendVote.data.questions[i].img1), mongoose.Types.ObjectId(sendVote.data.questions[i].img2), colors[j]._id);
+          //console.log(mongoose.Types.ObjectId(sendVote.data.questions[i].img1), mongoose.Types.ObjectId(sendVote.data.questions[i].img2), colors[j]._id);
           if (mongoose.Types.ObjectId(sendVote.data.questions[i].img1).equals(colors[j]._id)) {
             colorA = colors[j];
-            console.log('color A equals');
+            //console.log('color A equals');
           }
           else if (mongoose.Types.ObjectId(sendVote.data.questions[i].img2).equals(colors[j]._id)) {
             colorB = colors[j];
-            console.log('color B equals');
+           // console.log('color B equals');
           }
         }
         //Set score depending on user choice
@@ -120,7 +120,7 @@ exports.register = function (socket) {
         for (k = 0; k < sendVote.data.diagnoses.length; k++) {
           indexELO = objectFindKey(colorA.ELO_rating, 'name', sendVote.data.diagnoses[k]);
           if (indexELO !== -1) {
-            console.log('updateELO');
+           // console.log('updateELO');
             updateELOandVotes(colorA.ELO_rating[indexELO], colorB.ELO_rating[indexELO], scoreA, scoreB);
           }
           else if (indexELO === -1 && sendVote.data.diagnoses[k].length !== 0) {

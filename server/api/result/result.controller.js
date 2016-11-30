@@ -31,6 +31,11 @@ exports.show = function(req, res) {
 
 // Creates a new Result in the DB.
 exports.create = function(req, res) {
+/*  console.log({
+    disabilities: req.body.disabilities,
+    diagnoses: req.body.diagnoses,
+    questions: req.session.questions
+  });*/
   var result = new Result({
     disabilities: req.body.disabilities,
     diagnoses: req.body.diagnoses,

@@ -119,6 +119,7 @@ angular.module('colorwatchApp')
           diagnoses: choosedDiagnoses,
           disabilities: choosedDisabilities
         }).then(function successCallback(res) {
+          console.log(JSON.stringify(res.data));
           socket.emit('send:vote', {data: res.data});
           $location.path('/final-result');
         }, function errorCallback(err) {

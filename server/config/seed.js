@@ -14,6 +14,7 @@ var mongoose = require('mongoose');
 //Creating colorcombinations used in test
 ColorCombs.find({}).remove(function() {
   ColorCombs.create({
+      _id: mongoose.Types.ObjectId("583f5e2200fd5c2c4c96ad31"),
       textcolor: '#c32020',
       backcolor: '#000000',
       image_secureurl: 'https://res.cloudinary.com/duff92/image/upload/v1442181524/colors/c32020_000000.png',
@@ -46,6 +47,7 @@ ColorCombs.find({}).remove(function() {
       ]
     },
     {
+      _id: mongoose.Types.ObjectId("583f5e2200fd5c2c4c96ad48"),
       textcolor: '#ffffff',
       backcolor: '#000000',
       image_secureurl: 'https://res.cloudinary.com/duff92/image/upload/v1439564281/colors/ffffff_000000.png',
@@ -78,6 +80,7 @@ ColorCombs.find({}).remove(function() {
       ]
     },
     {
+      _id: mongoose.Types.ObjectId("583f5e2200fd5c2c4c96ad5f"),
       textcolor: '#ceff00',
       backcolor: '#000000',
       image_secureurl: 'http://res.cloudinary.com/duff92/image/upload/v1457380097/colors/ceff00_000000.png',
@@ -110,6 +113,7 @@ ColorCombs.find({}).remove(function() {
       ]
     },
     {
+      _id: mongoose.Types.ObjectId("583f5e2200fd5c2c4c96ad76"),
       textcolor: '#001eff',
       backcolor: '#ffffff',
       image_secureurl: 'http://res.cloudinary.com/duff92/image/upload/v1457375265/colors/001eff_ffffff.png',
@@ -142,6 +146,7 @@ ColorCombs.find({}).remove(function() {
       ]
     },
     {
+      _id: mongoose.Types.ObjectId("583f5e2200fd5c2c4c96ad8d"),
       textcolor: '#e11414',
       backcolor: '#dfabab',
       image_secureurl: 'http://res.cloudinary.com/duff92/image/upload/v1456923338/colors/e11414_dfabab.png',
@@ -174,6 +179,7 @@ ColorCombs.find({}).remove(function() {
       ]
     },
     {
+      _id: mongoose.Types.ObjectId("583f5e2200fd5c2c4c96ada4"),
       textcolor: '#000000',
       backcolor: '#ffffff',
       image_secureurl: 'http://res.cloudinary.com/duff92/image/upload/v1441296680/colors/000000_ffffff.png',
@@ -206,6 +212,7 @@ ColorCombs.find({}).remove(function() {
       ]
     },
     {
+      _id: mongoose.Types.ObjectId("583f5e2200fd5c2c4c96adbb"),
       textcolor: '#ffffff',
       backcolor: '#2e7917',
       image_secureurl: 'http://res.cloudinary.com/duff92/image/upload/v1441230860/colors/ffffff_2e7917.png',
@@ -238,6 +245,7 @@ ColorCombs.find({}).remove(function() {
       ]
     },
     {
+      _id: mongoose.Types.ObjectId("583f5e2200fd5c2c4c96add2"),
       textcolor: '#0029ff',
       backcolor: '#f0ff00',
       image_secureurl: 'http://res.cloudinary.com/duff92/image/upload/v1457374971/colors/0029ff_f0ff00.png',
